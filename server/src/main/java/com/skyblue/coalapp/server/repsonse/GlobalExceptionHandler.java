@@ -1,6 +1,5 @@
-package com.skyblue.coalapp.server.example.controller;
+package com.skyblue.coalapp.server.repsonse;
 
-import com.young.wuxia.server.domain.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

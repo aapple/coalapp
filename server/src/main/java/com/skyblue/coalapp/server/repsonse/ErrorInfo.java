@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.example.domain;
+package com.skyblue.coalapp.server.repsonse;
 
 import lombok.Getter;
 import lombok.Setter;
