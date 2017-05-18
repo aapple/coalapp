@@ -19,7 +19,7 @@ public class AccessService {
     public User login(User user){
 
         String sql = "select * from wuxia_user where username=? and password=?";
-        String[] args = {user.getUsername(), user.getPassword()};
+        String[] args = {user.getUserName(), user.getPassword()};
         List<User> result = jdbcTemplate.queryForList(sql, args, User.class);
         if(result.size() > 0){
             return result.get(0);
