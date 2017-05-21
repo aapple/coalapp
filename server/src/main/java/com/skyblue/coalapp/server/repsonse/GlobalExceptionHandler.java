@@ -2,9 +2,11 @@ package com.skyblue.coalapp.server.repsonse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,14 +39,10 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(value = Exception.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        ErrorInfo<String> r = new ErrorInfo<>();
-        r.setMessage(e.getMessage());
-        r.setCode(ErrorInfo.ERROR);
-        r.setData("Some Data");
-        r.setUrl(req.getRequestURL().toString());
-        return r;
+    public String processException(HttpServletRequest req, Exception e) throws Exception {
+        return e.getMessage();
     }
 
 }

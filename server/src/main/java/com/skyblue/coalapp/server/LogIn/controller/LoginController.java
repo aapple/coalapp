@@ -1,12 +1,15 @@
 package com.skyblue.coalapp.server.LogIn.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.skyblue.coalapp.server.LogIn.service.LoginService;
 import com.skyblue.coalapp.server.example.domain.User;
 import com.skyblue.coalapp.server.example.service.AccessService;
+import com.skyblue.coalapp.server.repsonse.BusinessException;
+import com.skyblue.coalapp.server.repsonse.HttpUtils;
 import com.skyblue.coalapp.server.repsonse.ResponseMessage;
 
 import org.slf4j.Logger;
@@ -15,13 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bin.yao on 2017/4/12.
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/app/login")
 public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -50,7 +55,9 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
-    ResponseMessage login(@RequestParam(value = "phoneNum")String phoneNum, @RequestParam(value = "verifyCode")String verifyCode){
+    String login(@RequestParam(value = "phoneNum")String phoneNum,
+                 @RequestParam(value = "verifyCode")String verifyCode,
+                 HttpServletResponse response){
 
         logger.info("try to login");
 
@@ -58,11 +65,26 @@ public class LoginController {
 
         if(verifyCode.equals(keepedVerifyCode)){
 
-            User  userInfo = loginService.login(phoneNum);
+            User userInfo = loginService.login(phoneNum);
+            String userJsonString = JSON.toJSONString(userInfo);
 
-            return  ResponseMessage.ok(userInfo);
+            Cookie cookie = new Cookie("coalapp_session", userJsonString);
+            cookie.setMaxAge( 365 * 24 * 60 * 60);// 设置为30min
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return userJsonString;
         }else{
-            return  ResponseMessage.error("login failed");
+
+            throw new BusinessException("登录失败");
         }
+    }
+
+    @RequestMapping("/testCookie")
+    @ResponseBody
+    String testCookie(){
+
+        throw new BusinessException("网络异常");
+//        return JSON.toJSONString(HttpUtils.getUserInfo());
     }
 }
