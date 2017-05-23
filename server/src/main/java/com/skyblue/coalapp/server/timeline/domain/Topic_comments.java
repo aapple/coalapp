@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by yao on 2017/5/21.
@@ -29,5 +30,11 @@ public class Topic_comments {
 
     @Column(length = 10000)
     private String content;
+
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updated_at;
+
+    @Column(columnDefinition="TIMESTAMP NOT NULL DEFAULT 0 ")
+    private Date created_at;
 
 }
