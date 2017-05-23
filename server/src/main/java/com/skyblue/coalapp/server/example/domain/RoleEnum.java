@@ -21,6 +21,4 @@ public enum RoleEnum {
         this.desc = desc;
         this.value = value;
     }
-
-
 }

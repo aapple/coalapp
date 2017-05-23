@@ -20,5 +20,4 @@ public class City {
 
     @Column(nullable = false)
     private String name;
-
 }

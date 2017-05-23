@@ -24,22 +24,25 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true,length = 15)
     private String userCode;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 30)
     private String userName;
 
-    @Column(nullable = true)
+    @Column(nullable = true,length = 30)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true,length = 20)
     private String phoneNum;
-    @Column(nullable = false)
+
+    @Column(nullable = false,length = 2)
     private Integer role;
-    @Column(nullable = false)
+
+    @Column(nullable = false,length = 50)
     private String roleDesc;
-    @Column(nullable = false)
+
+    @Column(nullable = false,length = 30)
     private Timestamp createTime;
 
     public User(){}
@@ -66,7 +69,6 @@ public class User {
 
     private String getCurrentTime(){
         Date d = new Date();
-        System.out.println(d);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateNowStr = sdf.format(d);
 
