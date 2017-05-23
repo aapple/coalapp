@@ -4,25 +4,24 @@ package com.skyblue.coalapp.server.LogIn.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
 import com.skyblue.coalapp.server.LogIn.service.LoginService;
 import com.skyblue.coalapp.server.LogIn.vo.UserVO;
 import com.skyblue.coalapp.server.example.domain.User;
-import com.skyblue.coalapp.server.example.service.AccessService;
 import com.skyblue.coalapp.server.repsonse.BusinessException;
 import com.skyblue.coalapp.server.repsonse.CommonUtils;
 import com.skyblue.coalapp.server.repsonse.HttpUtils;
 import com.skyblue.coalapp.server.repsonse.ResponseMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -73,7 +72,12 @@ public class LoginController {
             User userInfo = loginService.login(phoneNum);
             String userJsonString = JSON.toJSONString(userInfo);
 
-            String base64String = CommonUtils.getBase64(userJsonString);
+            String base64String = null;
+            try {
+                base64String = URLEncoder.encode(CommonUtils.getBase64(userJsonString), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new BusinessException("验证异常，请重新尝试");
+            }
             Cookie cookie = new Cookie("coalapp_session", base64String);
             cookie.setMaxAge( 365 * 24 * 60 * 60);// 设置为30min
             cookie.setPath("/");
@@ -81,8 +85,7 @@ public class LoginController {
 
             return userJsonString;
         }else{
-
-            throw new BusinessException("登录失败");
+            throw new BusinessException("验证异常，请重新尝试");
         }
     }
 

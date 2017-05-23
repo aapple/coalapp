@@ -8,6 +8,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * Created by yao on 2017/5/21.
@@ -24,8 +26,14 @@ public class HttpUtils {
 
         for(Cookie cookie : cookies){
             if(StringUtils.equals("coalapp_session", cookie.getName())){
-                String userInfoJsonString = CommonUtils.getFromBase64(cookie.getValue());
-                return JSON.parseObject(userInfoJsonString, User.class);
+
+                try {
+                    String value = URLDecoder.decode(cookie.getValue(), "UTF-8");
+                    String userInfoJsonString = CommonUtils.getFromBase64(value);
+                    return JSON.parseObject(userInfoJsonString, User.class);
+                } catch (UnsupportedEncodingException e) {
+                    return null;
+                }
             }
         }
         return null;
