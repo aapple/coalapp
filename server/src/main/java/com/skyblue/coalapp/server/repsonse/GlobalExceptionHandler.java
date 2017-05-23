@@ -42,6 +42,8 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public String processException(HttpServletRequest req, Exception e) throws Exception {
+
+        logger.error(e.getMessage(), e);
         return e.getMessage();
     }
 

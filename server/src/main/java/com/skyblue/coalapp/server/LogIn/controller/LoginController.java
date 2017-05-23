@@ -6,9 +6,11 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.skyblue.coalapp.server.LogIn.service.LoginService;
+import com.skyblue.coalapp.server.LogIn.vo.UserVO;
 import com.skyblue.coalapp.server.example.domain.User;
 import com.skyblue.coalapp.server.example.service.AccessService;
 import com.skyblue.coalapp.server.repsonse.BusinessException;
+import com.skyblue.coalapp.server.repsonse.CommonUtils;
 import com.skyblue.coalapp.server.repsonse.HttpUtils;
 import com.skyblue.coalapp.server.repsonse.ResponseMessage;
 
@@ -19,13 +21,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bin.yao on 2017/4/12.
  */
-@Controller
+@RestController
 @RequestMapping("/app/login")
 public class LoginController {
 
@@ -39,10 +44,10 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/getVerifyCode")
-    @ResponseBody
-    ResponseMessage getVrifyCode(@RequestParam(value = "phoneNum")String phoneNum){
+    ResponseMessage getVrifyCode(@RequestBody UserVO user){
         logger.info("try to get verify code");
 
+        String phoneNum = user.getPhoneNum();
         String verifyCode = loginService.getVerificationCode(phoneNum);
 
         if(verifyCode != null){
@@ -54,13 +59,13 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
-    @ResponseBody
-    String login(@RequestParam(value = "phoneNum")String phoneNum,
-                 @RequestParam(value = "verifyCode")String verifyCode,
+    String login(@RequestBody UserVO user,
                  HttpServletResponse response){
 
         logger.info("try to login");
 
+        String phoneNum = user.getPhoneNum();
+        String verifyCode = user.getVerifyCode();
         String keepedVerifyCode = cache.getIfPresent(phoneNum);
 
         if(verifyCode.equals(keepedVerifyCode)){
@@ -68,7 +73,8 @@ public class LoginController {
             User userInfo = loginService.login(phoneNum);
             String userJsonString = JSON.toJSONString(userInfo);
 
-            Cookie cookie = new Cookie("coalapp_session", userJsonString);
+            String base64String = CommonUtils.getBase64(userJsonString);
+            Cookie cookie = new Cookie("coalapp_session", base64String);
             cookie.setMaxAge( 365 * 24 * 60 * 60);// 设置为30min
             cookie.setPath("/");
             response.addCookie(cookie);
@@ -81,10 +87,16 @@ public class LoginController {
     }
 
     @RequestMapping("/testCookie")
-    @ResponseBody
     String testCookie(){
 
-        throw new BusinessException("网络异常");
-//        return JSON.toJSONString(HttpUtils.getUserInfo());
+        User user = HttpUtils.getUserInfo();
+
+        List a = new ArrayList<>();
+        a.add(user);
+        a.add(user);
+        a.add(user);
+
+//        throw new BusinessException("网络异常");
+        return JSON.toJSONString(a);
     }
 }

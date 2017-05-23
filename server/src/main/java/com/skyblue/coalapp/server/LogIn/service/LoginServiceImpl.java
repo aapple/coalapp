@@ -39,15 +39,15 @@ public class LoginServiceImpl implements LoginService {
         req.setRecNum(phoneNum);
         req.setSmsTemplateCode( "SMS_33485709" );
         req.setSmsParamString( "{coupon:'"+ randNum +"'}" );
-       /* try {
-            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
-            boolean success = rsp.getResult().getSuccess();
-            if(success) {
-                randNum = null;
-            }
-        } catch (ApiException e) {
-
-        }*/
+//        try {
+//            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
+//            boolean success = rsp.getResult().getSuccess();
+//            if(success) {
+//                randNum = null;
+//            }
+//        } catch (ApiException e) {
+//
+//        }
 
         return randNum.toString();
     }
