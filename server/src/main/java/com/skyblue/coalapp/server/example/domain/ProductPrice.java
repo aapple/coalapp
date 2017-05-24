@@ -13,7 +13,7 @@ import java.util.Date;
  * 这个对象主要用来表现当前厂商供应货品信息
  */
 @Entity
-@Table(name = "User")
+@Table(name = "product_price")
 @Setter
 @Getter
 public class ProductPrice {

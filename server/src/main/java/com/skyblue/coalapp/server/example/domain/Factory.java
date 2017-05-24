@@ -10,7 +10,7 @@ import java.util.List;
  * Created by 张杨 on 2017/5/19.
  */
 @Entity
-@Table(name = "coalIndustry")
+@Table(name = "factory")
 @Getter
 @Setter
 public class Factory {
@@ -25,8 +25,8 @@ public class Factory {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(length = 1024)
-    private String desc;
+    @Column
+    private String factoryDescribe;
 
     @Column(length = 2)
     private Integer type;
