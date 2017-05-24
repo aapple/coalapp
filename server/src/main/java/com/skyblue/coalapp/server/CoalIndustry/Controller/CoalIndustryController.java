@@ -33,8 +33,7 @@ public class CoalIndustryController {
     private ProductService productService;
 
     @RequestMapping("/getProdList")
-    @ResponseBody
-    public String getSpecFacoryCurrProds(@RequestParam(value = "factoryCode")String factoryCode, HttpServletResponse response){
+    public String getSpecFacoryCurrProds(@RequestParam(value = "factoryCode")String factoryCode){
 
         //查询当前厂可供应商品的信息
         List<ProductPrice> productList = productService.getProductListByCode(factoryCode,true);
@@ -44,7 +43,7 @@ public class CoalIndustryController {
 
     @RequestMapping("/saveProdList")
     @ResponseBody
-    public void saveOrUpdateProdutrice(@RequestParam(value = "productList") String productList,HttpServletResponse response){
+    public void saveOrUpdateProdutrice(@RequestParam(value = "productList") String productList){
 
         if(StringUtils.isNoneEmpty(productList)){
             List<ProductPrice> prodList = JSON.parseArray(productList,ProductPrice.class);
