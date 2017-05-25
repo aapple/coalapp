@@ -1,7 +1,7 @@
 package com.skyblue.coalapp.server.example.controller;
 
-import com.skyblue.coalapp.server.example.domain.User;
 import com.skyblue.coalapp.server.example.service.AccessService;
+import com.skyblue.coalapp.server.user.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

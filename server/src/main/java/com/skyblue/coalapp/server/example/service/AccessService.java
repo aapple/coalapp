@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.example.service;
 
-import com.skyblue.coalapp.server.example.domain.User;
+import com.skyblue.coalapp.server.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

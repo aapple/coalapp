@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.user.vo;
+package com.skyblue.coalapp.server.CoalIndustry.vo;
 
 import com.skyblue.coalapp.server.example.domain.ProductPrice;
 
