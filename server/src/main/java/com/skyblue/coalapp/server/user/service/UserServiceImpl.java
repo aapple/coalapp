@@ -1,7 +1,7 @@
-package com.skyblue.coalapp.server.example.service;
+package com.skyblue.coalapp.server.user.service;
 
-import com.skyblue.coalapp.server.example.domain.User;
-import com.skyblue.coalapp.server.example.repository.UserRepository;
+import com.skyblue.coalapp.server.user.domain.User;
+import com.skyblue.coalapp.server.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Created by 张杨 on 2017/5/18.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService{
     public User CreateUserAndSave(String PhoneNum) {
 
         User user = new User(PhoneNum);
-
         User saveResult = userRepository.save(user);
 
         return saveResult;

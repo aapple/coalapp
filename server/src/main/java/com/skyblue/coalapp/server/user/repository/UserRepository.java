@@ -1,6 +1,6 @@
-package com.skyblue.coalapp.server.example.repository;
+package com.skyblue.coalapp.server.user.repository;
 
-import com.skyblue.coalapp.server.example.domain.User;
+import com.skyblue.coalapp.server.user.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

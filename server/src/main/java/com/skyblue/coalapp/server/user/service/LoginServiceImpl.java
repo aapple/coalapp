@@ -1,12 +1,9 @@
-package com.skyblue.coalapp.server.LogIn.service;
+package com.skyblue.coalapp.server.user.service;
 
-import com.skyblue.coalapp.server.example.domain.User;
-import com.skyblue.coalapp.server.example.service.UserService;
-import com.taobao.api.ApiException;
+import com.skyblue.coalapp.server.user.domain.User;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
