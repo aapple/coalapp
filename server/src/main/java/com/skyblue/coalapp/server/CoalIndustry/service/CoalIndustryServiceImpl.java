@@ -1,8 +1,6 @@
-package com.skyblue.coalapp.server.example.service;
+package com.skyblue.coalapp.server.CoalIndustry.service;
 ;
-import com.skyblue.coalapp.server.LogIn.vo.FactoryVO;
 import com.skyblue.coalapp.server.example.domain.Factory;
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
 import com.skyblue.coalapp.server.example.repository.CoalIndustryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

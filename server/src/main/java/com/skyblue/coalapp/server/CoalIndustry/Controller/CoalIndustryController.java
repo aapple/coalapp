@@ -1,20 +1,18 @@
 package com.skyblue.coalapp.server.CoalIndustry.Controller;
 
 import com.alibaba.fastjson.JSON;
+
+import com.skyblue.coalapp.server.CoalIndustry.vo.FactoryVO;
 import com.skyblue.coalapp.server.example.domain.Factory;
 import com.skyblue.coalapp.server.example.domain.ProductPrice;
-import com.skyblue.coalapp.server.example.service.CoalIndustryService;
-import com.skyblue.coalapp.server.example.service.ProductService;
+import com.skyblue.coalapp.server.CoalIndustry.service.CoalIndustryService;
+import com.skyblue.coalapp.server.CoalIndustry.service.ProductService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -32,8 +30,8 @@ public class CoalIndustryController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/getProdList")
-    public String getSpecFacoryCurrProds(@RequestParam(value = "factoryCode")String factoryCode){
+    @RequestMapping("/getProdListByFactory")
+    public String getSpecFacoryCurrProds(@RequestParam(value = "factoryCode") String factoryCode){
 
         //查询当前厂可供应商品的信息
         List<ProductPrice> productList = productService.getProductListByCode(factoryCode,true);
@@ -46,15 +44,19 @@ public class CoalIndustryController {
     public void saveOrUpdateProdutrice(@RequestParam(value = "productList") String productList){
 
         if(StringUtils.isNoneEmpty(productList)){
-            List<ProductPrice> prodList = JSON.parseArray(productList,ProductPrice.class);
+            List<ProductPrice> prodInfoList = JSON.parseArray(productList,ProductPrice.class);
 
-            if(null != productList && prodList.size()>0){
-                productService.saveOrUpdateProdcutList(prodList);
+            if(null != prodInfoList && prodInfoList.size()>0){
+                productService.saveOrUpdateProdcutList(prodInfoList);
             }
         }
     }
 
-    public void getAllCurrntProductPrice(){
+    @RequestMapping("/getCurrentProdList")
+    @ResponseBody
+    public String getAllCurrntProductPrice(){
         List<Factory> prodcutList = coalIndustryService.getFactoryProductsList();
+
+        return JSON.toJSONString(prodcutList);
     }
 }
