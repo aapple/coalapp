@@ -1,17 +1,21 @@
-package com.skyblue.coalapp.server.LogIn.vo;
+package com.skyblue.coalapp.server.CoalIndustry.vo;
 
 import com.skyblue.coalapp.server.example.domain.ProductPrice;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 /**
  * Created by 张杨 on 2017/5/23.
  */
+@Getter
+@Setter
 public class FactoryVO {
 
-    private String code;
+    private String factoyCode;
 
-    private String name;
+    private String facotruName;
 
     private List<ProductPrice> products;
 }

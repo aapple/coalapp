@@ -51,6 +51,17 @@ public class ProductPrice {
 
     public ProductPrice(){};
 
+    public ProductPrice(ProductType prodType){
+        this.productType = prodType.getType();
+        this.productCode = prodType.getCode();
+        this.productName = prodType.getDesc();
+
+        this.prodPrice = new BigDecimal(0);
+        this.heatQuantity =  new Integer(0);
+
+        this.updateTime = Timestamp.valueOf(getCurrentTime());
+    }
+
     public ProductPrice(ProductType prodType,String factoryCode){
         this.productType = prodType.getType();
         this.productCode = prodType.getCode();

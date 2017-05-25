@@ -1,8 +1,11 @@
 package com.skyblue.coalapp.server.example.domain;
 
+import lombok.Getter;
+
 /**
  * Created by 张杨 on 2017/5/23.
  */
+@Getter
 public enum CommonEnum {
 
     STATE_YES("Y",1),

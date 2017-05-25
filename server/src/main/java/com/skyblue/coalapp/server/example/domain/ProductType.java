@@ -34,7 +34,11 @@ public enum ProductType {
     private String code;
     private String desc;
 
-    private ProductType(Integer type, String code, String desc){}
+    private ProductType(Integer type, String code, String desc){
+        this.type = type;
+        this.code = code;
+        this.desc = desc;
+    }
 
     //获取一类产品
     public static List<ProductType> getThisTypeAllProdcutList(int type){
@@ -42,7 +46,7 @@ public enum ProductType {
         ArrayList<ProductType> productList = new ArrayList<ProductType>();
 
         for (ProductType product : ProductType.values()) {
-            if(product.type == type && !product.code.equals("0000")){
+            if(product.getType() == type && !product.code.equals("0000")){
                 productList.add(product);
             }
         }
