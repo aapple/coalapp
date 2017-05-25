@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.CoalIndustry.service;
 
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
 
 import java.util.List;
 

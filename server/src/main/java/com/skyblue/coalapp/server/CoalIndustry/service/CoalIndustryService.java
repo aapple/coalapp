@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.CoalIndustry.service;
 
-import com.skyblue.coalapp.server.example.domain.Factory;
+import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
 
 import java.util.List;
 

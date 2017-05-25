@@ -1,10 +1,10 @@
 package com.skyblue.coalapp.server.CoalIndustry.service;
 
 import com.skyblue.coalapp.server.example.domain.CommonEnum;
-import com.skyblue.coalapp.server.example.domain.Factory;
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
-import com.skyblue.coalapp.server.example.domain.ProductType;
-import com.skyblue.coalapp.server.example.repository.ProductPriceRepository;
+import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductType;
+import com.skyblue.coalapp.server.CoalIndustry.repository.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

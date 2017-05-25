@@ -1,7 +1,6 @@
-package com.skyblue.coalapp.server.example.repository;
+package com.skyblue.coalapp.server.CoalIndustry.repository;
 
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
-import com.skyblue.coalapp.server.example.domain.ProductType;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

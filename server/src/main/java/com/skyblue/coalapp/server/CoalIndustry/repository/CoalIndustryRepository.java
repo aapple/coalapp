@@ -1,6 +1,6 @@
-package com.skyblue.coalapp.server.example.repository;
+package com.skyblue.coalapp.server.CoalIndustry.repository;
 
-import com.skyblue.coalapp.server.example.domain.Factory;
+import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

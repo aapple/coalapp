@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.example.domain;
+package com.skyblue.coalapp.server.CoalIndustry.domain;
 
 import lombok.Getter;
 

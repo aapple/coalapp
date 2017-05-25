@@ -2,11 +2,11 @@ package com.skyblue.coalapp.server.CoalIndustry.Controller;
 
 import com.alibaba.fastjson.JSON;
 
-import com.skyblue.coalapp.server.CoalIndustry.vo.FactoryVO;
-import com.skyblue.coalapp.server.example.domain.Factory;
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
+import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
 import com.skyblue.coalapp.server.CoalIndustry.service.CoalIndustryService;
 import com.skyblue.coalapp.server.CoalIndustry.service.ProductService;
+import com.skyblue.coalapp.server.CoalIndustry.vo.ProductVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,9 +52,13 @@ public class CoalIndustryController {
         }
     }
 
+    /*
+    *  可以按照条件来查询
+    * */
     @RequestMapping("/getCurrentProdList")
     @ResponseBody
-    public String getAllCurrntProductPrice(){
+    public String getAllProductBy(@RequestBody ProductVO product){
+
         List<Factory> prodcutList = coalIndustryService.getFactoryProductsList();
 
         return JSON.toJSONString(prodcutList);

@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.CoalIndustry.vo;
 
-import com.skyblue.coalapp.server.example.domain.ProductPrice;
+import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
 import lombok.Getter;
 import lombok.Setter;
 

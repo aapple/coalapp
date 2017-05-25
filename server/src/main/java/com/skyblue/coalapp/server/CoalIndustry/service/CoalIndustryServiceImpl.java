@@ -1,7 +1,7 @@
 package com.skyblue.coalapp.server.CoalIndustry.service;
 ;
-import com.skyblue.coalapp.server.example.domain.Factory;
-import com.skyblue.coalapp.server.example.repository.CoalIndustryRepository;
+import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
+import com.skyblue.coalapp.server.CoalIndustry.repository.CoalIndustryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,6 @@ public class CoalIndustryServiceImpl implements CoalIndustryService{
 
     @Override
     public void save(Factory industry) {
-
         coalIndustryRepository.save(industry);
     }
 
@@ -53,7 +52,7 @@ public class CoalIndustryServiceImpl implements CoalIndustryService{
 
     public List<Factory> getFactoryProductsList(){
 
-        List<Factory> result = new ArrayList<Factory>() ;
+        List<Factory> result = new ArrayList<Factory>();
 
         Iterable<Factory> factories = coalIndustryRepository.findAll();
 
@@ -65,6 +64,7 @@ public class CoalIndustryServiceImpl implements CoalIndustryService{
                 }
             }
         });
+
         return result;
     }
 }
