@@ -28,7 +28,7 @@ public class Topic_stars {
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updated_at;
 
-    @Column(columnDefinition="TIMESTAMP NOT NULL DEFAULT 0 ")
+    @Column(columnDefinition="datetime")
     private Date created_at;
 
 }

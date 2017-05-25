@@ -1,16 +1,16 @@
-package com.skyblue.coalapp.server.LogIn.controller;
+package com.skyblue.coalapp.server.user.controller;
 
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.skyblue.coalapp.server.LogIn.service.LoginService;
-import com.skyblue.coalapp.server.LogIn.vo.UserVO;
-import com.skyblue.coalapp.server.example.domain.User;
-import com.skyblue.coalapp.server.repsonse.BusinessException;
-import com.skyblue.coalapp.server.repsonse.CommonUtils;
-import com.skyblue.coalapp.server.repsonse.HttpUtils;
-import com.skyblue.coalapp.server.repsonse.ResponseMessage;
+import com.skyblue.coalapp.server.framework.BusinessException;
+import com.skyblue.coalapp.server.framework.CommonUtils;
+import com.skyblue.coalapp.server.framework.HttpUtils;
+import com.skyblue.coalapp.server.framework.ResponseMessage;
+import com.skyblue.coalapp.server.user.domain.User;
+import com.skyblue.coalapp.server.user.service.LoginService;
+import com.skyblue.coalapp.server.user.vo.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

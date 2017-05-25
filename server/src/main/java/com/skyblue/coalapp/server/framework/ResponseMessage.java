@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.repsonse;
+package com.skyblue.coalapp.server.framework;
 
 import com.alibaba.fastjson.JSON;
 

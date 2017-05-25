@@ -1,11 +1,10 @@
-package com.skyblue.coalapp.server.example.domain;
+package com.skyblue.coalapp.server.user.domain;
 
+import com.skyblue.coalapp.server.example.domain.RoleEnum;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -42,8 +41,30 @@ public class User {
     @Column(nullable = false,length = 50)
     private String roleDesc;
 
-    @Column(nullable = false,length = 30)
-    private Timestamp createTime;
+    @Column
+    private String wx_open_id;
+
+    @Column
+    private String wx_union_id;
+
+    @Column
+    private String nickname;
+
+    @Column
+    private String avatar;
+
+    @Column
+    private String bio;
+
+    @Column
+    private Integer gender;
+
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updated_at;
+
+    @Column(columnDefinition="datetime")
+    private Date created_at;
+
 
     public User(){}
 
@@ -53,7 +74,7 @@ public class User {
         this.phoneNum = phoneNum;
         this.role = new Integer(RoleEnum.ROLE_CUSTOMER.getValue());
         this.roleDesc = RoleEnum.ROLE_CUSTOMER.getDesc();
-        this.createTime = Timestamp.valueOf(getCurrentTime());
+        this.created_at = new Date();
     }
 
     private String creatRandomName() {
