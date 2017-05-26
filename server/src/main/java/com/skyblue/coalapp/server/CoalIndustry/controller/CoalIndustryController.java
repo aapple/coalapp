@@ -20,7 +20,7 @@ import java.util.List;
  * Created by 张杨 on 2017/5/19.
  */
 @RestController
-@RequestMapping("/coalIndustry")
+@RequestMapping("/app/coalIndustry")
 public class CoalIndustryController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
