@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
 import com.skyblue.coalapp.server.CoalIndustry.domain.ProductPrice;
 import com.skyblue.coalapp.server.CoalIndustry.domain.ProductType;
 import com.skyblue.coalapp.server.CoalIndustry.repository.ProductPriceRepository;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,6 +86,19 @@ public class ProductServiceImpl implements ProductService {
 
             productPriceRepository.save(products);
         }
+    }
+
+    public List<ProductPrice> getProdcutPriceByTypeAndCode(ProductPrice productPrice){
+
+        List<ProductPrice> products = null;
+
+        if(productPrice != null && StringUtils.isNotEmpty(productPrice.getProductCode())){
+            products = this.productPriceRepository.findAllByProductCodeEqualsOrderByProdPriceAsc(productPrice.getProductCode());
+        }else if(productPrice != null &&  productPrice.getProductType() != null){
+            products = this.productPriceRepository.findAllByProductTypeEqualsOrderByProdPriceAsc(productPrice.getProductType());
+        }
+
+        return products;
     }
 
     public List<ProductPrice> getProductPriceTemplateList(int type){

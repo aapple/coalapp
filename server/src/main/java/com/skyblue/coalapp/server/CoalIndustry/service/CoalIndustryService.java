@@ -16,6 +16,4 @@ public interface CoalIndustryService {
     public void save(Factory industry);
 
     public void deleteByCode(String code);
-
-    public List<Factory> getFactoryProductsList();
 }

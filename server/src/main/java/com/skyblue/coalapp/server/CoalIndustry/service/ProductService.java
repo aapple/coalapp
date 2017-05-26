@@ -23,4 +23,9 @@ public interface ProductService {
     * 获取某类型产品 模板列表
     */
     public List<ProductPrice> getProductPriceTemplateList(int type);
+
+    /*
+   * 获取某类型产品信息列表
+   */
+    public List<ProductPrice> getProdcutPriceByTypeAndCode(ProductPrice productproce);
 }

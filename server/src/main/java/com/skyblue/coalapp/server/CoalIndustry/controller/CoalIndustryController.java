@@ -55,11 +55,18 @@ public class CoalIndustryController {
     /*
     *  可以按照条件来查询
     * */
-    @RequestMapping("/getCurrentProdList")
+    @RequestMapping("/getCurrentProds")
     @ResponseBody
-    public String getAllProductBy(@RequestBody ProductVO product){
+    public String getCurrentProds(@RequestBody ProductVO productVO){
 
-        List<Factory> prodcutList = coalIndustryService.getFactoryProductsList();
+        //vo 转成 eo
+        ProductPrice productPrice = new ProductPrice();
+        if(productVO != null){
+            productPrice.setProductType(productVO.getProductType());
+            productPrice.setFactoryCode(productVO.getProductCode());
+        }
+
+        List<ProductPrice> prodcutList = productService.getProdcutPriceByTypeAndCode(productPrice);
 
         return JSON.toJSONString(prodcutList);
     }

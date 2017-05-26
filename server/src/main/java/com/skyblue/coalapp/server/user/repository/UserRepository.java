@@ -4,7 +4,6 @@ import com.skyblue.coalapp.server.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,5 +32,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("update User set bio = ?1 where id = ?2")
     int updateBio(String bio, int id);
-
 }
