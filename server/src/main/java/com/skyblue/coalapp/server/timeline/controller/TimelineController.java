@@ -9,4 +9,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("app/")
 public class TimelineController {
+
+
+    // timeline?type=refresh&id=' + params.id
+    // timeline?type=infinite&id=' + params.id
+    @RequestMapping("/index")
+    String timeline(){
+        return "";
+    }
+
+    @RequestMapping("/set-like")
+    String setSike(){
+        return "";
+    }
+
+    @RequestMapping("/store")
+    String store(){
+        return "";
+    }
+
+    @RequestMapping("/update")
+    String update(){
+        return "";
+    }
+
+    @RequestMapping("/destroy")
+    String destroy(){
+        return "";
+    }
+
+    @RequestMapping("/store-comment")
+    String storeComment(){
+        return "";
+    }
+
 }
