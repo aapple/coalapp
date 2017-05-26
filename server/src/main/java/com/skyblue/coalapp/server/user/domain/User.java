@@ -1,6 +1,5 @@
 package com.skyblue.coalapp.server.user.domain;
 
-import com.skyblue.coalapp.server.example.domain.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,7 @@ import java.util.Random;
  * Created by bin.yao on 2017/4/21.
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 @Setter
 @Getter
 public class User {
@@ -26,11 +25,8 @@ public class User {
     @Column(nullable = false,unique = true,length = 15)
     private String userCode;
 
-    @Column(nullable = false,length = 30)
+    @Column(length = 30)
     private String userName;
-
-    @Column(nullable = true,length = 30)
-    private String password;
 
     @Column(nullable = false,unique = true,length = 20)
     private String phoneNum;
@@ -40,12 +36,6 @@ public class User {
 
     @Column(nullable = false,length = 50)
     private String roleDesc;
-
-    @Column
-    private String wx_open_id;
-
-    @Column
-    private String wx_union_id;
 
     @Column
     private String nickname;
@@ -65,12 +55,18 @@ public class User {
     @Column(columnDefinition="datetime")
     private Date created_at;
 
+    @Column
+    private String wx_open_id;
+
+    @Column
+    private String wx_union_id;
+
 
     public User(){}
 
     public User(String phoneNum){
         this.userCode = phoneNum;
-        this.userName = creatRandomName();
+        this.nickname = creatRandomName();
         this.phoneNum = phoneNum;
         this.role = new Integer(RoleEnum.ROLE_CUSTOMER.getValue());
         this.roleDesc = RoleEnum.ROLE_CUSTOMER.getDesc();

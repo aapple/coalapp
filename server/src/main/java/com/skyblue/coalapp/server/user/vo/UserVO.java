@@ -10,6 +10,11 @@ import lombok.Setter;
 @Getter
 public class UserVO {
 
+    private Integer id;
     private String phoneNum;
     private String verifyCode;
+    private String nickname;
+    private String avatar;
+    private String bio;
+    private Integer gender;
 }

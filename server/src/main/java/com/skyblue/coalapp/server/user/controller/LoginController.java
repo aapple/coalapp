@@ -85,7 +85,7 @@ public class LoginController {
 
             return userJsonString;
         }else{
-            throw new BusinessException("验证异常，请重新尝试");
+            throw new BusinessException("验证码错误，请重新输入");
         }
     }
 

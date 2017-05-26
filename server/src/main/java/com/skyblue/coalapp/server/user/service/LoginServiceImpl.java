@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
 
         if(null == userInfo){
             // if cant get then create new User
-            userInfo = userService.CreateUserAndSave(phoneNum);
+            userInfo = userService.createUserAndSave(phoneNum);
         }
 
         return userInfo;

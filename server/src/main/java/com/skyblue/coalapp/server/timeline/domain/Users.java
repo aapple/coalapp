@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by yao on 2017/5/21.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "oldusers")
 @Setter
 @Getter
 public class Users {

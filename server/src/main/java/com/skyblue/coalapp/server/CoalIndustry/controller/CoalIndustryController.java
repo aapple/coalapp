@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.CoalIndustry.Controller;
+package com.skyblue.coalapp.server.CoalIndustry.controller;
 
 import com.alibaba.fastjson.JSON;
 
