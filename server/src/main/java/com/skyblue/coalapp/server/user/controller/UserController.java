@@ -1,11 +1,11 @@
 package com.skyblue.coalapp.server.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
 import com.skyblue.coalapp.server.framework.HttpUtils;
 import com.skyblue.coalapp.server.user.domain.User;
-import com.skyblue.coalapp.server.user.service.LoginService;
 import com.skyblue.coalapp.server.user.service.UserService;
 import com.skyblue.coalapp.server.user.vo.UserVO;
 import org.slf4j.Logger;
@@ -19,9 +19,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bin.yao on 2017/4/12.
@@ -35,6 +32,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FactoryService factoryService;
+
     @RequestMapping("/update")
     String update(@RequestBody UserVO user, HttpServletResponse response){
 
@@ -44,7 +44,6 @@ public class UserController {
 
         // 更新cookie
         String userJsonString = JSON.toJSONString(newUserInfo);
-
         String base64String = null;
         try {
             base64String = URLEncoder.encode(CommonUtils.getBase64(userJsonString), "UTF-8");
@@ -63,7 +62,11 @@ public class UserController {
     String myinfo(){
 
         User userInfo = HttpUtils.getUserInfo();
-        return JSON.toJSONString(userService.findById(userInfo.getId()));
+        if(userInfo != null){
+            return JSON.toJSONString(userService.findById(userInfo.getId()));
+        } else {
+            return "";
+        }
     }
 
 }

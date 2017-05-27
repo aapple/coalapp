@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.CoalIndustry.domain;
+package com.skyblue.coalapp.server.product.domain;
 
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by 张杨 on 2017/5/23.
  */
 @Getter
-public enum ProductType {
+public enum ProductType_old {
     // 1: 煤炭
     COAL(1,"0000","coal"),
     COAL_2_5(1,"1001","2-5籽"),
@@ -34,18 +34,18 @@ public enum ProductType {
     private String code;
     private String desc;
 
-    private ProductType(Integer type, String code, String desc){
+    private ProductType_old(Integer type, String code, String desc){
         this.type = type;
         this.code = code;
         this.desc = desc;
     }
 
     //获取一类产品
-    public static List<ProductType> getThisTypeAllProdcutList(int type){
+    public static List<ProductType_old> getThisTypeAllProdcutList(int type){
 
-        ArrayList<ProductType> productList = new ArrayList<ProductType>();
+        ArrayList<ProductType_old> productList = new ArrayList<ProductType_old>();
 
-        for (ProductType product : ProductType.values()) {
+        for (ProductType_old product : ProductType_old.values()) {
             if(product.getType() == type && !product.code.equals("0000")){
                 productList.add(product);
             }
@@ -54,11 +54,11 @@ public enum ProductType {
         return productList;
     }
 
-    public static Map<String,ProductType> getThisTypeAllProdcutMap(int type){
+    public static Map<String,ProductType_old> getThisTypeAllProdcutMap(int type){
 
-        Map<String,ProductType> productMap = new HashMap<String,ProductType>();
+        Map<String,ProductType_old> productMap = new HashMap<String,ProductType_old>();
 
-        for (ProductType product : ProductType.values()) {
+        for (ProductType_old product : ProductType_old.values()) {
             if(product.type == type && !product.code.equals("0000")){
                 productMap.put(product.code,product);
             }
@@ -68,9 +68,9 @@ public enum ProductType {
     }
 
     //获取某个产品根据Code
-    public static ProductType getProductByCode(String code){
+    public static ProductType_old getProductByCode(String code){
 
-        for (ProductType product : ProductType.values()) {
+        for (ProductType_old product : ProductType_old.values()) {
             if(product.code.equals("code")){
                 return product;
             }

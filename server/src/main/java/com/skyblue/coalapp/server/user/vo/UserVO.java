@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.user.vo;
 
-import com.skyblue.coalapp.server.CoalIndustry.vo.FactoryVO;
+import com.skyblue.coalapp.server.product.vo.FactoryVO;
 import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;

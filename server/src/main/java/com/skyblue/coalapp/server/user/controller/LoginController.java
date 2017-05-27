@@ -4,9 +4,7 @@ package com.skyblue.coalapp.server.user.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.skyblue.coalapp.server.CoalIndustry.domain.Factory;
-import com.skyblue.coalapp.server.CoalIndustry.service.CoalIndustryService;
-import com.skyblue.coalapp.server.CoalIndustry.vo.FactoryVO;
+import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
 import com.skyblue.coalapp.server.framework.HttpUtils;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.stream.FactoryConfigurationError;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -47,7 +44,7 @@ public class LoginController {
     private LoginService loginService;
 
     @Autowired
-    private CoalIndustryService coalIndustryService;
+    private FactoryService factoryService;
 
     @RequestMapping("/getVerifyCode")
     ResponseMessage getVrifyCode(@RequestBody UserVO user){
@@ -77,16 +74,7 @@ public class LoginController {
         if(verifyCode.equals(keepedVerifyCode)){
 
             User userInfo = loginService.login(phoneNum);
-
-            List<Factory> factoryList = coalIndustryService.findAllByOwner(userInfo.getUserCode());
-
-            List<FactoryVO> factories = new ArrayList<FactoryVO>();
-            for(Factory factory: factoryList){
-                factories.add(FactoryVO.eoToVo(factory));
-            }
-            UserVO userVO = UserVO.eoToVo(userInfo,factories);
-
-            String userJsonString = JSON.toJSONString(userVO);
+            String userJsonString = JSON.toJSONString(userInfo);
             String base64String = null;
             try {
                 base64String = URLEncoder.encode(CommonUtils.getBase64(userJsonString), "UTF-8");

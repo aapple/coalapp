@@ -31,8 +31,17 @@ public class User {
     @Column(nullable = false,length = 2)
     private Integer role;
 
-    @Column(nullable = false,length = 50)
-    private String roleDesc;
+    @Column
+    private Integer isCoalManager = 0;
+
+    @Column
+    private Integer isCoalSaler = 0;
+
+    @Column
+    private Integer isCokeManager = 0;
+
+    @Column
+    private Integer isInfoStoreManager = 0;
 
     @Column
     private String nickname;
@@ -52,20 +61,12 @@ public class User {
     @Column(columnDefinition="datetime")
     private Date created_at;
 
-    @Column
-    private String wx_open_id;
-
-    @Column
-    private String wx_union_id;
-
-
     public User(){}
 
     public User(String phoneNum){
         this.nickname = creatRandomName();
         this.phoneNum = phoneNum;
         this.role = new Integer(RoleEnum.ROLE_CUSTOMER.getValue());
-        this.roleDesc = RoleEnum.ROLE_CUSTOMER.getDesc();
         this.created_at = new Date();
     }
 

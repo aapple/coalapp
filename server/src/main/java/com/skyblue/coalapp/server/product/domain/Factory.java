@@ -1,9 +1,10 @@
-package com.skyblue.coalapp.server.CoalIndustry.domain;
+package com.skyblue.coalapp.server.product.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,17 +23,23 @@ public class Factory {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column
+    @Column (length = 10000)
     private String factoryDescribe;
 
     @Column(length = 2)
-    private Integer type;
+    private Integer factoryType;
 
     @Column(length = 2)
     private Integer state;
 
-    @Column(nullable = false,length = 15)
-    private String ownerCode;
+    @Column(nullable = false)
+    private Integer managerId;
+
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updateTime;
+
+    @Column(columnDefinition="datetime")
+    private Date createdTime;
 
     @ManyToMany
     private List<ProductPrice> products;
