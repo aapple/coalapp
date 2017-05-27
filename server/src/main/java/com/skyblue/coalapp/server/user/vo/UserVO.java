@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 public class UserVO {
 
+    private Integer id;
     private String userCode;
     private String phoneNum;
     private String verifyCode;
