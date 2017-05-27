@@ -15,5 +15,7 @@ public interface CoalIndustryService {
 
     public void save(Factory industry);
 
+    public List<Factory> findAllByOwner(String ownerCode);
+
     public void deleteByCode(String code);
 }

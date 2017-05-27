@@ -67,4 +67,11 @@ public class CoalIndustryServiceImpl implements CoalIndustryService{
 
         return result;
     }
+
+    public List<Factory> findAllByOwner(String ownerCode){
+
+        List<Factory> factories = this.coalIndustryRepository.findAllByOwnerCodeEquals(ownerCode);
+
+        return factories;
+    }
 }

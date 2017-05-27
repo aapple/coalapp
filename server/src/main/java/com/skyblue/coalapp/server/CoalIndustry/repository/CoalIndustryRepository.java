@@ -15,9 +15,13 @@ public interface CoalIndustryRepository extends JpaRepository<Factory, Long> {
 
     List<Factory> findAllByName(String name);
 
+    List<Factory> findAllByOwnerCodeEquals(String ownerCode);
+
     @Override
     <S extends Factory> S save(S s);
 
     @Override
     void delete(Factory coalIndustry);
+
+
 }

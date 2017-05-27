@@ -34,6 +34,9 @@ public class Factory {
     @Column(length = 2)
     private Integer state;
 
-    @OneToMany
+    @Column(nullable = false,length = 15)
+    private String ownerCode;
+
+    @ManyToMany
     private List<ProductPrice> products;
 }

@@ -67,10 +67,10 @@ public class CoalIndustryController {
             productPrice.setFactoryCode(productVO.getProductCode());
         }
 
-        List<ProductPrice> prodcutList = productService.getProdcutPriceByTypeAndCode(productPrice);
+        List<ProductPrice> productList = productService.getProdcutPriceByTypeAndCode(productPrice);
 
         List<ProductVO> productVOList = new ArrayList<ProductVO>();
-        for(ProductPrice prod : prodcutList){
+        for(ProductPrice prod : productList){
             productVOList.add(ProductVO.prodToProdVO(prod));
         }
 
