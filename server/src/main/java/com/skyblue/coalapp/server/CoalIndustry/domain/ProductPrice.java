@@ -43,8 +43,8 @@ public class ProductPrice {
     @Column(nullable = false,length = 2)
     private Integer state;
 
-    @Column(nullable = false,length = 10)
-    private String factoryCode;
+    @Column(nullable = false)
+    private Integer factoryId;
 
     @Column(nullable = false,length = 30)
     private Timestamp updateTime;
@@ -62,11 +62,11 @@ public class ProductPrice {
         this.updateTime = Timestamp.valueOf(getCurrentTime());
     }
 
-    public ProductPrice(ProductType prodType,String factoryCode){
+    public ProductPrice(ProductType prodType,Integer factoryCode){
         this.productType = prodType.getType();
         this.productCode = prodType.getCode();
         this.productName = prodType.getDesc();
-        this.factoryCode = factoryCode;
+        this.factoryId = factoryId;
 
         this.prodPrice = new BigDecimal(0);
         this.heatQuantity =  new Integer(0);
@@ -74,24 +74,24 @@ public class ProductPrice {
         this.updateTime = Timestamp.valueOf(getCurrentTime());
     }
 
-    public ProductPrice(ProductType prodType, String factoryCode, BigDecimal prodPrice, Integer  heatQuantity){
+    public ProductPrice(ProductType prodType, Integer factoryId, BigDecimal prodPrice, Integer  heatQuantity){
 
         this.productType = prodType.getType();
         this.productCode = prodType.getCode();
         this.productName = prodType.getDesc();
 
-        this.factoryCode = factoryCode;
+        this.factoryId = factoryId;
         this.prodPrice = prodPrice;
         this.heatQuantity = heatQuantity;
 
         this.updateTime = Timestamp.valueOf(getCurrentTime());
     }
 
-    public ProductPrice(ProductType prodType,String factoryCode, BigDecimal prodPrice,BigDecimal prodPrice2, Integer  heatQuantity){
+    public ProductPrice(ProductType prodType,Integer factoryId, BigDecimal prodPrice,BigDecimal prodPrice2, Integer  heatQuantity){
         this.productType = prodType.getType();
         this.productCode = prodType.getCode();
         this.productName = prodType.getDesc();
-        this.factoryCode = factoryCode;
+        this.factoryId = factoryId;
 
         this.prodPrice = prodPrice;
         this.prodPrice2 = prodPrice2;

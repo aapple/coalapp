@@ -19,9 +19,6 @@ public class Factory {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false,unique = true,length = 10)
-    private String code;
-
     @Column(nullable = false, length = 50)
     private String name;
 

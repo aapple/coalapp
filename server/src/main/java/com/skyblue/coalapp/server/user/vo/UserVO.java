@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 public class UserVO {
 
-    private String userCode;
+    private Integer id;
     private String phoneNum;
     private String verifyCode;
     private String nickname;
@@ -28,7 +28,7 @@ public class UserVO {
 
         UserVO userVO = new UserVO();
 
-        userVO.setUserCode(user.getUserCode());
+        userVO.setId(user.getId());
         userVO.setPhoneNum(user.getPhoneNum());
         userVO.setNickname(user.getNickname());
         userVO.setAvatar(user.getAvatar());

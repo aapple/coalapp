@@ -22,9 +22,6 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false,unique = true,length = 15)
-    private String userCode;
-
     @Column(length = 30)
     private String userName;
 
@@ -65,7 +62,6 @@ public class User {
     public User(){}
 
     public User(String phoneNum){
-        this.userCode = phoneNum;
         this.nickname = creatRandomName();
         this.phoneNum = phoneNum;
         this.role = new Integer(RoleEnum.ROLE_CUSTOMER.getValue());
