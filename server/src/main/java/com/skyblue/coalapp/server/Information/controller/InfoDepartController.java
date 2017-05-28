@@ -2,7 +2,9 @@ package com.skyblue.coalapp.server.Information.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.skyblue.coalapp.server.Information.domain.InfoDepartment;
+import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.service.InfoDepartService;
+import com.skyblue.coalapp.server.Information.service.LogisticsInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,12 @@ public class InfoDepartController {
     @Autowired
     private InfoDepartService infoDepartService;
 
-    @RequestMapping("/addOrUpdate")
+    @Autowired
+    private LogisticsInfoService logisticsInfoService;
+
+    @RequestMapping("/addOrUpdateInfoDepart")
     public void addOrUpdate(@RequestBody InfoDepartment infoDepart){
+
         infoDepartService.addInfoDepartment(infoDepart);
     }
 
@@ -39,5 +45,27 @@ public class InfoDepartController {
         List<InfoDepartment> infoDepartmetList = infoDepartService.findAll(infoDepart);
 
         return JSON.toJSONString(infoDepartmetList);
+    }
+
+    @RequestMapping("/addOrUpdateLogisticsInfo")
+    public void addOrUpdateLogisticsInfo(@RequestBody LogisticsInfo logisticsInfo){
+
+       logisticsInfoService.saveOrUpdate(logisticsInfo);
+    }
+
+    @RequestMapping("/getLogisticsList")
+    public String getLogisticsList(@RequestBody LogisticsInfo logisticsInfo){
+
+        List<LogisticsInfo> resultList = logisticsInfoService.findList(logisticsInfo);
+
+        return JSON.toJSONString(resultList);
+    }
+
+    @RequestMapping("/getLogisticsDetail")
+    public String getLogisticsDetail(@RequestBody LogisticsInfo logisticsInfo){
+
+        LogisticsInfo result = logisticsInfoService.findOne(logisticsInfo);
+
+        return JSON.toJSONString(result);
     }
 }
