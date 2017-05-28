@@ -45,23 +45,6 @@ public class FactoryServiceImpl implements FactoryService {
         factoryRepository.delete(industry);
     }
 
-    public List<Factory> getFactoryProductsList(){
-
-        List<Factory> result = new ArrayList<Factory>();
-
-        Iterable<Factory> factories = factoryRepository.findAll();
-
-        factories.forEach(new Consumer<Factory>(){
-            @Override
-            public void accept(Factory factory) {
-                if(factory.getProducts().size()>0){
-                    result.add(factory);
-                }
-            }
-        });
-
-        return result;
-    }
 
     public List<Factory> getFactoryList(Factory factory){
 

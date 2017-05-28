@@ -24,13 +24,13 @@ public class ProductPrice {
     private Integer factoryId;
 
     @Column(nullable = false)
-    private Integer productType;
+    private Integer factoryType;
 
     @Column(nullable = false)
-    private String productCode;
+    private String productTypeId;
 
     @Column(nullable = false,length = 10)
-    private String productName;
+    private String productTypeName;
 
     @Column(nullable = false,length = 10)
     private BigDecimal price;

@@ -41,6 +41,4 @@ public class Factory {
     @Column(columnDefinition="datetime")
     private Date createdTime;
 
-    @ManyToMany
-    private List<ProductPrice> products;
 }
