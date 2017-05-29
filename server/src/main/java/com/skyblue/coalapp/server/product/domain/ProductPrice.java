@@ -20,17 +20,11 @@ public class ProductPrice {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer factoryId;
+    @ManyToOne
+    private Factory factory;
 
-    @Column(nullable = false)
-    private Integer factoryType;
-
-    @Column(nullable = false)
-    private String productTypeId;
-
-    @Column(nullable = false,length = 10)
-    private String productTypeName;
+    @ManyToOne
+    private ProductType productType;
 
     @Column(nullable = false,length = 10)
     private BigDecimal price;

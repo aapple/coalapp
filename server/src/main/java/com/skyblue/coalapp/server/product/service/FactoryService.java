@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface FactoryService {
 
-    List<Factory> getFactoryList(Factory factory);
-
-    void save(Factory industry);
+    void save(Factory factory);
 
     void deleteById(Integer id);
+
+    List<Factory> getFactoryList(Factory factory);
 
     List<ProductType> getProductTypeList(ProductType productType);
 }

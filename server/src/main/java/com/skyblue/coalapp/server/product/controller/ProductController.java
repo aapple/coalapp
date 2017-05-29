@@ -7,7 +7,6 @@ import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.product.service.ProductPriceService;
-import com.skyblue.coalapp.server.product.vo.ProductPriceVO;
 import com.skyblue.coalapp.server.user.domain.User;
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
@@ -38,21 +37,21 @@ public class ProductController {
     *  查询产品价格列表
     * */
     @RequestMapping("/getProductPriceList")
-    public String getProductPriceList(@RequestBody ProductPriceVO productPriceVo){
+    public String getProductPriceList(@RequestBody ProductPrice productPrice){
 
-        List<ProductPrice> productList = productPriceService.getProductPriceList(productPriceVo);
+        List<ProductPrice> productList = productPriceService.getProductPriceList(productPrice);
 
         return JSON.toJSONString(productList);
     }
 
     /*
-    *  查询工厂产品列表
+    *  查询用户的工厂和产品列表
     * */
     @RequestMapping("/getFactoryList")
     String getFactoryList(@RequestBody Factory factory){
 
         User userInfo = HttpUtils.getUserInfo();
-        factory.setManagerId(userInfo.getId());
+        factory.setUser(userInfo);
         List<Factory> factoryList = factoryService.getFactoryList(factory);
 
         ProductType productType = new ProductType();
@@ -63,6 +62,19 @@ public class ProductController {
         result.put("factoryList", factoryList);
         result.put("productTypeList", productTypeList);
         return JSON.toJSONString(result);
+    }
+
+    /*
+    *  查询产品列表
+    * */
+    @RequestMapping("/getProductTypeList")
+    String getProductTypeList(@RequestBody Factory factory){
+
+        ProductType productType = new ProductType();
+        productType.setFactoryType(factory.getFactoryType());
+        List<ProductType> productTypeList = factoryService.getProductTypeList(productType);
+
+        return JSON.toJSONString(productTypeList);
     }
 
     /*

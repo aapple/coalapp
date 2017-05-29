@@ -59,14 +59,29 @@ public class UserController {
     }
 
     @RequestMapping("/my-info")
-    String myinfo(){
+    String myinfo(HttpServletResponse response){
 
         User userInfo = HttpUtils.getUserInfo();
-        if(userInfo != null){
-            return JSON.toJSONString(userService.findById(userInfo.getId()));
-        } else {
+
+        if(userInfo == null) {
             return "";
         }
+
+        User newUserInfo = userService.findById(userInfo.getId());
+        // 更新cookie
+        String userJsonString = JSON.toJSONString(newUserInfo);
+        String base64String = null;
+        try {
+            base64String = URLEncoder.encode(CommonUtils.getBase64(userJsonString), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
+        Cookie cookie = new Cookie("coalapp_session", base64String);
+        cookie.setMaxAge( 365 * 24 * 60 * 60);// 设置为30min
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return userJsonString;
     }
 
 }

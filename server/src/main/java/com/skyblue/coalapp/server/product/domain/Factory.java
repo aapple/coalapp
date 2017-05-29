@@ -1,11 +1,11 @@
 package com.skyblue.coalapp.server.product.domain;
 
+import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by 张杨 on 2017/5/19.
@@ -32,8 +32,8 @@ public class Factory {
     @Column(length = 2)
     private Integer state;
 
-    @Column(nullable = false)
-    private Integer managerId;
+    @OneToOne
+    private User user;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updateTime;
