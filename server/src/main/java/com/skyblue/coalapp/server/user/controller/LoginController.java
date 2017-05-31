@@ -7,7 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
-import com.skyblue.coalapp.server.framework.HttpUtils;
+import com.skyblue.coalapp.server.framework.RequestUtils;
 import com.skyblue.coalapp.server.framework.ResponseMessage;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.service.LoginService;
@@ -95,7 +95,7 @@ public class LoginController {
     @RequestMapping("/testCookie")
     String testCookie(){
 
-        User user = HttpUtils.getUserInfo();
+        User user = RequestUtils.getUserInfo();
 
         List a = new ArrayList<>();
         a.add(user);

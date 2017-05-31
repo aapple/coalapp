@@ -14,7 +14,7 @@ import java.net.URLDecoder;
 /**
  * Created by yao on 2017/5/21.
  */
-public class HttpUtils {
+public class RequestUtils {
 
     public static User getUserInfo(){
 

@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.Information.domain.InfoDepartment;
 import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.service.InfoDepartService;
 import com.skyblue.coalapp.server.Information.service.LogisticsInfoService;
+import com.skyblue.coalapp.server.framework.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class InfoDepartController {
     public String findInfoDepartment(@RequestBody InfoDepartment infoDepart){
         InfoDepartment infoDepartment = infoDepartService.findOne(infoDepart);
 
-        return JSON.toJSONString(infoDepartment);
+        return ResponseUtils.toJSONString(infoDepartment);
     }
 
     @RequestMapping("/getInfoDepartmentList")
@@ -44,7 +45,7 @@ public class InfoDepartController {
 
         List<InfoDepartment> infoDepartmetList = infoDepartService.findAll(infoDepart);
 
-        return JSON.toJSONString(infoDepartmetList);
+        return ResponseUtils.toJSONString(infoDepartmetList);
     }
 
     @RequestMapping("/addOrUpdateLogisticsInfo")
@@ -58,7 +59,7 @@ public class InfoDepartController {
 
         List<LogisticsInfo> resultList = logisticsInfoService.findList(logisticsInfo);
 
-        return JSON.toJSONString(resultList);
+        return ResponseUtils.toJSONString(resultList);
     }
 
     @RequestMapping("/getLogisticsDetail")
@@ -66,6 +67,6 @@ public class InfoDepartController {
 
         LogisticsInfo result = logisticsInfoService.findOne(logisticsInfo);
 
-        return JSON.toJSONString(result);
+        return ResponseUtils.toJSONString(result);
     }
 }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
-import com.skyblue.coalapp.server.framework.HttpUtils;
+import com.skyblue.coalapp.server.framework.RequestUtils;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.service.UserService;
 import com.skyblue.coalapp.server.user.vo.UserVO;
@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping("/update")
     String update(@RequestBody UserVO user, HttpServletResponse response){
 
-        User userInfo = HttpUtils.getUserInfo();
+        User userInfo = RequestUtils.getUserInfo();
         user.setId(userInfo.getId());
         User newUserInfo = userService.updateUserInfo(user);
 
@@ -61,7 +61,7 @@ public class UserController {
     @RequestMapping("/my-info")
     String myinfo(HttpServletResponse response){
 
-        User userInfo = HttpUtils.getUserInfo();
+        User userInfo = RequestUtils.getUserInfo();
 
         if(userInfo == null) {
             return "";

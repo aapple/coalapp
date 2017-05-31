@@ -1,7 +1,8 @@
 package com.skyblue.coalapp.server.product.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.skyblue.coalapp.server.framework.HttpUtils;
+import com.skyblue.coalapp.server.framework.RequestUtils;
+import com.skyblue.coalapp.server.framework.ResponseUtils;
 import com.skyblue.coalapp.server.product.domain.Factory;
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class ProductController {
 
         List<ProductPrice> productList = productPriceService.getProductPriceList(productPrice);
 
-        return JSON.toJSONString(productList);
+        return ResponseUtils.toJSONString(productList);
     }
 
     /*
@@ -50,7 +50,7 @@ public class ProductController {
     @RequestMapping("/getFactoryList")
     String getFactoryList(@RequestBody Factory factory){
 
-        User userInfo = HttpUtils.getUserInfo();
+        User userInfo = RequestUtils.getUserInfo();
         factory.setUser(userInfo);
         List<Factory> factoryList = factoryService.getFactoryList(factory);
 
@@ -61,7 +61,7 @@ public class ProductController {
         Map<String, Object> result = new HashedMap();
         result.put("factoryList", factoryList);
         result.put("productTypeList", productTypeList);
-        return JSON.toJSONString(result);
+        return ResponseUtils.toJSONString(result);
     }
 
     /*
@@ -74,7 +74,7 @@ public class ProductController {
         productType.setFactoryType(factory.getFactoryType());
         List<ProductType> productTypeList = factoryService.getProductTypeList(productType);
 
-        return JSON.toJSONString(productTypeList);
+        return ResponseUtils.toJSONString(productTypeList);
     }
 
     /*
