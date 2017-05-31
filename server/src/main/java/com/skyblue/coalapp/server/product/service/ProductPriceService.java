@@ -1,6 +1,7 @@
 package com.skyblue.coalapp.server.product.service;
 
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
+import com.skyblue.coalapp.server.product.domain.ProductType;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface ProductPriceService {
    * 获取某类型产品信息列表
    */
     List<ProductPrice> getProductPriceList(ProductPrice productPrice);
+
+    List<ProductPrice> getProdcutPriceTemplateList(ProductType productType);
 }

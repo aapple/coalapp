@@ -45,7 +45,6 @@ public class FactoryServiceImpl implements FactoryService {
         factoryRepository.delete(industry);
     }
 
-
     public List<Factory> getFactoryList(Factory factory){
 
         //创建匹配器，即如何使用查询条件

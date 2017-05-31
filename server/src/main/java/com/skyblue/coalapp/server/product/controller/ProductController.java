@@ -35,6 +35,9 @@ public class ProductController {
 
     /*
     *  查询产品价格列表
+    *
+    *  1. 默认只有facotryType这样查询出来的是当前种类产品的所有列表
+    *  2. 也可以有其他的过滤条件
     * */
     @RequestMapping("/getProductPriceList")
     public String getProductPriceList(@RequestBody ProductPrice productPrice){
@@ -72,9 +75,24 @@ public class ProductController {
 
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
+
         List<ProductType> productTypeList = factoryService.getProductTypeList(productType);
 
         return ResponseUtils.toJSONString(productTypeList);
+    }
+
+    /*
+   *  查询产品列表模板
+   * */
+    @RequestMapping("/getProductPriceTempList")
+    String getProductPriceTempList(@RequestBody Factory factory){
+
+        ProductType productType = new ProductType();
+        productType.setFactoryType(factory.getFactoryType());
+
+        List<ProductPrice> productList = productPriceService.getProdcutPriceTemplateList(productType);
+
+        return ResponseUtils.toJSONString(productList);
     }
 
     /*

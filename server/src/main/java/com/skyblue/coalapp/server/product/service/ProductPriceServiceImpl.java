@@ -1,6 +1,7 @@
 package com.skyblue.coalapp.server.product.service;
 
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
+import com.skyblue.coalapp.server.product.domain.ProductType;
 import com.skyblue.coalapp.server.product.domain.ProductType_old;
 import com.skyblue.coalapp.server.product.repository.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,22 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @Autowired
     private ProductPriceRepository productPriceRepository;
 
+    @Autowired
+    private FactoryService factoryService;
+
     public void saveOrUpdateProductPrice(ProductPrice productPrice){
 
-        productPrice.setCreatedTime(new Date());
-        productPrice.setState(1);
+        // 首先判断是不是有ID
+        if(productPrice.getId() == null){
+            List<ProductPrice> productPrices = getProductPriceList(productPrice);
+            if(productPrices != null && productPrices.size()> 0){
+                productPrice = productPrices.get(0);
+            }else{
+                productPrice.setCreatedTime(new Date());
+                productPrice.setState(1);
+            }
+        }
+
         productPriceRepository.save(productPrice);
     }
 
@@ -43,4 +56,19 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         return productPrices;
     }
 
+    public List<ProductPrice> getProdcutPriceTemplateList(ProductType productType){
+
+        List<ProductType> productTypes =  factoryService.getProductTypeList(productType);
+
+        List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
+        if(productTypes != null){
+            for(ProductType prodType : productTypes){
+
+                ProductPrice productPrice = new ProductPrice();
+                productPrice.setProductType(productType);
+            }
+        }
+
+        return productPrices;
+    }
 }
