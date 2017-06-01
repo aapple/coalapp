@@ -32,7 +32,7 @@ public class Factory {
     @Column(length = 2)
     private Integer state;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")

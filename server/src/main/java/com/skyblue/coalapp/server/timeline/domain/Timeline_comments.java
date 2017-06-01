@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.timeline.domain;
 
+import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,12 @@ public class Timeline_comments {
 
     @Column(nullable = false)
     private Integer user_id;
+
+    @ManyToOne
+    private User users;
+
+    @ManyToOne
+    private Timelines timelines;
 
     @Column
     private Integer parent_id = 0;
