@@ -1,6 +1,8 @@
 package com.skyblue.coalapp.server.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.skyblue.coalapp.server.framework.ResponseUtils;
+import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
@@ -19,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by bin.yao on 2017/4/12.
@@ -82,6 +85,14 @@ public class UserController {
         response.addCookie(cookie);
 
         return userJsonString;
+    }
+
+    @RequestMapping("/getUserList")
+    public String getUserList(){
+
+        List<User> userList = userService.findAll();
+
+        return ResponseUtils.toJSONString(userList);
     }
 
 }

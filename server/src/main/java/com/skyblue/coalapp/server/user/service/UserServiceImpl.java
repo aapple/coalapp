@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by 张杨 on 2017/5/18.
@@ -68,5 +69,11 @@ public class UserServiceImpl implements UserService {
     public User findById(int id){
         User result = userRepository.findOne(id);
         return result;
+    }
+
+    @Override
+    public List<User> findAll() {
+
+        return userRepository.findAll();
     }
 }

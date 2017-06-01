@@ -44,6 +44,9 @@ public class User {
     private Integer isInfoStoreManager = 0;
 
     @Column
+    private Integer isSuperManager = 0;
+
+    @Column
     private String nickname;
 
     @Column

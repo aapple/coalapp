@@ -10,8 +10,7 @@ public class ResponseUtils {
 
     public static String toJSONString(Object object){
 
-        String jsonString = JSON.toJSONStringWithDateFormat(object,
-                "yyyy-MM-dd HH:mm:ss", SerializerFeature.DisableCircularReferenceDetect);
+        String jsonString = JSON.toJSONString(object, SerializerFeature.DisableCircularReferenceDetect);
 
         return jsonString;
     }

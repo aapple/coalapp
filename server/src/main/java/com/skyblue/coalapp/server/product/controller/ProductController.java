@@ -104,4 +104,22 @@ public class ProductController {
         productPriceService.saveOrUpdateProductPrice(productPrice);
     }
 
+    /*
+    *  删除工厂
+    * */
+    @RequestMapping("/deleteFactory")
+    public void deleteFactory(@RequestBody Factory factory){
+
+        factoryService.deleteById(factory);
+    }
+
+    /*
+    *  保存或更新工厂
+    * */
+    @RequestMapping("/saveOrUpdateFactory")
+    public void saveOrUpdateFactory(@RequestBody Factory factory){
+
+        factoryService.saveOrUpdateProductPrice(factory);
+    }
+
 }

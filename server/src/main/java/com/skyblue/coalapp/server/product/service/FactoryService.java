@@ -1,6 +1,7 @@
 package com.skyblue.coalapp.server.product.service;
 
 import com.skyblue.coalapp.server.product.domain.Factory;
+import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
  */
 public interface FactoryService {
 
-    void save(Factory factory);
+    void saveFactory(Factory factory);
 
-    void deleteById(Integer id);
+    void deleteById(Factory factory);
+
+    void saveOrUpdateProductPrice(Factory factory);
 
     List<Factory> getFactoryList(Factory factory);
 
