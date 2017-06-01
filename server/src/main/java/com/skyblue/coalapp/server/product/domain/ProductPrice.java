@@ -32,7 +32,7 @@ public class ProductPrice {
     @Column(nullable = true,length = 10)
     private BigDecimal price2;
 
-    @Column(nullable = false,length = 10)
+    @Column(nullable = true,length = 10)
     private Integer  heatQuantity;
 
     @Column(nullable = false,length = 2)

@@ -19,7 +19,7 @@ public class TimelineController {
     }
 
     @RequestMapping("/set-like")
-    String setSike(){
+    String setLike(){
         return "";
     }
 

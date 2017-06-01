@@ -31,20 +31,20 @@ public class User {
     @Column(nullable = false,length = 2)
     private Integer role;
 
-    @Column
-    private Integer isCoalManager = 0;
+    @Column(columnDefinition="DEFAULT 0")
+    private Integer isCoalManager;
 
-    @Column
-    private Integer isCoalSaler = 0;
+    @Column(columnDefinition="DEFAULT 0")
+    private Integer isCoalSaler;
 
-    @Column
-    private Integer isCokeManager = 0;
+    @Column(columnDefinition="DEFAULT 0")
+    private Integer isCokeManager;
 
-    @Column
-    private Integer isInfoStoreManager = 0;
+    @Column(columnDefinition="DEFAULT 0")
+    private Integer isInfoStoreManager;
 
-    @Column
-    private Integer isSuperManager = 0;
+    @Column(columnDefinition="DEFAULT 0")
+    private Integer isSuperManager;
 
     @Column
     private String nickname;
