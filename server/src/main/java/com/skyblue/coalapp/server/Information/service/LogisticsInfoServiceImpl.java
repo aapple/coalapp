@@ -47,4 +47,9 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
 
         return logisticsInfos;
     }
+
+    @Override
+    public void deleteById(LogisticsInfo logisticsInfo) {
+        logisticsInfoRepository.delete(logisticsInfo);
+    }
 }

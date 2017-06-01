@@ -1,6 +1,5 @@
 package com.skyblue.coalapp.server.Information.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.skyblue.coalapp.server.Information.domain.InfoDepartment;
 import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.service.InfoDepartService;
@@ -48,6 +47,12 @@ public class InfoDepartController {
         return ResponseUtils.toJSONString(infoDepartmetList);
     }
 
+    @RequestMapping("/deleteInfoDepartment")
+    public void deleteInfoDepartment(@RequestBody InfoDepartment infoDepart){
+
+        infoDepartService.deleteById(infoDepart);
+    }
+
     @RequestMapping("/addOrUpdateLogisticsInfo")
     public void addOrUpdateLogisticsInfo(@RequestBody LogisticsInfo logisticsInfo){
 
@@ -68,5 +73,11 @@ public class InfoDepartController {
         LogisticsInfo result = logisticsInfoService.findOne(logisticsInfo);
 
         return ResponseUtils.toJSONString(result);
+    }
+
+    @RequestMapping("/deleteLogistics")
+    public void deleteLogistics(@RequestBody LogisticsInfo logisticsInfo){
+
+        logisticsInfoService.deleteById(logisticsInfo);
     }
 }

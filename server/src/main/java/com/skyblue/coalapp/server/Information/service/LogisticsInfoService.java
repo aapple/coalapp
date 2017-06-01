@@ -14,4 +14,6 @@ public interface LogisticsInfoService {
     LogisticsInfo findOne(LogisticsInfo logisticsInfo);
 
     List<LogisticsInfo> findList(LogisticsInfo logisticsInfo);
+
+    void deleteById(LogisticsInfo logisticsInfo);
 }

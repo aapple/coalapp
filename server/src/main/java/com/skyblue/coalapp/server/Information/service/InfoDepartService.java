@@ -15,4 +15,6 @@ public interface InfoDepartService {
     InfoDepartment findOne(InfoDepartment infoDepart);
 
     List<InfoDepartment> findAll(InfoDepartment infoDepartment);
+
+    void deleteById(InfoDepartment infoDepart);
 }

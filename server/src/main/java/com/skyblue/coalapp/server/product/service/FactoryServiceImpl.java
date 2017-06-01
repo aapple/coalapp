@@ -1,7 +1,6 @@
 package com.skyblue.coalapp.server.product.service;
 
 import com.skyblue.coalapp.server.product.domain.Factory;
-import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 import com.skyblue.coalapp.server.product.repository.FactoryRepository;
 import com.skyblue.coalapp.server.product.repository.ProductTypeRepository;
@@ -12,10 +11,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
 
 ;
 
@@ -32,11 +29,6 @@ public class FactoryServiceImpl implements FactoryService {
 
     @Autowired
     private ProductTypeRepository productTypeRepository;
-
-    @Override
-    public void saveFactory(Factory factory) {
-        factoryRepository.save(factory);
-    }
 
     @Override
     public void deleteById(Factory factory) {

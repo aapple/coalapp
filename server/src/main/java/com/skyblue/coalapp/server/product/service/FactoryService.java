@@ -1,7 +1,6 @@
 package com.skyblue.coalapp.server.product.service;
 
 import com.skyblue.coalapp.server.product.domain.Factory;
-import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 
 import java.util.List;
@@ -10,8 +9,6 @@ import java.util.List;
  * Created by 张杨 on 2017/5/19.
  */
 public interface FactoryService {
-
-    void saveFactory(Factory factory);
 
     void deleteById(Factory factory);
 

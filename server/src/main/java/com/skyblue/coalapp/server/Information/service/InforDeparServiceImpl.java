@@ -43,4 +43,9 @@ public class InforDeparServiceImpl implements InfoDepartService {
 
         return infoDepartRepository.findAll(ex);
     }
+
+    @Override
+    public void deleteById(InfoDepartment infoDepartment) {
+        infoDepartRepository.delete(infoDepartment);
+    }
 }

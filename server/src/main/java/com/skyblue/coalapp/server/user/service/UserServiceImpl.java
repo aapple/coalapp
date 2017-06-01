@@ -58,8 +58,13 @@ public class UserServiceImpl implements UserService {
         } else if(StringUtils.isNotEmpty(user.getBio())){
 
             userRepository.updateBio(user.getBio(), user.getId());
-        }
+        } else if(StringUtils.isNotEmpty(user.getUserName())){
 
+            userRepository.updateUserName(user.getUserName(), user.getId());
+        } else if(user.getRole() != null){
+
+            userRepository.updateRole(user.getRole(), user.getId());
+        }
 
         User result = userRepository.findOne(user.getId());
         return result;
