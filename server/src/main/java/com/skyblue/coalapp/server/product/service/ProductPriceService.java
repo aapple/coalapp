@@ -21,4 +21,6 @@ public interface ProductPriceService {
     List<ProductPrice> getProductPriceList(ProductPrice productPrice);
 
     List<ProductPrice> getProdcutPriceTemplateList(ProductType productType);
+
+    void recordProductPriceToHistoryPrice();
 }
