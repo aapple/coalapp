@@ -63,7 +63,7 @@ public class TimelineController {
         timelines = timelinesService.saveTimelines(timelines);
         timelines.setIs_like(!isLike);
         timelines.setLike_num(timelines.getAuthor_like().size());
-        timelines.setLike_num(timelines.getComments().size());
+        timelines.setComment_num(timelines.getComments().size());
         return ResponseUtils.toJSONString(timelines);
     }
 
