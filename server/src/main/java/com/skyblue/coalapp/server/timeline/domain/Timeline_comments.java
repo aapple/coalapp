@@ -29,6 +29,9 @@ public class Timeline_comments {
     @ManyToOne
     private User author;
 
+    @ManyToOne
+    private Timeline_comments parents;
+
     @Column
     private Integer parent_id = 0;
 

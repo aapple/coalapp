@@ -27,7 +27,7 @@ public class Timeline_likes {
     private Integer user_id;
 
     @ManyToOne
-    private User users;
+    private User author;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updated_at;

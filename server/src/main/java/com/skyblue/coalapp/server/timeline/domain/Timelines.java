@@ -36,19 +36,19 @@ public class Timelines {
     @OneToMany
     private List<Timeline_imgs> imgs;
 
-    @OneToMany
-    private List<Timeline_videos> video;
+    @OneToOne
+    private Timeline_videos video;
 
     @Column(length = 10000)
     private String content;
 
-    @Column
+    @Transient
     private Integer like_num;
 
-    @Column
+    @Column(columnDefinition="DEFAULT 0")
     private Integer view_num;
 
-    @Column
+    @Transient
     private Integer comment_num;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
@@ -58,7 +58,7 @@ public class Timelines {
     private Date created_at;
 
     @Transient
-    private Boolean is_like;
+    private Boolean is_like = false;
 
 
 }
