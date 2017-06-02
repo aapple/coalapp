@@ -29,9 +29,6 @@ public class Timeline_likes {
     @ManyToOne
     private User users;
 
-    @ManyToOne
-    private Timelines timelines;
-
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updated_at;
 

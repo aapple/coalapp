@@ -27,10 +27,7 @@ public class Timeline_comments {
     private Integer user_id;
 
     @ManyToOne
-    private User users;
-
-    @ManyToOne
-    private Timelines timelines;
+    private User author;
 
     @Column
     private Integer parent_id = 0;

@@ -2,8 +2,10 @@ package com.skyblue.coalapp.server.timeline.controller;
 
 import com.skyblue.coalapp.server.framework.ResponseUtils;
 import com.skyblue.coalapp.server.product.service.FactoryService;
+import com.skyblue.coalapp.server.timeline.domain.Timelines;
 import com.skyblue.coalapp.server.timeline.service.TimelinesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +24,9 @@ public class TimelineController {
     @RequestMapping("/timeline")
     String timeline(){
 
-        timelinesService.xxx();
-        return ResponseUtils.toJSONString(productList);
+//        timelinesService.xxx();
+//        return ResponseUtils.toJSONString(productList);
+        return "";
     }
 
     @RequestMapping("/set-like")
@@ -32,10 +35,11 @@ public class TimelineController {
         return "";
     }
 
-    @RequestMapping("/store")
-    String store(){
+    @RequestMapping("timeline/store")
+    String store(@RequestBody Timelines timelines){
 
-        return "";
+        timelines = timelinesService.saveTimelines(timelines);
+        return ResponseUtils.toJSONString(timelines);
     }
 
     @RequestMapping("/update")

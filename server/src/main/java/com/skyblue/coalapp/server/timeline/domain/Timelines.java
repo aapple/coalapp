@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yao on 2017/5/21.
@@ -24,19 +25,22 @@ public class Timelines {
     private Integer user_id;
 
     @ManyToOne
-    private User users;
+    private User author;
+
+    @OneToMany
+    private List<Timeline_comments> comments;
+
+    @OneToMany
+    private List<Timeline_likes> author_like;
+
+    @OneToMany
+    private List<Timeline_imgs> imgs;
+
+    @OneToMany
+    private List<Timeline_videos> video;
 
     @Column(length = 10000)
     private String content;
-
-    @Column
-    private String imgs;
-
-    @Column
-    private String video;
-
-    @Column
-    private String poster;
 
     @Column
     private Integer like_num;
@@ -52,6 +56,9 @@ public class Timelines {
 
     @Column(columnDefinition="datetime")
     private Date created_at;
+
+    @Transient
+    private Boolean is_like;
 
 
 }

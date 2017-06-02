@@ -29,9 +29,6 @@ public class Timeline_imgs {
     @ManyToOne
     private User users;
 
-    @ManyToOne
-    private Timelines timelines;
-
     @Column(nullable = false)
     private String uri;
 
