@@ -32,7 +32,10 @@ public class ProductPrice {
     @Column(nullable = true,length = 10)
     private BigDecimal price2;
 
-    @Column(nullable = true,length = 10)
+    @Column(length = 10)
+    private BigDecimal priceDiff;
+
+    @Column(nullable = false,length = 10)
     private Integer  heatQuantity;
 
     @Column(nullable = false,length = 2)
@@ -44,4 +47,20 @@ public class ProductPrice {
     @Column(columnDefinition="datetime")
     private Date createdTime;
 
+    public ProductPriceHis toProductPriceHis(){
+
+        ProductPriceHis productPriceHis = new ProductPriceHis();
+
+        productPriceHis.setFactory(this.factory);
+        productPriceHis.setProductType(this.productType);
+        productPriceHis.setPrice(this.price);
+        productPriceHis.setPrice2(this.price2);
+        productPriceHis.setPriceDiff(this.priceDiff);
+        productPriceHis.setHeatQuantity(this.heatQuantity);
+        productPriceHis.setState(this.state);
+        productPriceHis.setUpdateTime(this.getUpdateTime());
+        productPriceHis.setCreatedTime(this.createdTime);
+
+        return productPriceHis;
+    }
 }

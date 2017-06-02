@@ -1,14 +1,21 @@
 package com.skyblue.coalapp.server.product.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
+import com.skyblue.coalapp.server.product.domain.ProductPriceHis;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 import com.skyblue.coalapp.server.product.domain.ProductType_old;
+import com.skyblue.coalapp.server.product.repository.ProductPriceHisRepository;
 import com.skyblue.coalapp.server.product.repository.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,18 +32,33 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @Autowired
     private FactoryService factoryService;
 
+    @Autowired
+    private ProductPriceHisRepository productPriceHisRepository;
+
     public void saveOrUpdateProductPrice(ProductPrice productPrice){
 
-        // 首先判断是不是有ID
-        if(productPrice.getId() == null){
-            List<ProductPrice> productPrices = getProductPriceList(productPrice);
-            if(productPrices != null && productPrices.size()> 0){
-                productPrice = productPrices.get(0);
-            }else{
-                productPrice.setCreatedTime(new Date());
-                productPrice.setState(1);
-            }
+
+        ProductPrice productPriceTmp = new ProductPrice();
+        productPriceTmp.setFactory(productPrice.getFactory());
+        productPriceTmp.setProductType(productPrice.getProductType());
+
+        List<ProductPrice> productPrices = getProductPriceList(productPriceTmp);
+
+        //update
+        if(productPrices != null && productPrices.size()> 0){
+
+            productPriceTmp = productPrices.get(0);
+
+            BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
+            productPrice.setId(productPriceTmp.getId());
+            productPrice.setPriceDiff(priceDiff);
+
+        }else{
+            //add
+            productPrice.setCreatedTime(new Date());
         }
+
+        productPrice.setState(1);
 
         productPriceRepository.save(productPrice);
     }
@@ -70,5 +92,29 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         }
 
         return productPrices;
+    }
+
+    @Scheduled(cron = "0 58 23 * * ?")
+    public void recordProductPriceToHistoryPrice(){
+        ProductPrice productPrice = new ProductPrice();
+        //productPrice.setUpdateTime(new Date());
+
+        //查找当前表中的所有合适的数据
+        List<ProductPrice> productPrices = getProductPriceList(productPrice);
+
+        if(productPrices != null && productPrices.size()>0){
+
+            List<ProductPriceHis> productPriceHisList = new ArrayList<ProductPriceHis>();
+
+            for(ProductPrice prodPrice: productPrices){
+                prodPrice.setId(null);
+
+                productPriceHisList.add(prodPrice.toProductPriceHis());
+            }
+
+            if(productPrices != null && productPrices.size()>0){
+                productPriceHisRepository.save(productPriceHisList);
+            }
+        }
     }
 }
