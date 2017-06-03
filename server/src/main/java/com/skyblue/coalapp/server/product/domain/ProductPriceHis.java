@@ -35,8 +35,28 @@ public class ProductPriceHis{
     @Column(length = 10)
     private BigDecimal priceDiff;
 
-    @Column(nullable = false,length = 10)
-    private Integer  heatQuantity;
+    @Column
+    private String coal_fareliang; //发热量
+    @Column
+    private String coal_quanshuifen; // 全水分
+    @Column
+    private String coal_liufen; // 硫份
+    @Column
+    private String coal_huifafen; // 挥发份
+    @Column
+    private String coal_huifen; // 灰分
+    @Column
+    private String coal_gudingtan; // 固定碳
+    @Column
+    private String coke_hantan; // 含碳
+    @Column
+    private String coke_hanliu; // 含硫
+    @Column
+    private String coke_shuifen; // 水份
+    @Column
+    private String coke_huifafen; // 挥发份
+    @Column
+    private String coke_huifen; // 灰分
 
     @Column(nullable = false,length = 2)
     private Integer state;

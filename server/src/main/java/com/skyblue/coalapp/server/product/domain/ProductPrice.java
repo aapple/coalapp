@@ -35,8 +35,28 @@ public class ProductPrice {
     @Column(length = 10)
     private BigDecimal priceDiff;
 
-    @Column(nullable = false,length = 10)
-    private Integer  heatQuantity;
+    @Column
+    private String coal_fareliang; //发热量
+    @Column
+    private String coal_quanshuifen; // 全水分
+    @Column
+    private String coal_liufen; // 硫份
+    @Column
+    private String coal_huifafen; // 挥发份
+    @Column
+    private String coal_huifen; // 灰分
+    @Column
+    private String coal_gudingtan; // 固定碳
+    @Column
+    private String coke_hantan; // 含碳
+    @Column
+    private String coke_hanliu; // 含硫
+    @Column
+    private String coke_shuifen; // 水份
+    @Column
+    private String coke_huifafen; // 挥发份
+    @Column
+    private String coke_huifen; // 灰分
 
     @Column(nullable = false,length = 2)
     private Integer state;
@@ -56,7 +76,17 @@ public class ProductPrice {
         productPriceHis.setPrice(this.price);
         productPriceHis.setPrice2(this.price2);
         productPriceHis.setPriceDiff(this.priceDiff);
-        productPriceHis.setHeatQuantity(this.heatQuantity);
+        productPriceHis.setCoal_fareliang(this.coal_fareliang);
+        productPriceHis.setCoal_gudingtan(this.coal_gudingtan);
+        productPriceHis.setCoal_huifafen(this.coal_huifafen);
+        productPriceHis.setCoal_huifen(this.coal_huifen);
+        productPriceHis.setCoal_quanshuifen(this.coal_quanshuifen);
+        productPriceHis.setCoal_liufen(this.coal_liufen);
+        productPriceHis.setCoke_hanliu(this.coke_hanliu);
+        productPriceHis.setCoke_hantan(this.coke_hantan);
+        productPriceHis.setCoke_huifafen(this.coke_huifafen);
+        productPriceHis.setCoke_huifen(this.coke_huifen);
+        productPriceHis.setCoke_shuifen(this.coke_shuifen);
         productPriceHis.setState(this.state);
         productPriceHis.setUpdateTime(this.getUpdateTime());
         productPriceHis.setCreatedTime(this.createdTime);
