@@ -30,8 +30,8 @@ public class InfoDepartment {
     @Column(length = 1024)
     private String introduction;
 
-    @Column(length = 10)
-    private Integer callNumber;
+    @Column
+    private String callNumber;
 
     @Column(length = 128)
     private String point;

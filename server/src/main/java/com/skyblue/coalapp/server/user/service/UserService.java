@@ -15,7 +15,7 @@ public interface UserService {
 
     User createUserAndSave(String PhoneNum);
 
-    User updateUserInfo(UserVO user);
+    User updateUserInfo(User user);
 
     User findById(int id);
 

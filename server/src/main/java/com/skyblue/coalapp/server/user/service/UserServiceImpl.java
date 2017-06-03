@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updateUserInfo(UserVO user){
+    public User updateUserInfo(User user){
 
         if(StringUtils.isNotEmpty(user.getAvatar())){
 
@@ -64,6 +64,9 @@ public class UserServiceImpl implements UserService {
         } else if(user.getRole() != null){
 
             userRepository.updateRole(user.getRole(), user.getId());
+        } else {
+
+            userRepository.save(user);
         }
 
         User result = userRepository.findOne(user.getId());

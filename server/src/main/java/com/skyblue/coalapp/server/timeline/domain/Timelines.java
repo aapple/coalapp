@@ -45,7 +45,7 @@ public class Timelines {
     @Transient
     private Integer like_num;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer view_num;
 
     @Transient

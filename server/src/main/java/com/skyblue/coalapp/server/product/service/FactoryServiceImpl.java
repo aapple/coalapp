@@ -4,6 +4,8 @@ import com.skyblue.coalapp.server.product.domain.Factory;
 import com.skyblue.coalapp.server.product.domain.ProductType;
 import com.skyblue.coalapp.server.product.repository.FactoryRepository;
 import com.skyblue.coalapp.server.product.repository.ProductTypeRepository;
+import com.skyblue.coalapp.server.user.domain.User;
+import com.skyblue.coalapp.server.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +32,44 @@ public class FactoryServiceImpl implements FactoryService {
     @Autowired
     private ProductTypeRepository productTypeRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public void deleteById(Factory factory) {
 
         factoryRepository.delete(factory);
     }
 
-    public void saveOrUpdateProductPrice(Factory factory){
+    public void saveOrUpdateFactory(Factory factory){
 
+        if(factory.getOnwer() != null && factory.getOnwer().getId() == null){
+            factory.setOnwer(null);
+        }
+        if(factory.getSaler() != null && factory.getSaler().getId() == null){
+            factory.setSaler(null);
+        }
         factory.setCreatedTime(new Date());
         factoryRepository.save(factory);
+
+        // 用户权限更新
+        if(factory.getOnwer() != null && factory.getOnwer().getId() != null) {
+
+            User user = userService.findById(factory.getOnwer().getId());
+            if(factory.getFactoryType() == 1) {
+                user.setIsCoalManager(1);
+            } else {
+                user.setIsCokeManager(1);
+            }
+            userService.updateUserInfo(user);
+        }
+
+        if(factory.getSaler() != null && factory.getSaler().getId() != null) {
+
+            User user = userService.findById(factory.getSaler().getId());
+            user.setIsCoalSaler(1);
+            userService.updateUserInfo(user);
+        }
     }
 
     public List<Factory> getFactoryList(Factory factory){

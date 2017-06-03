@@ -44,7 +44,11 @@ public class GlobalExceptionHandler {
     public String processException(HttpServletRequest req, Exception e) throws Exception {
 
         logger.error(e.getMessage(), e);
-        return e.getMessage();
+        if (e instanceof BusinessException){
+            return e.getMessage();
+        } else {
+            return "系统错误，请联系开发人员！";
+        }
     }
 
 }

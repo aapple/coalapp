@@ -31,19 +31,19 @@ public class User {
     @Column(nullable = false,length = 2)
     private Integer role;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer isCoalManager;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer isCoalSaler;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer isCokeManager;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer isInfoStoreManager;
 
-    @Column(columnDefinition="DEFAULT 0")
+    @Column(columnDefinition="int(11) DEFAULT 0")
     private Integer isSuperManager;
 
     @Column
@@ -81,7 +81,7 @@ public class User {
             int number = random.nextInt(base.length());
             sb.append(base.charAt(number));
         }
-        return sb.toString();
+        return "sm" + sb.toString();
     }
 
     private String getCurrentTime(){

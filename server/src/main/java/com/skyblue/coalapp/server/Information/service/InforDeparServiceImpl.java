@@ -2,6 +2,8 @@ package com.skyblue.coalapp.server.Information.service;
 
 import com.skyblue.coalapp.server.Information.domain.InfoDepartment;
 import com.skyblue.coalapp.server.Information.repository.InfoDepartRepository;
+import com.skyblue.coalapp.server.user.domain.User;
+import com.skyblue.coalapp.server.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -15,11 +17,23 @@ public class InforDeparServiceImpl implements InfoDepartService {
     @Autowired
     private InfoDepartRepository infoDepartRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public void addInfoDepartment(InfoDepartment infoDepart) {
         if(infoDepart != null){
             infoDepartRepository.save(infoDepart);
         }
+
+        if(infoDepart != null && infoDepart.getUser() != null
+                && infoDepart.getUser().getId() != null) {
+
+            User user = userService.findById(infoDepart.getUser().getId());
+            user.setIsInfoStoreManager(1);
+            userService.updateUserInfo(user);
+        }
+
     }
 
     @Override

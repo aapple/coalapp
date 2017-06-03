@@ -49,9 +49,17 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
             productPriceTmp = productPrices.get(0);
 
-            BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
-            productPrice.setId(productPriceTmp.getId());
-            productPrice.setPriceDiff(priceDiff);
+            if(productPrice.getPrice2() == null){
+
+                BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
+                productPrice.setId(productPriceTmp.getId());
+                productPrice.setPriceDiff(priceDiff);
+            } else {
+
+                productPriceTmp.setPrice2(productPrice.getPrice2());
+                productPrice = productPriceTmp;
+            }
+
 
         }else{
             //add

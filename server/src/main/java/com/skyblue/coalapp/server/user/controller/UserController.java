@@ -39,7 +39,7 @@ public class UserController {
     private FactoryService factoryService;
 
     @RequestMapping("/update")
-    String update(@RequestBody UserVO user, HttpServletResponse response){
+    String update(@RequestBody User user, HttpServletResponse response){
 
         User userInfo = RequestUtils.getUserInfo();
         user.setId(userInfo.getId());

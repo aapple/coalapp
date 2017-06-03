@@ -12,7 +12,7 @@ public interface FactoryService {
 
     void deleteById(Factory factory);
 
-    void saveOrUpdateProductPrice(Factory factory);
+    void saveOrUpdateFactory(Factory factory);
 
     List<Factory> getFactoryList(Factory factory);
 

@@ -54,7 +54,11 @@ public class ProductController {
     String getFactoryList(@RequestBody Factory factory){
 
         User userInfo = RequestUtils.getUserInfo();
-        factory.setUser(userInfo);
+        if(factory.getOnwer() != null){
+            factory.setOnwer(userInfo);
+        } else if(factory.getSaler() != null){
+            factory.setSaler(userInfo);
+        }
         List<Factory> factoryList = factoryService.getFactoryList(factory);
 
         ProductType productType = new ProductType();
@@ -119,7 +123,7 @@ public class ProductController {
     @RequestMapping("/saveOrUpdateFactory")
     public void saveOrUpdateFactory(@RequestBody Factory factory){
 
-        factoryService.saveOrUpdateProductPrice(factory);
+        factoryService.saveOrUpdateFactory(factory);
     }
 
 }
