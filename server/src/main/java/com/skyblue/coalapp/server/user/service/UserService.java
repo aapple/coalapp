@@ -1,6 +1,7 @@
 package com.skyblue.coalapp.server.user.service;
 
 
+import com.skyblue.coalapp.server.user.domain.Feedback;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.vo.UserVO;
 
@@ -20,4 +21,6 @@ public interface UserService {
     User findById(int id);
 
     List<User> findAll();
+
+    Feedback saveFeedback(Feedback feedback);
 }

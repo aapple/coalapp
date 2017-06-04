@@ -1,6 +1,8 @@
 package com.skyblue.coalapp.server.user.service;
 
+import com.skyblue.coalapp.server.user.domain.Feedback;
 import com.skyblue.coalapp.server.user.domain.User;
+import com.skyblue.coalapp.server.user.repository.FeedbackRepository;
 import com.skyblue.coalapp.server.user.repository.UserRepository;
 import com.skyblue.coalapp.server.user.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     @Override
     public User findByPhone(String phoneNum) {
@@ -83,5 +88,10 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
 
         return userRepository.findAll();
+    }
+
+    @Override
+    public Feedback saveFeedback(Feedback feedback) {
+        return feedbackRepository.save(feedback);
     }
 }

@@ -7,6 +7,7 @@ import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.framework.BusinessException;
 import com.skyblue.coalapp.server.framework.CommonUtils;
 import com.skyblue.coalapp.server.framework.RequestUtils;
+import com.skyblue.coalapp.server.user.domain.Feedback;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.service.UserService;
 import com.skyblue.coalapp.server.user.vo.UserVO;
@@ -21,6 +22,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -93,6 +95,19 @@ public class UserController {
         List<User> userList = userService.findAll();
 
         return ResponseUtils.toJSONString(userList);
+    }
+
+    @RequestMapping("/feedback")
+    String feedback(@RequestBody Feedback feedback){
+
+        User userInfo = RequestUtils.getUserInfo();
+        feedback.setCreated_at(new Date());
+        feedback.setUser(userInfo);
+        feedback.setPhoneNum(userInfo.getPhoneNum());
+        feedback.setUserName(userInfo.getUserName());
+        feedback = userService.saveFeedback(feedback);
+
+        return "非常感谢您的积极反馈，反馈已经提交成功，如有必要我们随后会与您联系！";
     }
 
 }
