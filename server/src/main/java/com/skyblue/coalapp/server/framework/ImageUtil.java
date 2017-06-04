@@ -10,14 +10,15 @@ import com.qiniu.util.Auth;
 
 import com.qiniu.util.StringMap;
 import org.apache.commons.lang.StringUtils;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 
 @RestController
@@ -55,15 +56,19 @@ public class ImageUtil {
     //上传文件名 支持 "" --> 名称为空
     //          支持 null --> 文件名的hash
     @RequestMapping("/uploadImage")
-    public String upload(@RequestParam MultipartFile file) throws QiniuException {
+    public String upload(@RequestParam MultipartFile file) throws IOException {
 
-            String suffix= file.getName().substring(file.getName().lastIndexOf(".")+1);
-            String fileName = StringUtil.generateRandomString(null)+"."+suffix;
+        String suffix= file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+        String fileName = StringUtil.generateRandomString(null)+"."+suffix;
 
-            String token = getUpToken(fileName);
+        String token = getUpToken(fileName);
 
-            //Response response = uploadManager.put(file, fileName, token);
+        File TarFile = new File("");
+        CommonsMultipartFile cf= (CommonsMultipartFile)file;
+        file.transferTo(TarFile);
 
-            return "http://or0qspriu.bkt.clouddn.com/"+fileName;
+        Response response = uploadManager.put(TarFile, fileName, token);
+
+        return "http://or0qspriu.bkt.clouddn.com/"+fileName;
     }
 }
