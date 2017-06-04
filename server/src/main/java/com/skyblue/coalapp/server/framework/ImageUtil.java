@@ -11,6 +11,7 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,8 @@ public class ImageUtil {
 
     //要上传的空间
     String bucketName = "coalapp";
+
+    String uploadDir = ClassUtils.getDefaultClassLoader().getResource("").getPath();;
 
     Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     Configuration cfg = new Configuration(Zone.zone2());
@@ -58,16 +61,19 @@ public class ImageUtil {
     @RequestMapping("/uploadImage")
     public String upload(@RequestParam MultipartFile file) throws IOException {
 
-        String suffix= file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
         String fileName = StringUtil.generateRandomString(null)+"."+suffix;
 
         String token = getUpToken(fileName);
 
-        File TarFile = new File("");
-        CommonsMultipartFile cf= (CommonsMultipartFile)file;
-        file.transferTo(TarFile);
+        File tarFile = new File(uploadDir + fileName);
+        if(!tarFile.exists()){
+            tarFile.createNewFile();
+        }
+        file.transferTo(tarFile);
 
-        Response response = uploadManager.put(TarFile, fileName, token);
+        Response response = uploadManager.put(tarFile, fileName, token);
+        tarFile.delete();
 
         return "http://or0qspriu.bkt.clouddn.com/"+fileName;
     }

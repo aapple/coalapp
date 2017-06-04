@@ -51,31 +51,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateUserInfo(User user){
 
-        if(StringUtils.isNotEmpty(user.getAvatar())){
-
-            userRepository.updateAvatar(user.getAvatar(), user.getId());
-        } else if(StringUtils.isNotEmpty(user.getNickname())){
-
-            userRepository.updateNickname(user.getNickname(), user.getId());
-        } else if(user.getGender() != null){
-
-            userRepository.updateGender(user.getGender(), user.getId());
-        } else if(StringUtils.isNotEmpty(user.getBio())){
-
-            userRepository.updateBio(user.getBio(), user.getId());
-        } else if(StringUtils.isNotEmpty(user.getUserName())){
-
-            userRepository.updateUserName(user.getUserName(), user.getId());
-        } else if(user.getRole() != null){
-
-            userRepository.updateRole(user.getRole(), user.getId());
-        } else {
-
-            userRepository.save(user);
-        }
-
-        User result = userRepository.findOne(user.getId());
-        return result;
+        return userRepository.save(user);
     }
 
     @Override
