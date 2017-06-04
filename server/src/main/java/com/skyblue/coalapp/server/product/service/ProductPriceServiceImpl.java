@@ -34,7 +34,6 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
     public void saveOrUpdateProductPrice(ProductPrice productPrice){
 
-
         ProductPrice productPriceTmp = new ProductPrice();
         productPriceTmp.setFactory(productPrice.getFactory());
         productPriceTmp.setProductType(productPrice.getProductType());

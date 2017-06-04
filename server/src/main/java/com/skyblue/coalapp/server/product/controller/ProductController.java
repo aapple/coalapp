@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by 张杨 on 2017/5/19.
- */
 @RestController
 @RequestMapping("/app/product")
 public class ProductController {
