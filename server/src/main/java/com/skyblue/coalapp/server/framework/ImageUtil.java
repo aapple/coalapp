@@ -10,10 +10,13 @@ import com.qiniu.util.Auth;
 
 import com.qiniu.util.StringMap;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/app/imageUtil")
@@ -22,14 +25,12 @@ public class ImageUtil {
     String ACCESS_KEY = "Dv1hWgZr--j2d1boSh0uO7NaFigCFOxx-ESm_Nfn";
     String SECRET_KEY = "GRLfsQM4DxgfPvRPI4vANXYvCURjSgJBW9MnLy1k";
 
-    Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-
-    Configuration cfg = new Configuration(Zone.zone2());
-    UploadManager uploadManager = new UploadManager(cfg);
-
     //要上传的空间
     String bucketName = "coalapp";
 
+    Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+    Configuration cfg = new Configuration(Zone.zone2());
+    UploadManager uploadManager = new UploadManager(cfg);
 
     /*
     * <bucket>，表示允许用户上传文件到指定的 bucket。在这种格式下文件只能“新增”，若已存在同名资源则会失败。
@@ -52,33 +53,15 @@ public class ImageUtil {
     //上传文件名 支持 "" --> 名称为空
     //          支持 null --> 文件名的hash
     @RequestMapping("/uploadImage")
-    public void upload(File file) throws QiniuException {
+    public String upload(@RequestBody File file) throws QiniuException {
 
-        if(file == null){
-            file = new File("C:\\Users\\张杨\\Desktop\\3.png");
-        }
+            String suffix= file.getName().substring(file.getName().lastIndexOf(".")+1);
+            String fileName = StringUtil.generateRandomString(null)+"."+suffix;
 
-        try {
-            if(file != null){
-                String suffix= file.getName().substring( file.getName().lastIndexOf(".")+1);
-                String fileName = StringUtil.generateRandomString(null)+"."+suffix;
-                String token = getUpToken("2.png");
-                Response response = uploadManager.put(file, "2.png", token);
-                System.out.println(response.bodyString());
-            }
-        }catch (QiniuException e){
-            Response r = e.response;
-            // 请求失败时简单状态信息
-            System.out.println(r.toString());
-            try {
-                System.out.println(r.bodyString());
-            } catch (QiniuException e1) {
-                //ignore
-            }
-        }
-    }
+            String token = getUpToken("");
 
-    public static void main(String args[]) throws QiniuException{
-        new ImageUtil().upload(null);
+            Response response = uploadManager.put(file, "2.png", token);
+
+            return "http://or0qspriu.bkt.clouddn.com/"+fileName;
     }
 }
