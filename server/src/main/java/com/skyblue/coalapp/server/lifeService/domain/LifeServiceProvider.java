@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.life.domain;
+package com.skyblue.coalapp.server.lifeService.domain;
 
 import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
@@ -7,44 +7,40 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * 信息部
- */
 
 @Entity
-@Table(name = "life_store")
+@Table(name = "life_service_provider")
 @Getter
 @Setter
-public class LifeStore {
+public class LifeServiceProvider {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    @Column
-    private String serviceType;
-
-    @Column
-    private String area;
-
-    @Column
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(length = 10000)
+    @Column (length = 1024)
     private String introduction;
 
-    @Column
-    private String callNumber;
+    @Column(nullable =false, length = 2)
+    private Integer serviceType;
 
-    @Column(length = 128)
+    @Column(nullable= false)
+    private String address;
+
+    @Column
     private String point;
 
     @Column
-    private String address;
-
-    @Column(length = 256)
     private String photoPath;
 
+    @Column(length = 2)
+    private Integer state;
+
+    @ManyToOne
+    private User owner;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updateTime;

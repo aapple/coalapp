@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by 张杨 on 2017/5/23.
- */
 @Service
 public class ProductPriceServiceImpl implements ProductPriceService {
 
@@ -55,12 +52,9 @@ public class ProductPriceServiceImpl implements ProductPriceService {
                 productPrice.setId(productPriceTmp.getId());
                 productPrice.setPriceDiff(priceDiff);
             } else {
-
                 productPriceTmp.setPrice2(productPrice.getPrice2());
                 productPrice = productPriceTmp;
             }
-
-
         }else{
             //add
             productPrice.setCreatedTime(new Date());
@@ -120,7 +114,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
                 productPriceHisList.add(prodPrice.toProductPriceHis());
             }
 
-            if(productPrices != null && productPrices.size()>0){
+            if(productPrices.size()>0){
                 productPriceHisRepository.save(productPriceHisList);
             }
         }
