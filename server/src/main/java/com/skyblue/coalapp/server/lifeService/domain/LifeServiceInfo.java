@@ -25,20 +25,20 @@ public class LifeServiceInfo {
     private ServiceType type;
 
     //原价
-    @Column(nullable = false,length = 10)
+    @Column(nullable = false)
     private BigDecimal price;
 
     //优惠价格
-    @Column(length = 10)
+    @Column
     private BigDecimal price2;
 
     @Column(length = 1024)
     private String images;
 
     @Column(length = 2048)
-    private String desc;
+    private String descibe;
 
-    @Column(length = 2048)
+    @Column
     private Integer averageGrade;
 
     @Column(nullable = false,length = 2)
