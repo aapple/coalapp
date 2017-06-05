@@ -24,11 +24,14 @@ public class LifeServiceProvider {
     @Column (length = 1024)
     private String introduction;
 
-    @Column(nullable =false, length = 2)
-    private Integer serviceType;
+    @Column(nullable =false)
+    private String serviceType;
 
     @Column(nullable= false)
     private String address;
+
+    @Column
+    private String callNumber;
 
     @Column
     private String point;
