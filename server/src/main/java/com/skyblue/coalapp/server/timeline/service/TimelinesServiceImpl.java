@@ -23,11 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-;
 
-/**
- * Created by 张杨 on 2017/5/19.
- */
 @Service
 public class TimelinesServiceImpl implements TimelinesService {
 

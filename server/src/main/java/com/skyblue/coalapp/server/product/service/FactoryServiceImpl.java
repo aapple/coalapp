@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -38,6 +39,8 @@ public class FactoryServiceImpl implements FactoryService {
         factoryRepository.delete(factory);
     }
 
+    @Override
+    @CacheEvict(value="factoryList",allEntries=true)
     public void saveOrUpdateFactory(Factory factory){
 
         if(factory.getOnwer() != null && factory.getOnwer().getId() == null){
@@ -69,7 +72,8 @@ public class FactoryServiceImpl implements FactoryService {
         }
     }
 
-    @Cacheable(value = "factoryList", key="#factory.toString()")
+    @Override
+    @Cacheable(value = "factoryList", key="#factory.toString()",unless="!(#result.size()>0)")
     public List<Factory> getFactoryList(Factory factory){
 
         //创建匹配器，即如何使用查询条件
@@ -85,7 +89,8 @@ public class FactoryServiceImpl implements FactoryService {
         return factoryList;
     }
 
-    @Cacheable(value = "productTypeList", key="#productType.toString()")
+    @Override
+    @Cacheable(value = "productTypeList", key="#productType.toString()",unless="!(#result.size()>0)")
     public List<ProductType> getProductTypeList(ProductType productType){
 
         //创建匹配器，即如何使用查询条件

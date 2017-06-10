@@ -10,6 +10,7 @@ import com.skyblue.coalapp.server.product.domain.ProductType_old;
 import com.skyblue.coalapp.server.product.repository.ProductPriceHisRepository;
 import com.skyblue.coalapp.server.product.repository.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -34,6 +35,8 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @Autowired
     private ProductPriceHisRepository productPriceHisRepository;
 
+    @Override
+    @CacheEvict(value="productPriceList",allEntries=true)
     public void saveOrUpdateProductPrice(ProductPrice productPrice){
 
         ProductPrice productPriceTmp = new ProductPrice();
@@ -64,11 +67,13 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         productPriceRepository.save(productPrice);
     }
 
-    @Cacheable(value = "productPriceList", key="#productPrice.toString()")
+    @Override
+    @Cacheable(value = "productPriceList", key="#productPrice.toString()",unless="!(#result.size()>0)")
     public List<ProductPrice> getProductPriceList(ProductPrice productPrice){
 
         //创建匹配器，即如何使用查询条件
-        ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
+        ExampleMatcher matcher = ExampleMatcher.matching()//构建对象
+                .withMatcher("factory.name", ExampleMatcher.GenericPropertyMatchers.contains())
                 .withIgnorePaths("focus");  //忽略属性：是否关注。因为是基本类型，需要忽略掉
 
         //创建实例
@@ -79,7 +84,9 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         return productPrices;
     }
-    @Cacheable(value = "prodcutPriceTemplateList", key="#productType.toString()")
+
+    @Override
+    @Cacheable(value = "prodcutPriceTemplateList", key="#productType.toString()",unless="!(#result.size()>0)")
     public List<ProductPrice> getProdcutPriceTemplateList(ProductType productType){
 
         List<ProductType> productTypes =  factoryService.getProductTypeList(productType);

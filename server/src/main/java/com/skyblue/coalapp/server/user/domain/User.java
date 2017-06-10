@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-/**
- * Created by bin.yao on 2017/4/21.
- */
 @Entity
 @Table(name = "user")
 @Setter

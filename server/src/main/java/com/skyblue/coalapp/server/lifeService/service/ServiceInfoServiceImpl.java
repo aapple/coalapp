@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.lifeService.Repository.LifeServiceInfoReposito
 import com.skyblue.coalapp.server.lifeService.domain.CustomerEvaluate;
 import com.skyblue.coalapp.server.lifeService.domain.LifeServiceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -22,12 +23,13 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     private CustomerEvaluateRepository customerEvaluateRepository;
 
     @Override
+    @CacheEvict(value="lifeServiceInfoList",allEntries=true)
     public void addOrUpdate(LifeServiceInfo lifeServiceInfo) {
         lifeServiceInfoRepository.save(lifeServiceInfo);
     }
 
     @Override
-    @Cacheable(value = "lifeServiceInfo", key="#lifeServiceInfo.toString()")
+    @Cacheable(value = "lifeServiceInfo", key="#lifeServiceInfo.toString()",unless="#result!=null")
     public LifeServiceInfo findOne(LifeServiceInfo lifeServiceInfo) {
 
         //创建匹配器，即如何使用查询条件
@@ -44,7 +46,7 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
-    @Cacheable(value = "lifeServiceInfoList", key="#lifeServiceInfo.toString()")
+    @Cacheable(value = "lifeServiceInfoList", key="#lifeServiceInfo.toString()",unless="!(#result.size()>0)")
     public List<LifeServiceInfo> findList(LifeServiceInfo lifeServiceInfo) {
 
         //创建匹配器，即如何使用查询条件
@@ -61,12 +63,13 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
+    @CacheEvict(value="customerEvaluateList",allEntries=true)
     public void addEvaluate(CustomerEvaluate customerEvaluate) {
         customerEvaluateRepository.save(customerEvaluate);
     }
 
     @Override
-    @Cacheable(value = "customerEvaluateList", key="#lifeServiceInfo.toString()")
+    @Cacheable(value = "customerEvaluateList", key="#lifeServiceInfo.toString()",unless="!(#result.size()>0)")
     public List<CustomerEvaluate> getEvaluateList(LifeServiceInfo lifeServiceInfo) {
 
         CustomerEvaluate customerEvaluate = new CustomerEvaluate();

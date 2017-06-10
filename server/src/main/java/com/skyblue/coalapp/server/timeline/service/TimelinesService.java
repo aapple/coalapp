@@ -8,9 +8,6 @@ import com.skyblue.coalapp.server.timeline.vo.TimelineCommentVo;
 
 import java.util.List;
 
-/**
- * Created by 张杨 on 2017/5/19.
- */
 public interface TimelinesService {
 
 

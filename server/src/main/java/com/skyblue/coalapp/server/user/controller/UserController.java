@@ -25,9 +25,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by bin.yao on 2017/4/12.
- */
+
 @RestController
 @RequestMapping("/app/user")
 public class UserController {

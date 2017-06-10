@@ -7,9 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by 张杨 on 2017/5/18.
- */
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 

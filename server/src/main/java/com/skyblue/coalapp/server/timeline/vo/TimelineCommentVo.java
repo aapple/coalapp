@@ -7,9 +7,6 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 
-/**
- * Created by yao on 2017/6/3.
- */
 @Setter
 @Getter
 public class TimelineCommentVo {

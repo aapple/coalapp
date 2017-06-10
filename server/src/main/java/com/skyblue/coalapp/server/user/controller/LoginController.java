@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by bin.yao on 2017/4/12.
- */
+
 @RestController
 @RequestMapping("/app/login")
 public class LoginController {

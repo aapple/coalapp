@@ -7,9 +7,6 @@ import com.skyblue.coalapp.server.user.vo.UserVO;
 
 import java.util.List;
 
-/**
- * Created by 张杨 on 2017/5/18.
- */
 public interface UserService {
 
     User findByPhone(String PhoneNum);

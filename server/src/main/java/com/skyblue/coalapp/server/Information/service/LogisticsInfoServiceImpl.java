@@ -3,6 +3,7 @@ package com.skyblue.coalapp.server.Information.service;
 import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.repository.LogisticsInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,12 +18,13 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     private LogisticsInfoRepository logisticsInfoRepository;
 
     @Override
+    @CacheEvict(value="logisticsInfoList",allEntries=true)
     public void saveOrUpdate(LogisticsInfo logisticsInfo) {
         logisticsInfoRepository.save(logisticsInfo);
     }
 
     @Override
-    @Cacheable(value = "logisticsInfo", key="#logisticsInfo.toString()")
+    @Cacheable(value = "logisticsInfo", key="#logisticsInfo.toString()",unless="#result!=null")
     public LogisticsInfo findOne(LogisticsInfo logisticsInfo) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -36,7 +38,7 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     }
 
     @Override
-    @Cacheable(value = "logisticsInfoList", key="#logisticsInfo.toString()")
+    @Cacheable(value = "logisticsInfoList", key="#logisticsInfo.toString()",unless="!(#result.size()>0)")
     public List<LogisticsInfo> findList(LogisticsInfo logisticsInfo){
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -52,6 +54,7 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     }
 
     @Override
+    @CacheEvict(value="logisticsInfoList",allEntries=true)
     public void deleteById(LogisticsInfo logisticsInfo) {
         logisticsInfoRepository.delete(logisticsInfo);
     }

@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.Information.repository.InfoDepartRepository;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -22,6 +23,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     private UserService userService;
 
     @Override
+    @CacheEvict(value="infoDepartmentList",allEntries=true)
     public void addInfoDepartment(InfoDepartment infoDepart) {
         if(infoDepart != null){
             infoDepartRepository.save(infoDepart);
@@ -38,7 +40,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     }
 
     @Override
-    @Cacheable(value = "infoDepartment", key="#infoDepart.toString()")
+    @Cacheable(value = "infoDepartment", key="#infoDepart.toString()",unless="#result != null")
     public InfoDepartment findOne(InfoDepartment infoDepart) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -50,7 +52,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     }
 
     @Override
-    @Cacheable(value = "infoDepartmentList", key="#infoDepartment.toString()")
+    @Cacheable(value = "infoDepartmentList", key="#infoDepartment.toString()",unless="!(#result.size()>0)")
     public List<InfoDepartment> findAll(InfoDepartment infoDepartment) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -62,6 +64,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     }
 
     @Override
+    @CacheEvict(value="infoDepartmentList",allEntries=true)
     public void deleteById(InfoDepartment infoDepartment) {
         infoDepartRepository.delete(infoDepartment);
     }

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by 张杨 on 2017/5/19.
- */
 @Repository
 public interface TimelinesRepository extends JpaRepository<Timelines, Long> {
 

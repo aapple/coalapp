@@ -2,10 +2,6 @@ package com.skyblue.coalapp.server.user.domain;
 
 import lombok.Getter;
 
-/**
- * Created by 张杨 on 2017/5/18.
- */
-
 @Getter
 public enum RoleEnum {
 
