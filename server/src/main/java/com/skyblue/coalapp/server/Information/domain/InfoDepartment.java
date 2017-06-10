@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.Information.domain;
 
+import com.alibaba.fastjson.JSON;
 import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,4 +42,8 @@ public class InfoDepartment {
 
     @Column(length = 256)
     private String photoPath;
+
+    public String toString(){
+        return JSON.toJSONString(this);
+    }
 }

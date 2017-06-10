@@ -3,6 +3,7 @@ package com.skyblue.coalapp.server.Information.service;
 import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.repository.LogisticsInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     }
 
     @Override
+    @Cacheable(value = "logisticsInfo", key="#logisticsInfo.toString()")
     public LogisticsInfo findOne(LogisticsInfo logisticsInfo) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -34,7 +36,8 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     }
 
     @Override
-    public List<LogisticsInfo> findList(LogisticsInfo logisticsInfo) {
+    @Cacheable(value = "logisticsInfoList", key="#logisticsInfo.toString()")
+    public List<LogisticsInfo> findList(LogisticsInfo logisticsInfo){
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("departure", ExampleMatcher.GenericPropertyMatchers.contains())

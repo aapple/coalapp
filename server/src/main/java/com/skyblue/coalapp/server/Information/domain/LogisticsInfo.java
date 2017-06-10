@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.Information.domain;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,4 +57,8 @@ public class LogisticsInfo {
     @ManyToOne
     @JoinColumn(name="InfoDepartment_id")
     private InfoDepartment infoDepartment;
+
+    public String toString(){
+        return JSON.toJSONString(this);
+    }
 }

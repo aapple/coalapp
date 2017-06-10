@@ -4,6 +4,7 @@ import com.skyblue.coalapp.server.lifeService.Repository.LifeServiceProviderRepo
 import com.skyblue.coalapp.server.lifeService.domain.LifeServiceProvider;
 import com.skyblue.coalapp.server.product.domain.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService{
     }
 
     @Override
+    @Cacheable(value = "lifeServiceProvider", key="#lifeServiceProvider.toString()")
     public LifeServiceProvider findOne(LifeServiceProvider lifeServiceProvider){
         //创建匹配器，即如何使用查询条件
         ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
@@ -41,6 +43,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService{
     }
 
     @Override
+    @Cacheable(value = "lifeServiceProviderList", key="#lifeServiceProvider.toString()")
     public List<LifeServiceProvider> findList(LifeServiceProvider lifeServiceProvider) {
 
         //创建匹配器，即如何使用查询条件

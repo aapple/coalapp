@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.lifeService.domain;
 
+import com.alibaba.fastjson.JSON;
 import com.skyblue.coalapp.server.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,4 +51,8 @@ public class LifeServiceProvider {
 
     @Column(columnDefinition="datetime")
     private Date createdTime;
+
+    public String toString(){
+        return JSON.toJSONString(this);
+    }
 }

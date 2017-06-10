@@ -2,6 +2,7 @@ package com.skyblue.coalapp.server.product.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.skyblue.coalapp.server.framework.ResponseUtils;
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductPriceHis;
 import com.skyblue.coalapp.server.product.domain.ProductType;
@@ -9,6 +10,7 @@ import com.skyblue.coalapp.server.product.domain.ProductType_old;
 import com.skyblue.coalapp.server.product.repository.ProductPriceHisRepository;
 import com.skyblue.coalapp.server.product.repository.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -42,9 +44,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         //update
         if(productPrices != null && productPrices.size()> 0){
-
             productPriceTmp = productPrices.get(0);
-
             if(productPrice.getPrice2() == null){
 
                 BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
@@ -64,6 +64,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         productPriceRepository.save(productPrice);
     }
 
+    @Cacheable(value = "productPriceList", key="#productPrice.toString()")
     public List<ProductPrice> getProductPriceList(ProductPrice productPrice){
 
         //创建匹配器，即如何使用查询条件
@@ -78,7 +79,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         return productPrices;
     }
-
+    @Cacheable(value = "prodcutPriceTemplateList", key="#productType.toString()")
     public List<ProductPrice> getProdcutPriceTemplateList(ProductType productType){
 
         List<ProductType> productTypes =  factoryService.getProductTypeList(productType);

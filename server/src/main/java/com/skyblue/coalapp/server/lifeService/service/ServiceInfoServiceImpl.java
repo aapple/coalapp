@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.lifeService.Repository.LifeServiceInfoReposito
 import com.skyblue.coalapp.server.lifeService.domain.CustomerEvaluate;
 import com.skyblue.coalapp.server.lifeService.domain.LifeServiceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
+    @Cacheable(value = "lifeServiceInfo", key="#lifeServiceInfo.toString()")
     public LifeServiceInfo findOne(LifeServiceInfo lifeServiceInfo) {
 
         //创建匹配器，即如何使用查询条件
@@ -42,6 +44,7 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
+    @Cacheable(value = "lifeServiceInfoList", key="#lifeServiceInfo.toString()")
     public List<LifeServiceInfo> findList(LifeServiceInfo lifeServiceInfo) {
 
         //创建匹配器，即如何使用查询条件
@@ -63,6 +66,7 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
+    @Cacheable(value = "customerEvaluateList", key="#lifeServiceInfo.toString()")
     public List<CustomerEvaluate> getEvaluateList(LifeServiceInfo lifeServiceInfo) {
 
         CustomerEvaluate customerEvaluate = new CustomerEvaluate();

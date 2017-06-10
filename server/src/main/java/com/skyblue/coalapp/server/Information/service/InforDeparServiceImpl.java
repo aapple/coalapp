@@ -5,6 +5,7 @@ import com.skyblue.coalapp.server.Information.repository.InfoDepartRepository;
 import com.skyblue.coalapp.server.user.domain.User;
 import com.skyblue.coalapp.server.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     }
 
     @Override
+    @Cacheable(value = "infoDepartment", key="#infoDepart.toString()")
     public InfoDepartment findOne(InfoDepartment infoDepart) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -48,6 +50,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
     }
 
     @Override
+    @Cacheable(value = "infoDepartmentList", key="#infoDepartment.toString()")
     public List<InfoDepartment> findAll(InfoDepartment infoDepartment) {
 
         ExampleMatcher matcher = ExampleMatcher.matching()

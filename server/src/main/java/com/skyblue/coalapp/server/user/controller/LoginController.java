@@ -102,7 +102,6 @@ public class LoginController {
         a.add(user);
         a.add(user);
 
-//        throw new BusinessException("网络异常");
         return JSON.toJSONString(a);
     }
 }

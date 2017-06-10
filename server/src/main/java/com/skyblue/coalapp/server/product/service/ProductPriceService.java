@@ -5,9 +5,7 @@ import com.skyblue.coalapp.server.product.domain.ProductType;
 
 import java.util.List;
 
-/**
- * Created by 张杨 on 2017/5/23.
- */
+
 public interface ProductPriceService {
 
     /*
@@ -16,8 +14,8 @@ public interface ProductPriceService {
     void saveOrUpdateProductPrice(ProductPrice productPrice);
 
     /*
-   * 获取某类型产品信息列表
-   */
+     * 获取某类型产品信息列表
+     */
     List<ProductPrice> getProductPriceList(ProductPrice productPrice);
 
     List<ProductPrice> getProdcutPriceTemplateList(ProductType productType);

@@ -83,8 +83,8 @@ public class ProductController {
     }
 
     /*
-   *  查询产品列表模板
-   * */
+    *  查询产品列表模板
+    * */
     @RequestMapping("/getProductPriceTempList")
     String getProductPriceTempList(@RequestBody Factory factory){
 
@@ -97,8 +97,8 @@ public class ProductController {
     }
 
     /*
-    *  保存或更新价格列表
-    * */
+     *  保存或更新价格列表
+     * */
     @RequestMapping("/saveOrUpdateProductPrice")
     public void saveOrUpdateProductPrice(@RequestBody ProductPrice productPrice){
 
@@ -106,8 +106,8 @@ public class ProductController {
     }
 
     /*
-    *  删除工厂
-    * */
+     *  删除工厂
+     * */
     @RequestMapping("/deleteFactory")
     public void deleteFactory(@RequestBody Factory factory){
 
@@ -115,12 +115,11 @@ public class ProductController {
     }
 
     /*
-    *  保存或更新工厂
-    * */
+     *  保存或更新工厂
+     * */
     @RequestMapping("/saveOrUpdateFactory")
     public void saveOrUpdateFactory(@RequestBody Factory factory){
 
         factoryService.saveOrUpdateFactory(factory);
     }
-
 }

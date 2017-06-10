@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.user.domain;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -90,6 +91,10 @@ public class User {
         String dateNowStr = sdf.format(d);
 
         return dateNowStr;
+    }
+
+    public String toString(){
+        return JSON.toJSONString(this);
     }
 
 }

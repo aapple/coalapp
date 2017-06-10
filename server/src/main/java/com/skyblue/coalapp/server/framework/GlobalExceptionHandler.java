@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 //    @ExceptionHandler(IllegalArgumentException.class)
-////    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    @ResponseBody
 //    public String processValidationException(IllegalArgumentException e){
 //        logger.error("error");
@@ -50,5 +50,4 @@ public class GlobalExceptionHandler {
             return "系统错误，请联系开发人员！";
         }
     }
-
 }

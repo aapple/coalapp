@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.product.domain;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -92,5 +93,9 @@ public class ProductPrice {
         productPriceHis.setCreatedTime(this.createdTime);
 
         return productPriceHis;
+    }
+
+    public String toString(){
+        return JSON.toJSONString(this);
     }
 }

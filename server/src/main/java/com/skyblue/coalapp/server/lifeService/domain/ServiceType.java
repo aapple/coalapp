@@ -1,5 +1,6 @@
 package com.skyblue.coalapp.server.lifeService.domain;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,4 +21,8 @@ public class ServiceType {
 
     @Column(nullable = false, length = 2)
     private Integer value;
+
+    public String toString(){
+        return JSON.toJSONString(this);
+    }
 }

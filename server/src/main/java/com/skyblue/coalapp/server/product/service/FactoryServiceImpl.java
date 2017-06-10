@@ -69,7 +69,7 @@ public class FactoryServiceImpl implements FactoryService {
         }
     }
 
-    @Cacheable(value="factoryList", key="\"factory_all\"")
+    @Cacheable(value = "factoryList", key="#factory.toString()")
     public List<Factory> getFactoryList(Factory factory){
 
         //创建匹配器，即如何使用查询条件
@@ -85,6 +85,7 @@ public class FactoryServiceImpl implements FactoryService {
         return factoryList;
     }
 
+    @Cacheable(value = "productTypeList", key="#productType.toString()")
     public List<ProductType> getProductTypeList(ProductType productType){
 
         //创建匹配器，即如何使用查询条件
