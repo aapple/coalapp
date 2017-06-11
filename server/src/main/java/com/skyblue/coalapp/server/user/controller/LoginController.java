@@ -46,7 +46,7 @@ public class LoginController {
 
     @RequestMapping("/getVerifyCode")
     ResponseMessage getVrifyCode(@RequestBody UserVO user){
-        logger.info("try to get verify code");
+        logger.info("try to get verify code， user: "+user);
 
         String phoneNum = user.getPhoneNum();
         String verifyCode = loginService.getVerificationCode(phoneNum);
@@ -63,7 +63,7 @@ public class LoginController {
     String login(@RequestBody UserVO user,
                  HttpServletResponse response){
 
-        logger.info("try to login");
+        logger.info("request param user: " + user);
 
         String phoneNum = user.getPhoneNum();
         String verifyCode = user.getVerifyCode();

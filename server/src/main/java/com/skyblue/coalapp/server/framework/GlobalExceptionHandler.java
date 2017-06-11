@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by yaobin on 2017/4/28.
- */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

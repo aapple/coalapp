@@ -38,6 +38,7 @@ public class ProductController {
     * */
     @RequestMapping("/getProductPriceList")
     public String getProductPriceList(@RequestBody ProductPrice productPrice){
+        logger.info("request param productPrice : "+productPrice);
 
         List<ProductPrice> productList = productPriceService.getProductPriceList(productPrice);
 
@@ -49,6 +50,8 @@ public class ProductController {
     * */
     @RequestMapping("/getFactoryList")
     String getFactoryList(@RequestBody Factory factory){
+
+        logger.info("request param Factory : "+factory);
 
         User userInfo = RequestUtils.getUserInfo();
         if(factory.getOnwer() != null){
@@ -73,7 +76,7 @@ public class ProductController {
     * */
     @RequestMapping("/getProductTypeList")
     String getProductTypeList(@RequestBody Factory factory){
-
+        logger.info("request param Factory : "+factory);
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
 
@@ -87,7 +90,7 @@ public class ProductController {
     * */
     @RequestMapping("/getProductPriceTempList")
     String getProductPriceTempList(@RequestBody Factory factory){
-
+        logger.info("request param Factory : "+factory);
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
 
@@ -101,7 +104,7 @@ public class ProductController {
      * */
     @RequestMapping("/saveOrUpdateProductPrice")
     public void saveOrUpdateProductPrice(@RequestBody ProductPrice productPrice){
-
+        logger.info("request param ProductPrice : "+productPrice);
         productPriceService.saveOrUpdateProductPrice(productPrice);
     }
 
@@ -110,7 +113,7 @@ public class ProductController {
      * */
     @RequestMapping("/deleteFactory")
     public void deleteFactory(@RequestBody Factory factory){
-
+        logger.info("request param Factory : "+factory);
         factoryService.deleteById(factory);
     }
 
@@ -119,7 +122,7 @@ public class ProductController {
      * */
     @RequestMapping("/saveOrUpdateFactory")
     public void saveOrUpdateFactory(@RequestBody Factory factory){
-
+        logger.info("request param Factory : "+factory);
         factoryService.saveOrUpdateFactory(factory);
     }
 }

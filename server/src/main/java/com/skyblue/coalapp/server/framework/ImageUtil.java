@@ -11,6 +11,8 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +28,15 @@ import java.net.URLEncoder;
 @RequestMapping("/app/imageUtil")
 public class ImageUtil {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     String ACCESS_KEY = "Dv1hWgZr--j2d1boSh0uO7NaFigCFOxx-ESm_Nfn";
     String SECRET_KEY = "GRLfsQM4DxgfPvRPI4vANXYvCURjSgJBW9MnLy1k";
 
     //要上传的空间
     String bucketName = "coalapp";
 
-    String uploadDir = ClassUtils.getDefaultClassLoader().getResource("").getPath();;
+    String uploadDir = ClassUtils.getDefaultClassLoader().getResource("").getPath();
 
     Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     Configuration cfg = new Configuration(Zone.zone2());
@@ -66,14 +70,7 @@ public class ImageUtil {
 
         String token = getUpToken(fileName);
 
-        File tarFile = new File(uploadDir + fileName);
-        if(!tarFile.exists()){
-            tarFile.createNewFile();
-        }
-        file.transferTo(tarFile);
-
-        Response response = uploadManager.put(tarFile, fileName, token);
-        tarFile.delete();
+        Response response = uploadManager.put(file.getInputStream(), fileName, token,null,null);
 
         return "http://or0qspriu.bkt.clouddn.com/"+fileName;
     }

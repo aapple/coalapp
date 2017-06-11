@@ -39,7 +39,9 @@ public class UserController {
     private FactoryService factoryService;
 
     @RequestMapping("/update")
-    String update(@RequestBody User user, HttpServletResponse response){
+    public String update(@RequestBody User user, HttpServletResponse response){
+
+        logger.info("request param user : " + user);
 
         User userInfo = RequestUtils.getUserInfo();
         user.setId(userInfo.getId());
@@ -62,7 +64,7 @@ public class UserController {
     }
 
     @RequestMapping("/my-info")
-    String myinfo(HttpServletResponse response){
+    public String myinfo(HttpServletResponse response){
 
         User userInfo = RequestUtils.getUserInfo();
 

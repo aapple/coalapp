@@ -8,6 +8,8 @@ import com.skyblue.coalapp.server.timeline.domain.Timelines;
 import com.skyblue.coalapp.server.timeline.service.TimelinesService;
 import com.skyblue.coalapp.server.timeline.vo.TimelineCommentVo;
 import com.skyblue.coalapp.server.user.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ import java.util.List;
 @RestController
 @RequestMapping("app/")
 public class TimelineController {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private TimelinesService timelinesService;
