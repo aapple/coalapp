@@ -38,6 +38,9 @@ public class LifeServiceProvider {
     private String point;
 
     @Column
+    private String area;
+
+    @Column
     private String photoPath;
 
     @Column(length = 2)
