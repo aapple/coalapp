@@ -7,6 +7,7 @@ import com.skyblue.coalapp.server.product.repository.FactoryRepository;
 import com.skyblue.coalapp.server.product.repository.ProductTypeRepository;
 import com.skyblue.coalapp.server.product.service.FactoryService;
 import com.skyblue.coalapp.server.timeline.domain.Timeline_comments;
+import com.skyblue.coalapp.server.timeline.domain.Timeline_imgs;
 import com.skyblue.coalapp.server.timeline.domain.Timeline_likes;
 import com.skyblue.coalapp.server.timeline.domain.Timelines;
 import com.skyblue.coalapp.server.timeline.repository.*;
@@ -54,6 +55,11 @@ public class TimelinesServiceImpl implements TimelinesService {
     @Override
     public Timeline_likes saveTimelineLikes(Timeline_likes timelineLikes) {
         return timelineLikesRepository.save(timelineLikes);
+    }
+
+    @Override
+    public Timeline_imgs saveTTimelineImgs(Timeline_imgs timelineImgs) {
+        return timelineImgsRepository.save(timelineImgs);
     }
 
     @Override

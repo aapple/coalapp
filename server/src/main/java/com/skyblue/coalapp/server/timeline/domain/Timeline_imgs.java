@@ -24,12 +24,6 @@ public class Timeline_imgs {
     private Integer user_id;
 
     @Column(nullable = false)
-    private Integer timeline_id;
-
-    @ManyToOne
-    private User users;
-
-    @Column(nullable = false)
     private String uri;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")

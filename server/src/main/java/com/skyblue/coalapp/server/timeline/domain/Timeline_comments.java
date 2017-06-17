@@ -35,7 +35,7 @@ public class Timeline_comments {
     @Column
     private Integer parent_id = 0;
 
-    @Column(nullable = false)
+    @Column
     private String content;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
