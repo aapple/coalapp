@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "logistic_info")
@@ -51,8 +52,8 @@ public class LogisticsInfo {
     @Column
     private String unloadingDate;
 
-    @Column(columnDefinition="datetime")
-    private Timestamp createTime;
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updatedTime;
 
     @ManyToOne
     @JoinColumn(name="InfoDepartment_id")
