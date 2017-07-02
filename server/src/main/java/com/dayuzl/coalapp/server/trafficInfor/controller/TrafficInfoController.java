@@ -34,11 +34,11 @@ public class TrafficInfoController {
     }
 
     @RequestMapping("/getTrafficInfoList")
-    public String getTrafficInfoList(){
+    public String getTrafficInfoList(Integer pageNumber){
 
         logger.info("request TrafficInfo");
 
-        Page<TrafficInfo> resultList = trafficInfoService.findList(new TrafficInfo());
+        Page<TrafficInfo> resultList = trafficInfoService.findList(pageNumber);
 
         return ResponseUtils.toJSONString(resultList);
     }
