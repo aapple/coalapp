@@ -75,6 +75,7 @@ public class ProductPrice {
     @Column
     private String coke_huifen; // 灰分
 
+    //1.在产 0.停产
     @Column(nullable = false,length = 2)
     private Integer state;
 

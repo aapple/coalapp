@@ -37,27 +37,23 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         ProductPrice productPriceTmp = new ProductPrice();
         productPriceTmp.setFactory(productPrice.getFactory());
         productPriceTmp.setProductType(productPrice.getProductType());
+        productPriceTmp.setPriceOwnerType(productPrice.getPriceOwnerType());
 
         List<ProductPrice> productPrices = getProductPriceList(productPriceTmp);
 
         //update
         if(productPrices != null && productPrices.size()> 0){
             productPriceTmp = productPrices.get(0);
-            if(productPrice.getPrice2() == null){
 
-                BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
-                productPrice.setId(productPriceTmp.getId());
-                productPrice.setPriceDiff(priceDiff);
-            } else {
-                productPriceTmp.setPrice2(productPrice.getPrice2());
-                productPrice = productPriceTmp;
-            }
+            BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
+
+            productPrice.setId(productPriceTmp.getId());
+            productPrice.setPriceDiff(priceDiff);
         }else{
             //add
             productPrice.setCreatedTime(new Date());
+            productPrice.setState(1);
         }
-
-        productPrice.setState(1);
 
         productPriceRepository.save(productPrice);
     }
