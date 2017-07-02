@@ -55,6 +55,7 @@ public class LoginServiceImpl implements LoginService {
         if(null == userInfo){
             // if cant get then create new User
             userInfo = userService.createUserAndSave(phoneNum);
+            userInfo.setFirstFlag(1);
         }
 
         return userInfo;
