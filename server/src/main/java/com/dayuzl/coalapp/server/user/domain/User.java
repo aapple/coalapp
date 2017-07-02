@@ -62,6 +62,9 @@ public class User {
     @Column(columnDefinition="datetime")
     private Date created_at;
 
+    @Transient
+    private Integer firstFlag;
+
     public User(){}
 
     public User(String phoneNum){
