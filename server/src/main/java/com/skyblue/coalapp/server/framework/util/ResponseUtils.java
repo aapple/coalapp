@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.framework;
+package com.skyblue.coalapp.server.framework.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

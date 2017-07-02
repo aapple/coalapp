@@ -1,8 +1,7 @@
 package com.skyblue.coalapp.server.product.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.skyblue.coalapp.server.framework.RequestUtils;
-import com.skyblue.coalapp.server.framework.ResponseUtils;
+import com.skyblue.coalapp.server.framework.util.RequestUtils;
+import com.skyblue.coalapp.server.framework.util.ResponseUtils;
 import com.skyblue.coalapp.server.product.domain.Factory;
 import com.skyblue.coalapp.server.product.domain.ProductPrice;
 import com.skyblue.coalapp.server.product.domain.ProductType;

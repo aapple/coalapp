@@ -1,6 +1,6 @@
 package com.skyblue.coalapp.server.lifeService.controller;
 
-import com.skyblue.coalapp.server.framework.ResponseUtils;
+import com.skyblue.coalapp.server.framework.util.ResponseUtils;
 import com.skyblue.coalapp.server.lifeService.domain.CustomerEvaluate;
 import com.skyblue.coalapp.server.lifeService.domain.LifeServiceInfo;
 import com.skyblue.coalapp.server.lifeService.domain.LifeServiceProvider;

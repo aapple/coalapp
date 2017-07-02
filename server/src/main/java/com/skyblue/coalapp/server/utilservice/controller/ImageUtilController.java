@@ -1,32 +1,27 @@
-package com.skyblue.coalapp.server.framework;
+package com.skyblue.coalapp.server.utilservice.controller;
 
 
-import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
-import com.qiniu.util.StringMap;
+import com.skyblue.coalapp.server.framework.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ClassUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
-import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/app/imageUtil")
-public class ImageUtil {
+public class ImageUtilController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 

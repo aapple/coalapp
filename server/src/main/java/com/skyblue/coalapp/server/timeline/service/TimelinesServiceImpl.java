@@ -1,11 +1,6 @@
 package com.skyblue.coalapp.server.timeline.service;
 
-import com.skyblue.coalapp.server.framework.RequestUtils;
-import com.skyblue.coalapp.server.product.domain.Factory;
-import com.skyblue.coalapp.server.product.domain.ProductType;
-import com.skyblue.coalapp.server.product.repository.FactoryRepository;
-import com.skyblue.coalapp.server.product.repository.ProductTypeRepository;
-import com.skyblue.coalapp.server.product.service.FactoryService;
+import com.skyblue.coalapp.server.framework.util.RequestUtils;
 import com.skyblue.coalapp.server.timeline.domain.Timeline_comments;
 import com.skyblue.coalapp.server.timeline.domain.Timeline_imgs;
 import com.skyblue.coalapp.server.timeline.domain.Timeline_likes;
@@ -14,7 +9,6 @@ import com.skyblue.coalapp.server.timeline.repository.*;
 import com.skyblue.coalapp.server.timeline.vo.TimelineCommentVo;
 import com.skyblue.coalapp.server.user.domain.User;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

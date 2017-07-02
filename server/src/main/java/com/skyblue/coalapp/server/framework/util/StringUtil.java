@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.framework;
+package com.skyblue.coalapp.server.framework.util;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -1,6 +1,7 @@
-package com.skyblue.coalapp.server.framework;
+package com.skyblue.coalapp.server.framework.util;
 
 import com.alibaba.fastjson.JSON;
+import com.skyblue.coalapp.server.framework.util.CommonUtils;
 import com.skyblue.coalapp.server.user.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;

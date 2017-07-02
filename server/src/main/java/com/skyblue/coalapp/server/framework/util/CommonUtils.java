@@ -1,4 +1,4 @@
-package com.skyblue.coalapp.server.framework;
+package com.skyblue.coalapp.server.framework.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

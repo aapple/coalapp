@@ -4,7 +4,7 @@ import com.skyblue.coalapp.server.Information.domain.InfoDepartment;
 import com.skyblue.coalapp.server.Information.domain.LogisticsInfo;
 import com.skyblue.coalapp.server.Information.service.InfoDepartService;
 import com.skyblue.coalapp.server.Information.service.LogisticsInfoService;
-import com.skyblue.coalapp.server.framework.ResponseUtils;
+import com.skyblue.coalapp.server.framework.util.ResponseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
