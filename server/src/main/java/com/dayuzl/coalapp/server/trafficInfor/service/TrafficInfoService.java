@@ -9,5 +9,5 @@ public interface TrafficInfoService {
 
     void saveOrUpdate(TrafficInfo trafficInfo);
 
-    Page<TrafficInfo> findList(TrafficInfo trafficInfo);
+    Page<TrafficInfo> findList(Integer pageNumber);
 }

@@ -1,0 +1,1 @@
+package com.dayuzl.coalapp.server.dailynews;

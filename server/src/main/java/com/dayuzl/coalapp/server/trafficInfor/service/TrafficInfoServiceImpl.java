@@ -18,24 +18,17 @@ public class TrafficInfoServiceImpl implements TrafficInfoService {
     private TrafficInfoRepository trafficInfoRepository;
 
     @Override
-    @CacheEvict(value="trafficInfoList",allEntries=true)
+    @CacheEvict(value="dailyNewsList",allEntries=true)
     public void saveOrUpdate(TrafficInfo trafficInfo) {
         trafficInfoRepository.save(trafficInfo);
     }
 
     @Override
-    @Cacheable(value = "trafficInfoList", key="#trafficInfo.toString()",unless="!(#result.size()>0)")
-    public Page<TrafficInfo> findList(TrafficInfo trafficInfo){
+    @Cacheable(value = "dailyNewsList", key="#pageNumber",unless="!(#result.size()>0)")
+    public Page<TrafficInfo> findList(Integer pageNumber){
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("departure", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withMatcher("destination", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withIgnorePaths("focus");
-
-        Example<TrafficInfo> ex = Example.of(trafficInfo, matcher);
-
-        Sort sort=new Sort(Sort.Direction.DESC,"updateTime");
-        Pageable pageRequest = new PageRequest(0, 10, sort);
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
+        Pageable pageRequest = new PageRequest(pageNumber, 10, sort);
 
         Page<TrafficInfo> trafficInfos = trafficInfoRepository.findAll(pageRequest);
 

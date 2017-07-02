@@ -27,7 +27,7 @@ public class TrafficInfoController {
     private TrafficInfoService trafficInfoService;
 
     @RequestMapping("/addTrafficInfo")
-    public void addOrUpdateLogisticsInfo(@RequestBody TrafficInfo trafficInfo){
+    public void addTrafficInfo(@RequestBody TrafficInfo trafficInfo){
         logger.info("request param TrafficInfo: " + trafficInfo);
 
         trafficInfoService.saveOrUpdate(trafficInfo);
