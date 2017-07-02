@@ -33,6 +33,10 @@ public class Factory {
     @Column(length = 2)
     private Integer state;
 
+    //厂矿图片
+    @Column(length = 255)
+    private String factoryImage;
+
     @ManyToOne
     private User onwer;
 

@@ -27,6 +27,14 @@ public class ProductPrice {
     @ManyToOne
     private ProductType productType;
 
+    // 1.厂商 2.代发
+    @Column(nullable = false)
+    private Integer priceOwnerType;
+
+    //1.一票 2.两票
+    @Column
+    private Integer priceType;
+
     @Column(nullable = false,length = 10)
     private BigDecimal price;
 
@@ -35,6 +43,14 @@ public class ProductPrice {
 
     @Column(length = 10)
     private BigDecimal priceDiff;
+
+    //产品图像地址
+    @Column(length = 256)
+    private String productImage;
+
+    //化验报告图像地址
+    @Column(length = 256)
+    private String reportImage;
 
     @Column
     private String coal_fareliang; //发热量
@@ -73,6 +89,8 @@ public class ProductPrice {
         ProductPriceHis productPriceHis = new ProductPriceHis();
 
         productPriceHis.setFactory(this.factory);
+        productPriceHis.setPriceOwnerType(this.priceOwnerType);
+        productPriceHis.setPriceType(this.priceType);
         productPriceHis.setProductType(this.productType);
         productPriceHis.setPrice(this.price);
         productPriceHis.setPrice2(this.price2);
@@ -88,6 +106,8 @@ public class ProductPrice {
         productPriceHis.setCoke_huifafen(this.coke_huifafen);
         productPriceHis.setCoke_huifen(this.coke_huifen);
         productPriceHis.setCoke_shuifen(this.coke_shuifen);
+        productPriceHis.setProductImage(this.productImage);
+        productPriceHis.setReportImage(this.reportImage);
         productPriceHis.setState(this.state);
         productPriceHis.setUpdateTime(this.getUpdateTime());
         productPriceHis.setCreatedTime(this.createdTime);

@@ -26,6 +26,14 @@ public class ProductPriceHis{
     @ManyToOne
     private ProductType productType;
 
+    // 1.厂商 2.代发
+    @Column(nullable = false)
+    private Integer priceOwnerType;
+
+    //1.一票 2.两票
+    @Column
+    private Integer priceType;
+
     @Column(nullable = false,length = 10)
     private BigDecimal price;
 
@@ -57,6 +65,14 @@ public class ProductPriceHis{
     private String coke_huifafen; // 挥发份
     @Column
     private String coke_huifen; // 灰分
+
+    //产品图像地址
+    @Column(length = 256)
+    private String productImage;
+
+    //化验报告图像地址
+    @Column(length = 256)
+    private String reportImage;
 
     @Column(nullable = false,length = 2)
     private Integer state;

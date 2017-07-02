@@ -19,32 +19,45 @@ public class LogisticsInfo {
     @GeneratedValue
     private Integer id;
 
+    //出发地
     @Column(nullable = false,length = 255)
     private String departure;
 
+    //目的地
     @Column(nullable = false,length = 255)
     private String destination ;
 
+    //总数量
     @Column(length = 5)
     private Integer totalQty;
 
+    //剩余数量
     @Column(length = 5)
     private Integer remainQty;
 
+    //车数
     @Column(length = 5)
     private Integer carNumber;
 
+    //装车费
     @Column(length = 10)
     private BigDecimal loadingCharge;
 
+    //卸车费
     @Column(length = 10)
     private BigDecimal unloadingCharge;
 
+    //运费
     @Column(length = 10)
     private BigDecimal freightCharge;
 
+    //信息费
     @Column(length = 10)
     private BigDecimal messageCharge;
+
+    //备注
+    @Column(length = 1024)
+    private String comment;
 
     @Column
     private String loadingDate;
@@ -52,6 +65,7 @@ public class LogisticsInfo {
     @Column
     private String unloadingDate;
 
+    //更新时间
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Date updatedTime;
 
