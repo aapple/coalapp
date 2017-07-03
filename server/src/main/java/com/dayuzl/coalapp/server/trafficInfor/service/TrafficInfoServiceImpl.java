@@ -24,7 +24,7 @@ public class TrafficInfoServiceImpl implements TrafficInfoService {
     }
 
     @Override
-    @Cacheable(value = "dailyNewsList", key="#pageNumber",unless="!(#result.size()>0)")
+    @Cacheable(value = "dailyNewsList", key="#pageNumber",unless="!(#result!=null)")
     public Page<TrafficInfo> findList(Integer pageNumber){
 
         Sort sort = new Sort(Sort.Direction.DESC,"updateTime");

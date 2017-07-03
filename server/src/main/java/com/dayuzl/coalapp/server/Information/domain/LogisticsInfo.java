@@ -26,6 +26,10 @@ public class LogisticsInfo {
     @Column(nullable = false,length = 255)
     private String destination ;
 
+    //货物类型
+    @Column(nullable = false,length = 30)
+    private String productType ;
+
     //总数量
     @Column(length = 5)
     private Integer totalQty;
@@ -57,6 +61,10 @@ public class LogisticsInfo {
     //备注
     @Column(length = 1024)
     private String comment;
+
+    //状态
+    @Column
+    private Integer state;
 
     @Column
     private String loadingDate;

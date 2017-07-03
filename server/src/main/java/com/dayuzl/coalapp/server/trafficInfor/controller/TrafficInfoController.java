@@ -38,6 +38,10 @@ public class TrafficInfoController {
 
         logger.info("request TrafficInfo");
 
+        if(pageNumber == null){
+            pageNumber = new Integer(0);
+        }
+
         Page<TrafficInfo> resultList = trafficInfoService.findList(pageNumber);
 
         return ResponseUtils.toJSONString(resultList);

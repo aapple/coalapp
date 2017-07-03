@@ -36,6 +36,9 @@ public class DailyNewsController {
 
         logger.info("request DailyNews");
 
+        if(pageNumber == null){
+            pageNumber = new Integer(0);
+        }
         Page<DailyNews> resultList = dailyNewsService.findList(pageNumber);
 
         return ResponseUtils.toJSONString(resultList);

@@ -21,7 +21,7 @@ public class DailyNewsServiceImpl implements DailyNewsService {
     }
 
     @Override
-    @Cacheable(value = "dailyNewsList", key="#pageNumber",unless="!(#result.size()>0)")
+    @Cacheable(value = "dailyNewsList", key="#pageNumber",unless="!(#result!=null)")
     public Page<DailyNews> findList(Integer pageNumber){
 
         Sort sort=new Sort(Sort.Direction.DESC,"updateTime");
