@@ -32,7 +32,7 @@ public class DailyNewsController {
     }
 
     @RequestMapping("/getDailyNewsList")
-    public String getDailyNewsList(@RequestBody Integer pageNumber){
+    public String getDailyNewsList(Integer pageNumber){
 
         logger.info("request DailyNews");
 

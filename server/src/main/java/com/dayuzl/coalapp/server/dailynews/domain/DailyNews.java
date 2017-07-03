@@ -22,7 +22,7 @@ public class DailyNews {
     private String title ;
 
     //内容
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String content ;
 
     //配图
