@@ -58,6 +58,9 @@ public class VersionControlServiceImpl implements VersionControlService {
                         result = lastVersion;
                         result.setIsNeedUpdate(true);
                         break;
+                    }else if(Integer.parseInt(reqVersionNum[i]) > Integer.parseInt(lastVersionNum[i])){
+                        logger.error("请求版本高于最新版本"+" versionNum : " + version.getVersionNum() +" system：" + version.getSystemType());
+                        break;
                     }
                 }
             }else{
@@ -69,5 +72,4 @@ public class VersionControlServiceImpl implements VersionControlService {
 
         return result;
     }
-
 }
