@@ -36,9 +36,12 @@ public class VersionControlServiceImpl implements VersionControlService {
         result.setIsNeedUpdate(false);
         if(StringUtils.isNotBlank(version.getVersionNum()) && StringUtils.isNotEmpty(version.getSystemType())){
 
+            VersionControl exapVerion = new VersionControl();
+            exapVerion.setSystemType(version.getSystemType());
+
             ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("focus");
 
-            Example<VersionControl> ex = Example.of(version, matcher);
+            Example<VersionControl> ex = Example.of(exapVerion, matcher);
 
             Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
 
@@ -47,11 +50,11 @@ public class VersionControlServiceImpl implements VersionControlService {
             if(versions != null && versions.size()>0){
                 VersionControl lastVersion =  versions.get(0);
 
-                String[] reqVersionNum = version.getVersionNum().split(".");
-                String[] lastVersionNum = lastVersion.getVersionNum().split(".");
+                String[] reqVersionNum = version.getVersionNum().split("\\.");
+                String[] lastVersionNum = lastVersion.getVersionNum().split("\\.");
 
                 for(int i = 0; i<lastVersionNum.length; i++){
-                    if(Integer.getInteger(lastVersionNum[i]) > Integer.getInteger(reqVersionNum[i])){
+                    if(Integer.parseInt(lastVersionNum[i]) > Integer.parseInt(reqVersionNum[i])){
                         result = lastVersion;
                         result.setIsNeedUpdate(true);
                         break;
@@ -66,4 +69,5 @@ public class VersionControlServiceImpl implements VersionControlService {
 
         return result;
     }
+
 }

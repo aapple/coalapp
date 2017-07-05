@@ -25,7 +25,12 @@ public class VersionController {
     private VersionControlService versionControlService;
 
     @RequestMapping("/addVersion")
-    public void addVersionControl(@RequestBody VersionControl versionControl){
+    public void addVersionControl(){
+        VersionControl versionControl = new VersionControl();
+        /*versionControl.setForceUpdate(false);
+        versionControl.setSystemType("android");
+        versionControl.setVersionNum("0.0.1");
+        versionControl.setVersionAddr("testAddress");*/
         logger.info("request param VersionControl: " + versionControl);
 
         versionControlService.saveNewVerion(versionControl);

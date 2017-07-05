@@ -46,7 +46,7 @@
         </dependency>
         <!--mine-->
         <dependency>
-            <groupId>com.skyblue.coalapp</groupId>
+            <groupId>com.dayuzl.coalapp</groupId>
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
