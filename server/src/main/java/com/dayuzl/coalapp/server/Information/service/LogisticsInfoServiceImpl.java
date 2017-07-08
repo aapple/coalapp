@@ -48,7 +48,7 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
                 .withIgnorePaths("focus");
 
         Example<LogisticsInfo> ex = Example.of(logisticsInfo, matcher);
-        Sort sort=new Sort(Sort.Direction.DESC,"updateTime");
+        Sort sort=new Sort(Sort.Direction.DESC,"updatedTime");
         List<LogisticsInfo> logisticsInfos = logisticsInfoRepository.findAll(ex,sort);
 
         return logisticsInfos;
