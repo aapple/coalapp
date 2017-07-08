@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -69,9 +70,9 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         //创建实例
         Example<ProductPrice> ex = Example.of(productPrice, matcher);
-
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
         //查询
-        List<ProductPrice> productPrices = productPriceRepository.findAll(ex);
+        List<ProductPrice> productPrices = productPriceRepository.findAll(ex,sort);
 
         return productPrices;
     }

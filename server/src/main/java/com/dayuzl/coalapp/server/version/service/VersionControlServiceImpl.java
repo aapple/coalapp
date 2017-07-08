@@ -23,13 +23,13 @@ public class VersionControlServiceImpl implements VersionControlService {
     private VersionRepository versionControlRepository;
 
     @Override
-    @CacheEvict(value="versionControlList",allEntries=true)
+    //@CacheEvict(value="versionControlList",allEntries=true)
     public void saveNewVerion(VersionControl version) {
         versionControlRepository.save(version);
     }
 
     @Override
-    @Cacheable(value = "versionControlList", key="#version.systemType",unless="!(#result!=null)")
+    //@Cacheable(value = "versionControlList", key="#version.systemType",unless="!(#result!=null)")
     public VersionControl checkNewVersion(VersionControl version){
 
         VersionControl result =  version;

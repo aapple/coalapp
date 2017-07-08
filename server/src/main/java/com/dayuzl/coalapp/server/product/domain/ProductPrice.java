@@ -52,6 +52,14 @@ public class ProductPrice {
     @Column(length = 256)
     private String reportImage;
 
+    //是否水洗 0:不是 1 是
+    @Column
+    private Integer coalWashing;
+
+    //是否过筛  0:不是 1 是
+    @Column
+    private Integer graded;
+
     @Column
     private String coal_fareliang; //发热量
     @Column
@@ -95,6 +103,8 @@ public class ProductPrice {
         productPriceHis.setProductType(this.productType);
         productPriceHis.setPrice(this.price);
         productPriceHis.setPrice2(this.price2);
+        productPriceHis.setCoalWashing(this.coalWashing);
+        productPriceHis.setGraded(this.graded);
         productPriceHis.setPriceDiff(this.priceDiff);
         productPriceHis.setCoal_fareliang(this.coal_fareliang);
         productPriceHis.setCoal_gudingtan(this.coal_gudingtan);

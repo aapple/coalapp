@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,8 +48,8 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
                 .withIgnorePaths("focus");
 
         Example<LogisticsInfo> ex = Example.of(logisticsInfo, matcher);
-
-        List<LogisticsInfo> logisticsInfos = logisticsInfoRepository.findAll(ex);
+        Sort sort=new Sort(Sort.Direction.DESC,"updateTime");
+        List<LogisticsInfo> logisticsInfos = logisticsInfoRepository.findAll(ex,sort);
 
         return logisticsInfos;
     }
