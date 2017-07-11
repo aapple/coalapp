@@ -2,18 +2,23 @@ package com.dayuzl.coalapp.server.Information.service;
 
 import com.dayuzl.coalapp.server.Information.repository.LogisticsInfoRepository;
 import com.dayuzl.coalapp.server.Information.domain.LogisticsInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class LogisticsInfoServiceImpl implements LogisticsInfoService {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private LogisticsInfoRepository logisticsInfoRepository;
@@ -58,5 +63,11 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     @CacheEvict(value="logisticsInfoList",allEntries=true)
     public void deleteById(LogisticsInfo logisticsInfo) {
         logisticsInfoRepository.delete(logisticsInfo);
+    }
+
+    @CacheEvict(value="logisticsInfoList",allEntries=true)
+    @Scheduled(fixedDelay = 2*60*1000)
+    public void clearCache(){
+        logger.info("now clean logisticsInfo cache");
     }
 }

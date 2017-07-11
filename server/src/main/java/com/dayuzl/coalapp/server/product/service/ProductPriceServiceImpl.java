@@ -120,4 +120,10 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             }
         }
     }
+
+    @CacheEvict(value="productPriceList",allEntries=true)
+    @Scheduled(fixedDelay = 2*60*1000)
+    public void clearCache(){
+        logger.info("it's time to clean product price cache");
+    }
 }

@@ -4,17 +4,22 @@ import com.dayuzl.coalapp.server.lifeService.Repository.CustomerEvaluateReposito
 import com.dayuzl.coalapp.server.lifeService.Repository.LifeServiceInfoRepository;
 import com.dayuzl.coalapp.server.lifeService.domain.CustomerEvaluate;
 import com.dayuzl.coalapp.server.lifeService.domain.LifeServiceInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ServiceInfoServiceImpl implements ServiceInfoService {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private LifeServiceInfoRepository lifeServiceInfoRepository;
@@ -60,6 +65,12 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
         List<LifeServiceInfo> info = lifeServiceInfoRepository.findAll(ex);
 
         return info;
+    }
+
+    @CacheEvict(value="lifeServiceInfoList",allEntries=true)
+    @Scheduled(fixedDelay = 3*60*1000)
+    public void clearCache(){
+        logger.info("now clean life service info cache");
     }
 
     @Override

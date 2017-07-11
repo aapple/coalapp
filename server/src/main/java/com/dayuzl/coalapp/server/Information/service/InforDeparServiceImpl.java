@@ -4,17 +4,22 @@ import com.dayuzl.coalapp.server.user.domain.User;
 import com.dayuzl.coalapp.server.Information.domain.InfoDepartment;
 import com.dayuzl.coalapp.server.Information.repository.InfoDepartRepository;
 import com.dayuzl.coalapp.server.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class InforDeparServiceImpl implements InfoDepartService {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private InfoDepartRepository infoDepartRepository;
@@ -32,7 +37,7 @@ public class InforDeparServiceImpl implements InfoDepartService {
         if(infoDepart != null && infoDepart.getUser() != null
                 && infoDepart.getUser().getId() != null) {
 
-            User user = userService.findById(infoDepart.getUser().getId());
+            User user = userService.findUser(infoDepart.getUser());
             user.setIsInfoStoreManager(1);
             userService.updateUserInfo(user);
         }
@@ -67,5 +72,11 @@ public class InforDeparServiceImpl implements InfoDepartService {
     @CacheEvict(value="infoDepartmentList",allEntries=true)
     public void deleteById(InfoDepartment infoDepartment) {
         infoDepartRepository.delete(infoDepartment);
+    }
+
+    @CacheEvict(value="infoDepartmentList",allEntries=true)
+    @Scheduled(fixedDelay = 5*60*1000)
+    public void clearCache(){
+        logger.info("now clean info department cache");
     }
 }

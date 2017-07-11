@@ -73,7 +73,7 @@ public class UserController {
             return "";
         }
 
-        User newUserInfo = userService.findById(userInfo.getId());
+        User newUserInfo = userService.findUser(userInfo);
         // 更新cookie
         String userJsonString = JSON.toJSONString(newUserInfo);
         String base64String = null;

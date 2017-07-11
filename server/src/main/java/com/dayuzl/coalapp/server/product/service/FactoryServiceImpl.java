@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -54,7 +55,7 @@ public class FactoryServiceImpl implements FactoryService {
         // 用户权限更新
         if(factory.getOnwer() != null && factory.getOnwer().getId() != null) {
 
-            User user = userService.findById(factory.getOnwer().getId());
+            User user = userService.findUser(factory.getOnwer());
             if(factory.getFactoryType() == 1) {
                 user.setIsCoalManager(1);
             } else {
@@ -65,7 +66,7 @@ public class FactoryServiceImpl implements FactoryService {
 
         if(factory.getSaler() != null && factory.getSaler().getId() != null) {
 
-            User user = userService.findById(factory.getSaler().getId());
+            User user = userService.findUser(factory.getSaler());
             user.setIsCoalSaler(1);
             userService.updateUserInfo(user);
         }
@@ -103,5 +104,11 @@ public class FactoryServiceImpl implements FactoryService {
         List<ProductType> productTypeList = productTypeRepository.findAll(ex);
 
         return productTypeList;
+    }
+
+    @CacheEvict(value="factoryList",allEntries=true)
+    @Scheduled(fixedDelay = 5*60*1000)
+    public void clearCache(){
+        logger.info("it's time to clean factories cache");
     }
 }
