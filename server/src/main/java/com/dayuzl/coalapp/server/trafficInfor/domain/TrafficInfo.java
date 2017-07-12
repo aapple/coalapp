@@ -22,7 +22,6 @@ public class TrafficInfo {
     private String departure;
 
     //终点
-    @Column(nullable = false)
     private String destination ;
 
     //状态
