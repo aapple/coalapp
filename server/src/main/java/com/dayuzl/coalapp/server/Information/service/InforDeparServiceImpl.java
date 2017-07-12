@@ -4,6 +4,7 @@ import com.dayuzl.coalapp.server.user.domain.User;
 import com.dayuzl.coalapp.server.Information.domain.InfoDepartment;
 import com.dayuzl.coalapp.server.Information.repository.InfoDepartRepository;
 import com.dayuzl.coalapp.server.user.service.UserService;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,7 +68,13 @@ public class InforDeparServiceImpl implements InfoDepartService {
 
         Example<InfoDepartment> ex = Example.of(infoDepartment, matcher);
 
-        return infoDepartRepository.findAll(ex);
+        List<Sort.Order> orderList = new ArrayList<Sort.Order>();
+        orderList.add(new Sort.Order(Sort.Direction.DESC, "priority"));
+        orderList.add(new Sort.Order(Sort.Direction.DESC, "updateTime"));
+        Sort sort = new Sort(orderList);
+        List<InfoDepartment> infoDepartmentList = infoDepartRepository.findAll(ex,sort);
+
+        return infoDepartmentList;
     }
 
     @Override
