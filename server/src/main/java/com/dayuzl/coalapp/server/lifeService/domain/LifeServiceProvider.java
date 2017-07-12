@@ -32,6 +32,9 @@ public class LifeServiceProvider {
     private String address;
 
     @Column
+    private String callPerson;
+
+    @Column
     private String callNumber;
 
     @Column

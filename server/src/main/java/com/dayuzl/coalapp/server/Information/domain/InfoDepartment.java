@@ -32,6 +32,9 @@ public class InfoDepartment {
     private String introduction;
 
     @Column
+    private String callPerson;
+
+    @Column
     private String callNumber;
 
     @Column(length = 128)

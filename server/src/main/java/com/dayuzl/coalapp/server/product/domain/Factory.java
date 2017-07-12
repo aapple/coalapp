@@ -37,6 +37,12 @@ public class Factory {
     @Column(length = 255)
     private String factoryImage;
 
+    @Column
+    private String callPerson;
+
+    @Column
+    private String callNumber;
+
     @ManyToOne
     private User onwer;
 
