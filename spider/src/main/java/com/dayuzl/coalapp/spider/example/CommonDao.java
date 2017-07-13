@@ -1,4 +1,4 @@
-package com.dayuzl.coalapp.spider.service;
+package com.dayuzl.coalapp.spider.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * Created by bin.yao on 2017/4/20.
  */
 @Service
-public class SpiderService {
+public class CommonDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

@@ -1,9 +1,9 @@
-package com.dayuzl.coalapp.spider.home;
+package com.dayuzl.coalapp.spider.example.home;
 
 import com.geccocrawler.gecco.pipeline.Pipeline;
 import com.geccocrawler.gecco.request.HttpRequest;
 import com.geccocrawler.gecco.scheduler.SchedulerContext;
-import com.dayuzl.coalapp.spider.service.SpiderService;
+import com.dayuzl.coalapp.spider.example.CommonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class HomePipeline implements Pipeline<Home>{
 
     @Autowired
-    private SpiderService spiderService;
+    private CommonDao commonDao;
 
     @Override
     public void process(Home home) {
@@ -25,7 +25,7 @@ public class HomePipeline implements Pipeline<Home>{
         for(BookNode bookNode : bookNodes) {
             String name = bookNode.getName();
             String href = bookNode.getHref();
-            spiderService.saveBook(name,href);
+            commonDao.saveBook(name,href);
             HttpRequest currRequest = home.getRequest();
             SchedulerContext.into(currRequest.subRequest(href));
         }

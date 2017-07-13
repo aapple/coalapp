@@ -1,6 +1,6 @@
-package com.dayuzl.coalapp.spider.book;
+package com.dayuzl.coalapp.spider.example.book;
 
-import com.dayuzl.coalapp.spider.service.SpiderService;
+import com.dayuzl.coalapp.spider.example.CommonDao;
 import com.geccocrawler.gecco.pipeline.Pipeline;
 import com.geccocrawler.gecco.request.HttpRequest;
 import com.geccocrawler.gecco.scheduler.SchedulerContext;
@@ -16,7 +16,7 @@ import java.util.List;
 public class BookPipeline implements Pipeline<CDBook>{
 
     @Autowired
-    private SpiderService spiderService;
+    private CommonDao commonDao;
 
     @Override
     public void process(CDBook book) {
@@ -25,7 +25,7 @@ public class BookPipeline implements Pipeline<CDBook>{
             String name = chapterNode.getName();
             String href = chapterNode.getHref();
             HttpRequest currRequest = book.getRequest();
-            spiderService.saveChapter(name, href, currRequest.getUrl());
+            commonDao.saveChapter(name, href, currRequest.getUrl());
             SchedulerContext.into(currRequest.subRequest(href));
         }
     }

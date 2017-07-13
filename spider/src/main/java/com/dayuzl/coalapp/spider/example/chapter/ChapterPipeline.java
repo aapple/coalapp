@@ -1,6 +1,6 @@
-package com.dayuzl.coalapp.spider.chapter;
+package com.dayuzl.coalapp.spider.example.chapter;
 
-import com.dayuzl.coalapp.spider.service.SpiderService;
+import com.dayuzl.coalapp.spider.example.CommonDao;
 import com.geccocrawler.gecco.pipeline.Pipeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 public class ChapterPipeline implements Pipeline<Chapter>{
 
     @Autowired
-    private SpiderService spiderService;
+    private CommonDao commonDao;
 
     @Override
     public void process(Chapter chapter) {
         String body = chapter.getBody();
-        spiderService.saveChapterText(body, chapter.getRequest().getUrl());
+        commonDao.saveChapterText(body, chapter.getRequest().getUrl());
     }
 }

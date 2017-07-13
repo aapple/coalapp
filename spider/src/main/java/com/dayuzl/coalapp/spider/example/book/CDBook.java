@@ -1,6 +1,5 @@
-package com.dayuzl.coalapp.spider.book;
+package com.dayuzl.coalapp.spider.example.book;
 
-import com.geccocrawler.gecco.annotation.Gecco;
 import com.geccocrawler.gecco.annotation.HtmlField;
 import com.geccocrawler.gecco.annotation.Request;
 import com.geccocrawler.gecco.annotation.Text;
@@ -18,8 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Gecco(matchUrl="http://www.wuxidfgX", pipelines={"consolePipeline", "bookPipeline"})
-public class Book implements HtmlBean {
+//@Gecco(matchUrl="http://www.wuxiaworld.com/cdindex-html/", pipelines={"bookPipeline"})
+public class CDBook implements HtmlBean {
 
     @Request
     private HttpRequest request;
@@ -38,6 +37,6 @@ public class Book implements HtmlBean {
     @HtmlField(cssPath="#menu-item-12207 > ul li")
     private List<String> subBookNames;
 
-    @HtmlField(cssPath="#menu-item-12207 > ul li")
+    @HtmlField(cssPath="a[title]")
     private List<ChapterNode> chapterNodes;
 }

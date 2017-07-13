@@ -1,15 +1,13 @@
-package com.dayuzl.coalapp.spider.home;
+package com.dayuzl.coalapp.spider.example.chapter;
 
-import com.geccocrawler.gecco.annotation.Gecco;
 import com.geccocrawler.gecco.annotation.HtmlField;
 import com.geccocrawler.gecco.annotation.Request;
+import com.geccocrawler.gecco.annotation.Text;
 import com.geccocrawler.gecco.request.HttpRequest;
 import com.geccocrawler.gecco.spider.HtmlBean;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 /**
  * Created by bin.yao on 2017/4/20.
@@ -17,15 +15,16 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Gecco(matchUrl="http://www.wuxiaworld.com", pipelines={"consolePipeline", "homePipeline"})
-public class Home implements HtmlBean {
-
-    private static final long serialVersionUID = -7127412585200687225L;
+//@Gecco(matchUrl="http://www.wuxiaworld.com/cdindex-html/{}/", pipelines={"chapterPipeline"})
+public class Chapter implements HtmlBean {
 
     @Request
     private HttpRequest request;
+    @Text
+    @HtmlField(cssPath=".entry-header .entry-title")
+    private String name;
 
-    @HtmlField(cssPath="#menu-item-12207 > ul li")
-    private List<BookNode> bookNode;
+    @HtmlField(cssPath="div[itemprop='articleBody']")
+    private String body;
 
 }

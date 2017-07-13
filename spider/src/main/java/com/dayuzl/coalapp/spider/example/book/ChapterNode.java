@@ -1,4 +1,4 @@
-package com.dayuzl.coalapp.spider.book;
+package com.dayuzl.coalapp.spider.example.book;
 
 import com.geccocrawler.gecco.annotation.Href;
 import com.geccocrawler.gecco.annotation.HtmlField;
