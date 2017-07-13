@@ -1,7 +1,6 @@
 package com.dayuzl.coalapp.server.user.service;
 
 import com.dayuzl.coalapp.server.framework.BusinessException;
-import com.dayuzl.coalapp.server.product.domain.Factory;
 import com.dayuzl.coalapp.server.user.domain.Feedback;
 import com.dayuzl.coalapp.server.user.domain.User;
 import com.dayuzl.coalapp.server.user.repository.FeedbackRepository;
@@ -9,12 +8,8 @@ import com.dayuzl.coalapp.server.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -45,7 +40,7 @@ public class UserServiceImpl implements UserService {
         Example<User> ex = Example.of(user, matcher);
 
         //查询
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userRepository.findAll(ex);
 
         User userInfo = null;
         if(userList != null && userList.size()>0){

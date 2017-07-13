@@ -1,11 +1,7 @@
 package com.dayuzl.coalapp.server.freight.service;
 
-import com.dayuzl.coalapp.server.Information.domain.LogisticsInfo;
 import com.dayuzl.coalapp.server.freight.domain.FreightInfo;
 import com.dayuzl.coalapp.server.freight.repository.FreightRepository;
-import com.dayuzl.coalapp.server.trafficInfor.domain.TrafficInfo;
-import com.dayuzl.coalapp.server.trafficInfor.repository.TrafficInfoRepository;
-import com.dayuzl.coalapp.server.trafficInfor.service.TrafficInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
