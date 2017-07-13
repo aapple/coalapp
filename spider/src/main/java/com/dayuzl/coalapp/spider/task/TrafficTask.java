@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class TrafficTask extends SpringGeccoEngine {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Scheduled(cron = "0 */1 * * * ? ")
+    @Scheduled(cron = "0 0 8 * * ?")
     public void loadTrafficInfo() {
 
         logger.info("traffic task开始");
