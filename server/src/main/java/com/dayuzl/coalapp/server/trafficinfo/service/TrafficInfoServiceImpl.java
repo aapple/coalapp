@@ -1,8 +1,7 @@
-package com.dayuzl.coalapp.server.trafficInfor.service;
+package com.dayuzl.coalapp.server.trafficinfo.service;
 
-import com.dayuzl.coalapp.server.trafficInfor.domain.TrafficInfo;
-import com.dayuzl.coalapp.server.trafficInfor.repository.TrafficInfoRepository;
-import com.dayuzl.coalapp.server.trafficInfor.service.TrafficInfoService;
+import com.dayuzl.coalapp.server.trafficinfo.domain.TrafficInfo;
+import com.dayuzl.coalapp.server.trafficinfo.repository.TrafficInfoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TrafficInfoServiceImpl implements TrafficInfoService {

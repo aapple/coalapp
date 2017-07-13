@@ -1,9 +1,7 @@
-package com.dayuzl.coalapp.server.trafficInfor.service;
+package com.dayuzl.coalapp.server.trafficinfo.service;
 
-import com.dayuzl.coalapp.server.trafficInfor.domain.TrafficInfo;
+import com.dayuzl.coalapp.server.trafficinfo.domain.TrafficInfo;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface TrafficInfoService {
 

@@ -1,4 +1,4 @@
-package com.dayuzl.coalapp.server.trafficInfor.domain;
+package com.dayuzl.coalapp.server.trafficinfo.domain;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Getter;
