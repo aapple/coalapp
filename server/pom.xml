@@ -132,11 +132,28 @@
             <groupId>com.ali.duanxin</groupId>
             <artifactId>taobao-sdk-java-auto-20160607</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.ali.duanxin</groupId>
             <artifactId>taobao-sdk-java-auto-20160607-source</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607-source.jar</systemPath>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+
+        </resources>
+    </build>
 </project>
