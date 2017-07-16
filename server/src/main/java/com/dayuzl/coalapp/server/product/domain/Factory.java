@@ -37,6 +37,18 @@ public class Factory {
     @Column(length = 255)
     private String factoryImage;
 
+    @Column
+    private String onwerCallPerson;//矿方联系人
+
+    @Column
+    private String onwerCallNumber;//矿方联系电话
+
+    @Column
+    private String salerCallPerson;//代发联系人
+
+    @Column
+    private String salerCallNumber;//代发联系电话
+
     @ManyToOne
     private User onwer;
 

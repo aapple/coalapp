@@ -43,6 +43,13 @@ public class ProductPriceHis{
     @Column(length = 10)
     private BigDecimal priceDiff;
 
+    //是否水洗 0:不是 1 是
+    @Column
+    private Integer coalWashing;
+
+    //是否过筛  0:不是 1 是
+    @Column
+    private Integer graded;
     @Column
     private String coal_fareliang; //发热量
     @Column

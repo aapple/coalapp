@@ -2,11 +2,14 @@ package com.dayuzl.coalapp.server.lifeService.service;
 
 import com.dayuzl.coalapp.server.lifeService.Repository.LifeServiceProviderRepository;
 import com.dayuzl.coalapp.server.lifeService.domain.LifeServiceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,6 +17,8 @@ import java.util.List;
 
 @Service
 public class ServiceProviderServiceImpl implements ServiceProviderService{
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private LifeServiceProviderRepository lifeServiceProviderRepository;
@@ -58,5 +63,11 @@ public class ServiceProviderServiceImpl implements ServiceProviderService{
         List<LifeServiceProvider> providerList = lifeServiceProviderRepository.findAll(ex);
 
         return providerList;
+    }
+
+    @CacheEvict(value="lifeServiceProviderList",allEntries=true)
+    @Scheduled(fixedDelay = 5*60*1000)
+    public void clearCache(){
+        logger.info("now clean life service provider info cache");
     }
 }

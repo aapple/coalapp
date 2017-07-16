@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,5 +72,11 @@ public class VersionControlServiceImpl implements VersionControlService {
         }
 
         return result;
+    }
+
+    @CacheEvict(value="versionControlList",allEntries=true)
+    @Scheduled(fixedDelay = 10*60*1000)
+    public void clearCache(){
+        logger.info("now clean version info list cache");
     }
 }

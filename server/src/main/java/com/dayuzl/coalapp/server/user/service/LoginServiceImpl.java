@@ -1,6 +1,7 @@
 package com.dayuzl.coalapp.server.user.service;
 
 import com.dayuzl.coalapp.server.user.domain.User;
+
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -49,8 +50,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public User login(String phoneNum) {
 
+        User user = new User();
+        user.setPhoneNum(phoneNum);
         // try to get the user from DB
-        User userInfo = userService.findByPhone(phoneNum);
+        User userInfo = userService.findUser(user);
 
         if(null == userInfo){
             // if cant get then create new User

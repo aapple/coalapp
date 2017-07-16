@@ -5,11 +5,14 @@ import com.dayuzl.coalapp.server.product.domain.ProductPrice;
 import com.dayuzl.coalapp.server.product.domain.ProductType;
 import com.dayuzl.coalapp.server.product.repository.ProductPriceHisRepository;
 import com.dayuzl.coalapp.server.product.repository.ProductPriceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ import java.util.List;
 
 @Service
 public class ProductPriceServiceImpl implements ProductPriceService {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ProductPriceRepository productPriceRepository;
@@ -34,21 +39,19 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @CacheEvict(value="productPriceList",allEntries=true)
     public void saveOrUpdateProductPrice(ProductPrice productPrice){
 
-        ProductPrice productPriceTmp = new ProductPrice();
-        productPriceTmp.setFactory(productPrice.getFactory());
-        productPriceTmp.setProductType(productPrice.getProductType());
-        productPriceTmp.setPriceOwnerType(productPrice.getPriceOwnerType());
+        if(productPrice.getId() != null){
 
-        List<ProductPrice> productPrices = getProductPriceList(productPriceTmp);
+            ProductPrice productPriceTmp = new ProductPrice();
+            productPriceTmp.setId(productPrice.getId());
 
-        //update
-        if(productPrices != null && productPrices.size()> 0){
-            productPriceTmp = productPrices.get(0);
-
-            BigDecimal priceDiff = productPrice.getPrice().divide(productPriceTmp.getPrice());
-
-            productPrice.setId(productPriceTmp.getId());
-            productPrice.setPriceDiff(priceDiff);
+            List<ProductPrice> productPrices = getProductPriceList(productPriceTmp);
+            if(productPrices != null && productPrices.size()>0){
+                productPriceTmp = productPrices.get(0);
+                BigDecimal priceDiff = productPrice.getPrice().subtract(productPriceTmp.getPrice());
+                productPrice.setPriceDiff(priceDiff);
+            }else{
+                logger.error("product :" + productPrice +" is requesting to update data, but cant be found in database.");
+            }
         }else{
             //add
             productPrice.setCreatedTime(new Date());
@@ -69,9 +72,9 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         //创建实例
         Example<ProductPrice> ex = Example.of(productPrice, matcher);
-
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
         //查询
-        List<ProductPrice> productPrices = productPriceRepository.findAll(ex);
+        List<ProductPrice> productPrices = productPriceRepository.findAll(ex,sort);
 
         return productPrices;
     }
@@ -116,5 +119,11 @@ public class ProductPriceServiceImpl implements ProductPriceService {
                 productPriceHisRepository.save(productPriceHisList);
             }
         }
+    }
+
+    @CacheEvict(value="productPriceList",allEntries=true)
+    @Scheduled(fixedDelay = 2*60*1000)
+    public void clearCache(){
+        logger.info("it's time to clean product price cache");
     }
 }

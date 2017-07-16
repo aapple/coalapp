@@ -1,5 +1,6 @@
 package com.dayuzl.coalapp.server.user.service;
 
+import com.dayuzl.coalapp.server.framework.BusinessException;
 import com.dayuzl.coalapp.server.user.domain.Feedback;
 import com.dayuzl.coalapp.server.user.domain.User;
 import com.dayuzl.coalapp.server.user.repository.FeedbackRepository;
@@ -7,6 +8,8 @@ import com.dayuzl.coalapp.server.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,14 +26,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
+    //find User
     @Override
-    public User findByPhone(String phoneNum) {
+    public User findUser(User user) {
 
-        logger.info("Get user Info by phone number");
+        logger.info("Get user Info");
 
-        User user = userRepository.findByPhoneNum(phoneNum);
+        //创建匹配器，即如何使用查询条件
+        ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
+                .withIgnorePaths("focus");  //忽略属性：是否关注。因为是基本类型，需要忽略掉
 
-        return user;
+        //创建实例
+        Example<User> ex = Example.of(user, matcher);
+
+        //查询
+        List<User> userList = userRepository.findAll(ex);
+
+        User userInfo = null;
+        if(userList != null && userList.size()>0){
+            userInfo = userList.get(0);
+        }else{
+            throw new BusinessException("该用户不存在,请核对后重新查询");
+        }
+
+        return userInfo;
     }
 
     @Override
@@ -45,19 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUserInfo(User user){
-
         return userRepository.save(user);
     }
 
     @Override
-    public User findById(int id){
-        User result = userRepository.findOne(id);
-        return result;
-    }
-
-    @Override
     public List<User> findAll() {
-
         return userRepository.findAll();
     }
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 信息部
@@ -32,6 +33,9 @@ public class InfoDepartment {
     private String introduction;
 
     @Column
+    private String callPerson;
+
+    @Column
     private String callNumber;
 
     @Column(length = 128)
@@ -42,6 +46,13 @@ public class InfoDepartment {
 
     @Column(length = 256)
     private String photoPath;
+
+    @Column(columnDefinition="INT default 0")
+    private Integer priority;
+
+    //更新时间
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updateTime;
 
     public String toString(){
         return JSON.toJSONString(this);

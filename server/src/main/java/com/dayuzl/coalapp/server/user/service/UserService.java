@@ -8,13 +8,11 @@ import java.util.List;
 
 public interface UserService {
 
-    User findByPhone(String PhoneNum);
-
     User createUserAndSave(String PhoneNum);
 
     User updateUserInfo(User user);
 
-    User findById(int id);
+    User findUser(User user);
 
     List<User> findAll();
 

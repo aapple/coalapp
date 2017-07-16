@@ -39,7 +39,7 @@ public class UserController {
     @RequestMapping("/update")
     public String update(@RequestBody User user, HttpServletResponse response){
 
-        logger.info("request param user : " + user);
+        logger.debug("update user info, request param user : " + user);
 
         User userInfo = RequestUtils.getUserInfo();
         user.setId(userInfo.getId());
@@ -53,10 +53,13 @@ public class UserController {
         } catch (UnsupportedEncodingException e) {
             throw new BusinessException("用户信息更新异常，请重新尝试");
         }
+
         Cookie cookie = new Cookie("coalapp_session", base64String);
-        cookie.setMaxAge( 365 * 24 * 60 * 60);// 设置为30min
+        cookie.setMaxAge(365 * 24 * 60 * 60);// 设置为30min
         cookie.setPath("/");
         response.addCookie(cookie);
+
+        logger.debug("user info update success, response user : " + userJsonString);
 
         return userJsonString;
     }
@@ -70,7 +73,7 @@ public class UserController {
             return "";
         }
 
-        User newUserInfo = userService.findById(userInfo.getId());
+        User newUserInfo = userService.findUser(userInfo);
         // 更新cookie
         String userJsonString = JSON.toJSONString(newUserInfo);
         String base64String = null;
@@ -107,5 +110,4 @@ public class UserController {
 
         return "非常感谢您的积极反馈，反馈已经提交成功，如有必要我们随后会与您联系！";
     }
-
 }
