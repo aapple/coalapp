@@ -15,8 +15,8 @@ public class WechatUtilController {
 
         String result = HttpClientUtils.httpGet(url);
         result = result.replaceAll("data-src=\"http:", "src=\"https:");
-        result = result.replaceAll("0\\?wx_fmt=jpeg", "640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
-        result = result.replaceAll("0\\?wx_fmt=png", "640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1");
+//        result = result.replaceAll("0\\?wx_fmt=jpeg", "640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+//        result = result.replaceAll("0\\?wx_fmt=png", "640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1");
         return result;
     }
 }
