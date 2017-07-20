@@ -3,7 +3,6 @@ package com.dayuzl.coalapp.server.dailynews.service;
 import com.dayuzl.coalapp.server.dailynews.domain.DailyNews;
 import com.dayuzl.coalapp.server.dailynews.repository.DailyNewsRepository;
 import com.dayuzl.coalapp.server.framework.domain.PageParam;
-import org.apache.commons.beanutils.converters.IntegerArrayConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,11 @@ public class DailyNewsServiceImpl implements DailyNewsService {
     }
 
     @Override
-    public Page<DailyNews> findPage(PageParam page){
+    public Page<DailyNews> findPage(Integer pageNumber){
 
         Sort sort=new Sort(Sort.Direction.DESC,"updateTime");
 
-        Integer pageNumber = page.getPageNumber() != null ? page.getPageNumber() : 0;
-        Integer pageSize = page.getPageSize() != null ?  page.getPageSize() : 10;
-
-        Pageable pageRequest = new PageRequest(pageNumber, pageSize, sort);
+        Pageable pageRequest = new PageRequest(pageNumber, 10, sort);
 
         Page<DailyNews> dailyNewss = dailyNewsRepository.findAll(pageRequest);
 

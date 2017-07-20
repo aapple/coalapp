@@ -32,6 +32,19 @@ public class UserServiceImpl implements UserService {
 
         logger.info("Get user Info");
 
+        List<User> userList = this.getList(user);
+
+        User userInfo = null;
+        if(userList != null && userList.size()>0){
+            userInfo = userList.get(0);
+        }
+
+        return userInfo;
+    }
+
+    @Override
+    public List<User> getList(User user) {
+
         //创建匹配器，即如何使用查询条件
         ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
                 .withIgnorePaths("focus");  //忽略属性：是否关注。因为是基本类型，需要忽略掉
@@ -42,12 +55,7 @@ public class UserServiceImpl implements UserService {
         //查询
         List<User> userList = userRepository.findAll(ex);
 
-        User userInfo = null;
-        if(userList != null && userList.size()>0){
-            userInfo = userList.get(0);
-        }
-
-        return userInfo;
+        return userList;
     }
 
     @Override
@@ -63,11 +71,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateUserInfo(User user){
         return userRepository.save(user);
-    }
-
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 
     @Override

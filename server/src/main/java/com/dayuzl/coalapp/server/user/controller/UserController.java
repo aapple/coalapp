@@ -91,9 +91,9 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public String getUserList(){
+    public String getUserList(@RequestBody User user){
 
-        List<User> userList = userService.findAll();
+        List<User> userList = userService.getList(user);
 
         return ResponseUtils.toJSONString(userList);
     }

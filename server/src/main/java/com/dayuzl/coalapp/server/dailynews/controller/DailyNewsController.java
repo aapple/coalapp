@@ -2,7 +2,6 @@ package com.dayuzl.coalapp.server.dailynews.controller;
 
 import com.dayuzl.coalapp.server.dailynews.domain.DailyNews;
 import com.dayuzl.coalapp.server.dailynews.service.DailyNewsService;
-import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import com.dayuzl.coalapp.server.framework.util.ResponseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +33,15 @@ public class DailyNewsController {
     }
 
     @RequestMapping("/getDailyNewsList")
-    public String getDailyNewsList(@RequestBody PageParam page){
+    public String getDailyNewsList(Integer pageNumber){
 
         logger.info("request DailyNews");
 
-        Page<DailyNews> result = dailyNewsService.findPage(page);
+        if(pageNumber == null){
+            pageNumber = new Integer(0);
+        }
+
+        Page<DailyNews> result = dailyNewsService.findPage(pageNumber);
 
         return ResponseUtils.toJSONString(result);
     }
