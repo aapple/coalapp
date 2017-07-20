@@ -28,20 +28,16 @@ public class TrafficInfoController {
     public void addTrafficInfo(@RequestBody TrafficInfo trafficInfo){
         logger.info("request param TrafficInfo: " + trafficInfo);
 
-        trafficInfoService.saveOrUpdate(trafficInfo);
+        trafficInfoService.save(trafficInfo);
     }
 
     @RequestMapping("/getTrafficInfoList")
-    public String getTrafficInfoList(Integer pageNumber){
+    public String getTrafficInfoList(@RequestBody TrafficInfo trafficVO){
 
         logger.info("request TrafficInfo");
 
-        if(pageNumber == null){
-            pageNumber = new Integer(0);
-        }
+        Page<TrafficInfo> resultPage = trafficInfoService.findPage(trafficVO);
 
-        Page<TrafficInfo> resultList = trafficInfoService.findList(pageNumber);
-
-        return ResponseUtils.toJSONString(resultList);
+        return ResponseUtils.toJSONString(resultPage);
     }
 }

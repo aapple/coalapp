@@ -1,6 +1,7 @@
 package com.dayuzl.coalapp.server.product.domain;
 
 import com.alibaba.fastjson.JSON;
+import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 @Table(name = "product_price")
 @Setter
 @Getter
-public class ProductPrice {
+public class ProductPrice extends PageParam{
 
     @Id
     @GeneratedValue

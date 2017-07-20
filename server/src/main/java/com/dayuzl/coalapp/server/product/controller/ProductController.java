@@ -1,5 +1,6 @@
 package com.dayuzl.coalapp.server.product.controller;
 
+import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import com.dayuzl.coalapp.server.framework.util.RequestUtils;
 import com.dayuzl.coalapp.server.framework.util.ResponseUtils;
 import com.dayuzl.coalapp.server.product.domain.Factory;
@@ -29,17 +30,46 @@ public class ProductController {
     @Autowired
     private ProductPriceService productPriceService;
 
-    /*
-    *  查询产品价格列表
-    *
-    *  1. 默认只有facotryType这样查询出来的是当前种类产品的所有列表
-    *  2. 也可以有其他的过滤条件
-    * */
-    @RequestMapping("/getProductPriceList")
-    public String getProductPriceList(@RequestBody ProductPrice productPrice){
-        logger.info("request param productPrice : "+productPrice);
 
-        List<ProductPrice> productList = productPriceService.getProductPriceList(productPrice);
+    /*
+     *  保存或更新价格列表
+     * */
+    @RequestMapping("/saveOrUpdateProductPrice")
+    public void saveProductPrice(@RequestBody ProductPrice productPrice){
+
+        logger.info("saveProductPrice : request param ProductPrice --> "+productPrice);
+
+        productPriceService.save(productPrice);
+    }
+
+    /*
+     *  查询产品价格列表
+     *
+     *  1. 默认只有facotryType这样查询出来的是当前种类产品的所有列表
+     *  2. 也可以有其他的过滤条件
+     * */
+    @RequestMapping("/getProductPriceList")
+    public String getProductPrices(@RequestBody ProductPrice  productPriceVO) {
+
+        logger.info("getProductPrices : request param productPrice --> " + productPriceVO);
+
+        if (productPriceVO.getPageNumber() != null && productPriceVO.getPageSize() != null) {
+            return ResponseUtils.toJSONString(productPriceService.getPage(productPriceVO));
+        } else {
+            return ResponseUtils.toJSONString(productPriceService.getList(productPriceVO));
+        }
+    }
+
+    /*
+     *  查询产品列表模板
+     * */
+    @RequestMapping("/getProductPriceTempList")
+    String getProductPriceTempList(@RequestBody Factory factory){
+        logger.info("request param Factory : "+factory);
+        ProductType productType = new ProductType();
+        productType.setFactoryType(factory.getFactoryType());
+
+        List<ProductPrice> productList = productPriceService.getTemplateList(productType);
 
         return ResponseUtils.toJSONString(productList);
     }
@@ -48,9 +78,9 @@ public class ProductController {
     *  查询用户的工厂和产品列表
     * */
     @RequestMapping("/getFactoryList")
-    String getFactoryList(@RequestBody Factory factory){
+    String getFactories(@RequestBody Factory factory){
 
-        logger.info("request param Factory : "+factory);
+        logger.info("request param Factory : "+ factory);
 
         User userInfo = RequestUtils.getUserInfo();
         if(factory.getOnwer() != null){
@@ -84,28 +114,9 @@ public class ProductController {
         return ResponseUtils.toJSONString(productTypeList);
     }
 
-    /*
-    *  查询产品列表模板
-    * */
-    @RequestMapping("/getProductPriceTempList")
-    String getProductPriceTempList(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
-        ProductType productType = new ProductType();
-        productType.setFactoryType(factory.getFactoryType());
 
-        List<ProductPrice> productList = productPriceService.getProdcutPriceTemplateList(productType);
 
-        return ResponseUtils.toJSONString(productList);
-    }
 
-    /*
-     *  保存或更新价格列表
-     * */
-    @RequestMapping("/saveOrUpdateProductPrice")
-    public void saveOrUpdateProductPrice(@RequestBody ProductPrice productPrice){
-        logger.info("request param ProductPrice : "+productPrice);
-        productPriceService.saveOrUpdateProductPrice(productPrice);
-    }
 
     /*
      *  删除工厂

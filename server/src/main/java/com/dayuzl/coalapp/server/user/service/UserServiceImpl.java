@@ -45,8 +45,6 @@ public class UserServiceImpl implements UserService {
         User userInfo = null;
         if(userList != null && userList.size()>0){
             userInfo = userList.get(0);
-        }else{
-            throw new BusinessException("该用户不存在,请核对后重新查询");
         }
 
         return userInfo;

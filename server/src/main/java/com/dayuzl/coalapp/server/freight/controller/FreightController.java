@@ -1,9 +1,6 @@
 package com.dayuzl.coalapp.server.freight.controller;
 
-import com.dayuzl.coalapp.server.Information.domain.InfoDepartment;
-import com.dayuzl.coalapp.server.Information.domain.LogisticsInfo;
-import com.dayuzl.coalapp.server.Information.service.InfoDepartService;
-import com.dayuzl.coalapp.server.Information.service.LogisticsInfoService;
+import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import com.dayuzl.coalapp.server.framework.util.ResponseUtils;
 import com.dayuzl.coalapp.server.freight.domain.FreightInfo;
 import com.dayuzl.coalapp.server.freight.service.FreightService;
@@ -13,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 运费维护 controller
@@ -30,27 +25,29 @@ public class FreightController {
     private FreightService freightService;
 
     @RequestMapping("/addOrUpdate")
-    public void addOrUpdate(@RequestBody FreightInfo freightInfo){
+    public void saveFreight(@RequestBody FreightInfo freightInfo){
 
-        logger.info("request param FreightInfo:" + freightInfo);
+        logger.info("saveFreight: request param FreightInfo -->" + freightInfo);
 
-        freightService.addOrUpdate(freightInfo);
+        freightService.save(freightInfo);
     }
 
     @RequestMapping("/getFreightList")
-    public String getFreightList(@RequestBody FreightInfo freightInfo){
+    public String getFreights(@RequestBody FreightInfo freightInfoVO){
 
-        logger.info("request param FreightInfo: " + freightInfo);
+        logger.info("getFreightList : request param FreightInfo --> " + freightInfoVO);
 
-        List<FreightInfo> resultList = freightService.findList(freightInfo);
-
-        return ResponseUtils.toJSONString(resultList);
+        if(freightInfoVO.getPageNumber() != null && freightInfoVO.getPageSize() != null){
+            return ResponseUtils.toJSONString(freightService.getPage(freightInfoVO));
+        }else{
+            return ResponseUtils.toJSONString(freightService.getList(freightInfoVO));
+        }
     }
 
-    @RequestMapping("/delete")
-    public void deleteInfoDepartment(@RequestBody FreightInfo freightInfo){
+    @RequestMapping("/deleteFreight")
+    public void deleteFreight(@RequestBody FreightInfo freightInfo){
 
-        logger.info("request param FreightInfo:" + freightInfo);
+        logger.info("deleteFreight: request param FreightInfo -->" + freightInfo);
 
         freightService.delete(freightInfo);
     }

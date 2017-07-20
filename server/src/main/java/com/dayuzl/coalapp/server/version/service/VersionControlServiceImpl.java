@@ -1,6 +1,5 @@
 package com.dayuzl.coalapp.server.version.service;
 
-import com.dayuzl.coalapp.server.Information.domain.InfoDepartment;
 import com.dayuzl.coalapp.server.version.domain.VersionControl;
 import com.dayuzl.coalapp.server.version.repository.VersionRepository;
 import org.apache.commons.lang.StringUtils;
@@ -30,7 +29,7 @@ public class VersionControlServiceImpl implements VersionControlService {
     }
 
     @Override
-    @Cacheable(value = "versionControlList", key="#version.systemType",unless="!(#result!=null)")
+    @Cacheable(value = "versionControlList", key="#version.systemType+#version.versionNum",unless="!(#result!=null)")
     public VersionControl checkNewVersion(VersionControl version){
 
         VersionControl result =  version;

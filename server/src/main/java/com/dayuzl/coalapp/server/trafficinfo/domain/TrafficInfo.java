@@ -1,6 +1,7 @@
 package com.dayuzl.coalapp.server.trafficinfo.domain;
 
 import com.alibaba.fastjson.JSON;
+import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 @Table(name = "traffic_info")
 @Getter
 @Setter
-public class TrafficInfo {
+public class TrafficInfo extends PageParam{
 
     @Id
     @GeneratedValue

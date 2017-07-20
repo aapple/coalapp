@@ -35,7 +35,7 @@ public class LoginController {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     //cache use for record user login info
-    Cache<String, String> cache = CacheBuilder.newBuilder().expireAfterWrite(120, TimeUnit.SECONDS).initialCapacity(10)
+    Cache<String, String> cache = CacheBuilder.newBuilder().expireAfterWrite(600, TimeUnit.SECONDS).initialCapacity(10)
             .maximumSize(1000).build();
 
     @Autowired

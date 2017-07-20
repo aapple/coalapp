@@ -1,6 +1,7 @@
 package com.dayuzl.coalapp.server.freight.domain;
 
 import com.alibaba.fastjson.JSON;
+import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 @Table(name = "freight_info")
 @Getter
 @Setter
-public class FreightInfo {
+public class FreightInfo extends PageParam{
 
     @Id
     @GeneratedValue

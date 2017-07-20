@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 
 public interface TrafficInfoService {
 
-    void saveOrUpdate(TrafficInfo trafficInfo);
+    void save(TrafficInfo trafficInfo);
 
-    Page<TrafficInfo> findList(Integer pageNumber);
+    Page<TrafficInfo> findPage(TrafficInfo traffic);
 }

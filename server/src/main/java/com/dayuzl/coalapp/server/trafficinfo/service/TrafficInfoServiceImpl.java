@@ -20,24 +20,24 @@ public class TrafficInfoServiceImpl implements TrafficInfoService {
     private TrafficInfoRepository trafficInfoRepository;
 
     @Override
-    @CacheEvict(value="trafficInfoList",allEntries=true)
-    public void saveOrUpdate(TrafficInfo trafficInfo) {
+    @CacheEvict(value="trafficInfoCache",allEntries=true)
+    public void save(TrafficInfo trafficInfo) {
         trafficInfoRepository.save(trafficInfo);
     }
 
     @Override
-    @Cacheable(value = "trafficInfoList", key="#pageNumber",unless="!(#result!=null)")
-    public Page<TrafficInfo> findList(Integer pageNumber){
+    @Cacheable(value = "trafficInfoCache", key="#traffic",unless="!(#result!=null)")
+    public Page<TrafficInfo> findPage(TrafficInfo traffic){
 
         Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
-        Pageable pageRequest = new PageRequest(pageNumber, 10, sort);
+        Pageable pageRequest = new PageRequest(traffic.getPageNumber(), traffic.getPageSize(), sort);
 
         Page<TrafficInfo> trafficInfos = trafficInfoRepository.findAll(pageRequest);
 
         return trafficInfos;
     }
 
-    @CacheEvict(value="trafficInfoList",allEntries=true)
+    @CacheEvict(value="trafficInfoCache",allEntries=true)
     @Scheduled(fixedDelay = 2*60*1000)
     public void clearCache(){
         logger.info("now clean traffic info list cache");
