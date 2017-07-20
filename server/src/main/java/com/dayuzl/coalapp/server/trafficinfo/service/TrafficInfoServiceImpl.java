@@ -1,5 +1,6 @@
 package com.dayuzl.coalapp.server.trafficinfo.service;
 
+import com.dayuzl.coalapp.server.product.domain.ProductPrice;
 import com.dayuzl.coalapp.server.trafficinfo.domain.TrafficInfo;
 import com.dayuzl.coalapp.server.trafficinfo.repository.TrafficInfoRepository;
 import org.slf4j.Logger;
@@ -29,12 +30,25 @@ public class TrafficInfoServiceImpl implements TrafficInfoService {
     @Cacheable(value = "trafficInfoCache", key="#traffic",unless="!(#result!=null)")
     public Page<TrafficInfo> findPage(TrafficInfo traffic){
 
-        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
-        Pageable pageRequest = new PageRequest(traffic.getPageNumber(), traffic.getPageSize(), sort);
+        Example<TrafficInfo> ex = this.buildExample(traffic);
 
-        Page<TrafficInfo> trafficInfos = trafficInfoRepository.findAll(pageRequest);
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
+
+        Pageable pageRequest = new PageRequest(traffic.checkPageNumber(), traffic.checkPageSize(), sort);
+
+        Page<TrafficInfo> trafficInfos = trafficInfoRepository.findAll(ex,pageRequest);
 
         return trafficInfos;
+    }
+
+    private Example<TrafficInfo> buildExample(TrafficInfo traffic){
+
+        ExampleMatcher matcher = ExampleMatcher.matching()//构建对象
+                .withMatcher("traffic.departure", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("traffic.destination", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withIgnorePaths("focus");  //忽略属性：是否关注。因为是基本类型，需要忽略掉
+
+        return Example.of(traffic, matcher);
     }
 
     @CacheEvict(value="trafficInfoCache",allEntries=true)
