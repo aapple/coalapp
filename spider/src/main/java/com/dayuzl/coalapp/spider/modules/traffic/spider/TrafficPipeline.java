@@ -24,8 +24,16 @@ public class TrafficPipeline implements Pipeline<Traffic>{
 
         HttpRequest currRequest = traffic.getRequest();
         List<TrafficNode> trafficNodes = traffic.getQianNode();
+        trafficNodes.addAll(traffic.getShenNode());
+
+        // 清空原数据
+        if(currRequest.getUrl().endsWith("rid=1")){
+            trafficInfoRepository.deleteBySpiderFlag(1);
+        }
+
         for(TrafficNode trafficNode : trafficNodes) {
             TrafficInfo trafficInfo = new TrafficInfo();
+            trafficInfo.setSpiderFlag(1);
             trafficInfo.setDeparture(trafficNode.getData().get(0));
             trafficInfo.setState(trafficNode.getData().get(1));
             trafficInfo.setTrafficTime(trafficNode.getData().get(2));
