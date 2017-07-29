@@ -105,7 +105,13 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
     @CacheEvict(value="productPriceCache",allEntries=true)
     public void delete(ProductPrice productPrice){
-        productPriceRepository.delete(productPrice);
+
+        productPriceRepository.deleteByFactoryIdAndProductTypeIdAndPriceOwnerTypeAndCoalWashingAndGraded(
+                productPrice.getFactory().getId(),
+                productPrice.getProductType().getId(),
+                productPrice.getPriceOwnerType(),
+                productPrice.getCoalWashing(),
+                productPrice.getGraded());
     }
 
     private Example<ProductPrice> buildExample(ProductPrice productPrice){
