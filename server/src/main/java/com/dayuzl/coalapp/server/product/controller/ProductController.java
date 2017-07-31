@@ -33,7 +33,6 @@ public class ProductController {
     @Autowired
     private ProductPriceService productPriceService;
 
-
     /*
      *  保存或更新价格列表
      * */
@@ -68,7 +67,7 @@ public class ProductController {
      * */
     @RequestMapping("/getProductPriceTempList")
     String getProductPriceTempList(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
+        logger.info("request param Factory : "+ factory);
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
 
@@ -100,6 +99,7 @@ public class ProductController {
         Map<String, Object> result = new HashedMap();
         result.put("factoryList", factoryList);
         result.put("productTypeList", productTypeList);
+
         return ResponseUtils.toJSONString(result);
     }
 
@@ -125,7 +125,6 @@ public class ProductController {
 
             return ResponseUtils.toJSONString(productTypeList);
         }
-
     }
 
     private List<ProductTypeFormat> getProductTypeFormats() {
@@ -177,10 +176,6 @@ public class ProductController {
         return productTypeList;
 
     }
-
-
-
-
 
     /*
      *  删除工厂
