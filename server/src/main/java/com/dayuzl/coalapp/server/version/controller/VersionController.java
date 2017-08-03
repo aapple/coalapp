@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/version")
 public class VersionController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private VersionControlService versionControlService;
 
@@ -31,15 +29,12 @@ public class VersionController {
         versionControl.setSystemType("android");
         versionControl.setVersionNum("0.0.1");
         versionControl.setVersionAddr("testAddress");*/
-        logger.info("request param VersionControl: " + versionControl);
 
         versionControlService.saveNewVerion(versionControl);
     }
 
     @RequestMapping("/checkNewVersion")
     public String getVersionControlList(@RequestBody VersionControl version){
-
-        logger.info("request VersionControl");
 
         VersionControl result = versionControlService.checkNewVersion(version);
 

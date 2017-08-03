@@ -17,8 +17,6 @@ import java.util.List;
 @Service
 public class VersionControlServiceImpl implements VersionControlService {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private VersionRepository versionControlRepository;
 
@@ -59,15 +57,15 @@ public class VersionControlServiceImpl implements VersionControlService {
                         result.setIsNeedUpdate(true);
                         break;
                     }else if(Integer.parseInt(reqVersionNum[i]) > Integer.parseInt(lastVersionNum[i])){
-                        logger.error("请求版本高于最新版本"+" versionNum : " + version.getVersionNum() +" system：" + version.getSystemType());
+                        System.out.println("请求版本高于最新版本"+" versionNum : " + version.getVersionNum() +" system：" + version.getSystemType());
                         break;
                     }
                 }
             }else{
-                logger.error("没有找到任何版本"+" versionNum : " + version.getVersionNum() +" system : "+ version.getSystemType());
+                System.out.println("没有找到任何版本"+" versionNum : " + version.getVersionNum() +" system : "+ version.getSystemType());
             }
         }else {
-            logger.error("request 版本信息有误 ： "+" versionNum : " + version.getVersionNum() +" system : "+ version.getSystemType());
+            System.out.println("request 版本信息有误 ： "+" versionNum : " + version.getVersionNum() +" system : "+ version.getSystemType());
         }
 
         return result;
@@ -76,6 +74,5 @@ public class VersionControlServiceImpl implements VersionControlService {
     @CacheEvict(value="versionControlList",allEntries=true)
     @Scheduled(fixedDelay = 10*60*1000)
     public void clearCache(){
-        logger.info("now clean version info list cache");
     }
 }

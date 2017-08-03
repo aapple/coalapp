@@ -23,8 +23,6 @@ import java.util.List;
 @Service
 public class TimelinesServiceImpl implements TimelinesService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private TimelineCommentsRepository timelineCommentsRepository;
 

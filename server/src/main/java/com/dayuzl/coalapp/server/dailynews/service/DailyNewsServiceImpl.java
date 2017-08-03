@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class DailyNewsServiceImpl implements DailyNewsService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private DailyNewsRepository dailyNewsRepository;
 
@@ -39,6 +37,5 @@ public class DailyNewsServiceImpl implements DailyNewsService {
 
     @Scheduled(fixedDelay = 3*60*1000)
     public void clearCache(){
-        logger.info("now clean daily news page cache");
     }
 }

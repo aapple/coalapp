@@ -26,8 +26,6 @@ import java.util.List;
 @RequestMapping("app/")
 public class TimelineController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private TimelinesService timelinesService;
 

@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class TrafficInfoServiceImpl implements TrafficInfoService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private TrafficInfoRepository trafficInfoRepository;
 
@@ -54,6 +52,5 @@ public class TrafficInfoServiceImpl implements TrafficInfoService {
     @CacheEvict(value="trafficInfoCache",allEntries=true)
     @Scheduled(fixedDelay = 2*60*1000)
     public void clearCache(){
-        logger.info("now clean traffic info list cache");
     }
 }

@@ -18,8 +18,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private UserRepository userRepository;
 
@@ -29,8 +27,6 @@ public class UserServiceImpl implements UserService {
     //find User
     @Override
     public User findUser(User user) {
-
-        logger.info("Get user Info");
 
         List<User> userList = this.getList(user);
 

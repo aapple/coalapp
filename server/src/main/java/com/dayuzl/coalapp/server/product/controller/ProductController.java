@@ -25,8 +25,6 @@ import java.util.Map;
 @RequestMapping("/app/product")
 public class ProductController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private FactoryService factoryService;
 
@@ -38,8 +36,6 @@ public class ProductController {
      * */
     @RequestMapping("/saveOrUpdateProductPrice")
     public void saveProductPrice(@RequestBody ProductPrice productPrice){
-
-        logger.info("saveProductPrice : request param ProductPrice --> "+productPrice);
 
         productPriceService.save(productPrice);
     }
@@ -53,8 +49,6 @@ public class ProductController {
     @RequestMapping("/getProductPriceList")
     public String getProductPrices(@RequestBody ProductPrice  productPriceVO) {
 
-        logger.info("getProductPrices : request param productPrice --> " + productPriceVO);
-
         if (productPriceVO.getPageNumber() != null && productPriceVO.getPageSize() != null) {
             return ResponseUtils.toJSONString(productPriceService.getPage(productPriceVO));
         } else {
@@ -67,7 +61,6 @@ public class ProductController {
      * */
     @RequestMapping("/getProductPriceTempList")
     String getProductPriceTempList(@RequestBody Factory factory){
-        logger.info("request param Factory : "+ factory);
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
 
@@ -81,8 +74,6 @@ public class ProductController {
     * */
     @RequestMapping("/getFactoryList")
     String getFactories(@RequestBody Factory factory){
-
-        logger.info("request param Factory : "+ factory);
 
         User userInfo = RequestUtils.getUserInfo();
         if(factory.getOnwer() != null){
@@ -108,8 +99,6 @@ public class ProductController {
     * */
     @RequestMapping("/getProductTypeList")
     String getProductTypeList(@RequestBody Factory factory){
-
-        logger.info("request param Factory : "+factory);
 
         if(StringUtils.equals("tab", factory.getName())){
 
@@ -182,7 +171,6 @@ public class ProductController {
      * */
     @RequestMapping("/deleteFactory")
     public void deleteFactory(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
         factoryService.deleteById(factory);
     }
 
@@ -191,7 +179,6 @@ public class ProductController {
      * */
     @RequestMapping("/saveOrUpdateFactory")
     public void saveOrUpdateFactory(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
         factoryService.saveOrUpdateFactory(factory);
     }
 }

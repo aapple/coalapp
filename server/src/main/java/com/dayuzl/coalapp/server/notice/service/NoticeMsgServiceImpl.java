@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class NoticeMsgServiceImpl implements NoticeMsgService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private NoticeMsgRepository noticeMsgRepository;
 
@@ -43,6 +41,5 @@ public class NoticeMsgServiceImpl implements NoticeMsgService {
     @CacheEvict(value="noticeMsgList",allEntries=true)
     @Scheduled(fixedDelay = 10*60*1000)
     public void clearCache(){
-        logger.info("now clean notice Msg cache");
     }
 }
