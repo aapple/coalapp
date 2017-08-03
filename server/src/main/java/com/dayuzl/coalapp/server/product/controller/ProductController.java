@@ -56,6 +56,19 @@ public class ProductController {
         }
     }
 
+    @RequestMapping("/deleteProductPrice")
+    public void deleteProductPrice(@RequestBody ProductPrice  productPriceVO) {
+
+        ProductPrice productPrice = new ProductPrice();
+        productPrice.setFactory(productPriceVO.getFactory());
+        productPrice.setProductType(productPriceVO.getProductType());
+        productPrice.setPriceOwnerType(productPriceVO.getPriceOwnerType());
+        productPrice.setCoalWashing(productPriceVO.getCoalWashing());
+        productPrice.setGraded(productPriceVO.getGraded());
+
+        productPriceService.delete(productPrice);
+    }
+
     /*
      *  查询产品列表模板
      * */

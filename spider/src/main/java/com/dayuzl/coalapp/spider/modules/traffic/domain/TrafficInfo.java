@@ -32,6 +32,9 @@ public class TrafficInfo {
     private String trafficTime;
 
     @Column
+    private Integer spiderFlag;
+
+    @Column
     private String area ;
 
     @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
