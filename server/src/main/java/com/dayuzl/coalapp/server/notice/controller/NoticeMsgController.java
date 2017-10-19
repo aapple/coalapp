@@ -19,22 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/notice")
 public class NoticeMsgController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private NoticeMsgService noticeMsgService;
 
     @RequestMapping("/addNoticeMsg")
     public void addNoticeMsg(@RequestBody NoticeMsg noticeMsg){
-        logger.info("request param NoticeMsg: " + noticeMsg);
-
         noticeMsgService.saveOrUpdate(noticeMsg);
     }
 
     @RequestMapping("/getNoticeMsgList")
     public String getNoticeMsgList(Integer pageNumber){
-
-        logger.info("request NoticeMsg");
 
         if(pageNumber == null){
             pageNumber = new Integer(0);

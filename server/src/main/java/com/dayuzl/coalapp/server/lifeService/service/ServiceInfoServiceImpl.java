@@ -19,8 +19,6 @@ import java.util.List;
 @Service
 public class ServiceInfoServiceImpl implements ServiceInfoService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private LifeServiceInfoRepository lifeServiceInfoRepository;
 
@@ -70,7 +68,6 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     @CacheEvict(value="lifeServiceInfoList",allEntries=true)
     @Scheduled(fixedDelay = 3*60*1000)
     public void clearCache(){
-        logger.info("now clean life service info cache");
     }
 
     @Override

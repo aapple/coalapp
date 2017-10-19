@@ -19,23 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/freight")
 public class FreightController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private FreightService freightService;
 
     @RequestMapping("/addOrUpdate")
     public void saveFreight(@RequestBody FreightInfo freightInfo){
 
-        logger.info("saveFreight: request param FreightInfo -->" + freightInfo);
-
         freightService.save(freightInfo);
     }
 
     @RequestMapping("/getFreightList")
     public String getFreights(@RequestBody FreightInfo freightInfoVO){
-
-        logger.info("getFreightList : request param FreightInfo --> " + freightInfoVO);
 
         if(freightInfoVO.getPageNumber() != null && freightInfoVO.getPageSize() != null){
             return ResponseUtils.toJSONString(freightService.getPage(freightInfoVO));
@@ -46,8 +40,6 @@ public class FreightController {
 
     @RequestMapping("/deleteFreight")
     public void deleteFreight(@RequestBody FreightInfo freightInfo){
-
-        logger.info("deleteFreight: request param FreightInfo -->" + freightInfo);
 
         freightService.delete(freightInfo);
     }

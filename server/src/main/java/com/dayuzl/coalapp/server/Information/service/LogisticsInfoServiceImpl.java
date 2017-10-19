@@ -18,8 +18,6 @@ import java.util.List;
 @Service
 public class LogisticsInfoServiceImpl implements LogisticsInfoService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private LogisticsInfoRepository logisticsInfoRepository;
 
@@ -68,6 +66,5 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     @CacheEvict(value="logisticsInfoList",allEntries=true)
     @Scheduled(fixedDelay = 2*60*1000)
     public void clearCache(){
-        logger.info("now clean logisticsInfo cache");
     }
 }

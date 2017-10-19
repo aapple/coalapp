@@ -18,8 +18,6 @@ import java.util.List;
 @Service
 public class ServiceProviderServiceImpl implements ServiceProviderService{
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private LifeServiceProviderRepository lifeServiceProviderRepository;
 
@@ -68,6 +66,5 @@ public class ServiceProviderServiceImpl implements ServiceProviderService{
     @CacheEvict(value="lifeServiceProviderList",allEntries=true)
     @Scheduled(fixedDelay = 5*60*1000)
     public void clearCache(){
-        logger.info("now clean life service provider info cache");
     }
 }

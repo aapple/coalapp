@@ -23,8 +23,6 @@ import java.util.List;
 @RequestMapping("/app/life")
 public class LifeController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private ServiceProviderService serviceProviderService;
 
@@ -37,8 +35,6 @@ public class LifeController {
     @RequestMapping("/addOrUpdateLifeStore")
     public void addOrUpdateLifeStore(@RequestBody LifeServiceProvider lifeStore){
 
-        logger.info("request param lifeServiceProvider:" + lifeStore);
-
         serviceProviderService.saveOrUpdate(lifeStore);
     }
 
@@ -47,8 +43,6 @@ public class LifeController {
     * */
     @RequestMapping("/getLifeStoreList")
     public String getLifeStoreList(@RequestBody LifeServiceProvider lifeStore){
-
-        logger.info("request param lifeServiceProvider:" + lifeStore);
 
         List<LifeServiceProvider> lifeStoreList = serviceProviderService.findList(lifeStore);
 

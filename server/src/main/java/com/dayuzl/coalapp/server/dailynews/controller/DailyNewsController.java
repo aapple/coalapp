@@ -19,23 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/news")
 public class DailyNewsController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private DailyNewsService dailyNewsService;
 
     @RequestMapping("/addDailyNews")
     public void saveDailyNews(@RequestBody DailyNews dailyNews){
 
-        logger.info("saveDailyNews : request param (dailyNews: " + dailyNews +" )");
 
         dailyNewsService.save(dailyNews);
     }
 
     @RequestMapping("/getDailyNewsList")
     public String getDailyNewsList(Integer pageNumber){
-
-        logger.info("request DailyNews");
 
         if(pageNumber == null){
             pageNumber = new Integer(0);

@@ -25,22 +25,17 @@ import java.util.Map;
 @RequestMapping("/app/product")
 public class ProductController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private FactoryService factoryService;
 
     @Autowired
     private ProductPriceService productPriceService;
 
-
     /*
      *  保存或更新价格列表
      * */
     @RequestMapping("/saveOrUpdateProductPrice")
     public void saveProductPrice(@RequestBody ProductPrice productPrice){
-
-        logger.info("saveProductPrice : request param ProductPrice --> "+productPrice);
 
         productPriceService.save(productPrice);
     }
@@ -53,8 +48,6 @@ public class ProductController {
      * */
     @RequestMapping("/getProductPriceList")
     public String getProductPrices(@RequestBody ProductPrice  productPriceVO) {
-
-        logger.info("getProductPrices : request param productPrice --> " + productPriceVO);
 
         if (productPriceVO.getPageNumber() != null && productPriceVO.getPageSize() != null) {
             return ResponseUtils.toJSONString(productPriceService.getPage(productPriceVO));
@@ -81,7 +74,6 @@ public class ProductController {
      * */
     @RequestMapping("/getProductPriceTempList")
     String getProductPriceTempList(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
         ProductType productType = new ProductType();
         productType.setFactoryType(factory.getFactoryType());
 
@@ -95,8 +87,6 @@ public class ProductController {
     * */
     @RequestMapping("/getFactoryList")
     String getFactories(@RequestBody Factory factory){
-
-        logger.info("request param Factory : "+ factory);
 
         User userInfo = RequestUtils.getUserInfo();
         if(factory.getOnwer() != null){
@@ -113,6 +103,7 @@ public class ProductController {
         Map<String, Object> result = new HashedMap();
         result.put("factoryList", factoryList);
         result.put("productTypeList", productTypeList);
+
         return ResponseUtils.toJSONString(result);
     }
 
@@ -121,8 +112,6 @@ public class ProductController {
     * */
     @RequestMapping("/getProductTypeList")
     String getProductTypeList(@RequestBody Factory factory){
-
-        logger.info("request param Factory : "+factory);
 
         if(StringUtils.equals("tab", factory.getName())){
 
@@ -138,7 +127,6 @@ public class ProductController {
 
             return ResponseUtils.toJSONString(productTypeList);
         }
-
     }
 
     private List<ProductTypeFormat> getProductTypeFormats() {
@@ -196,7 +184,6 @@ public class ProductController {
      * */
     @RequestMapping("/deleteFactory")
     public void deleteFactory(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
         factoryService.deleteById(factory);
     }
 
@@ -205,7 +192,6 @@ public class ProductController {
      * */
     @RequestMapping("/saveOrUpdateFactory")
     public void saveOrUpdateFactory(@RequestBody Factory factory){
-        logger.info("request param Factory : "+factory);
         factoryService.saveOrUpdateFactory(factory);
     }
 }

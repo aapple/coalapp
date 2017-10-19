@@ -32,8 +32,6 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/app/login")
 public class LoginController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     //cache use for record user login info
     Cache<String, String> cache = CacheBuilder.newBuilder().expireAfterWrite(600, TimeUnit.SECONDS).initialCapacity(10)
             .maximumSize(1000).build();
@@ -46,7 +44,6 @@ public class LoginController {
 
     @RequestMapping("/getVerifyCode")
     ResponseMessage getVrifyCode(@RequestBody UserVO user){
-        logger.info("try to get verify code， user: "+user);
 
         String phoneNum = user.getPhoneNum();
         String verifyCode = loginService.getVerificationCode(phoneNum);
@@ -62,8 +59,6 @@ public class LoginController {
     @RequestMapping("/login")
     String login(@RequestBody UserVO user,
                  HttpServletResponse response){
-
-        logger.info("request param user: " + user);
 
         String phoneNum = user.getPhoneNum();
         String verifyCode = user.getVerifyCode();

@@ -19,22 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/traffic")
 public class TrafficInfoController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private TrafficInfoService trafficInfoService;
 
     @RequestMapping("/addTrafficInfo")
     public void addTrafficInfo(@RequestBody TrafficInfo trafficInfo){
-        logger.info("request param TrafficInfo: " + trafficInfo);
 
         trafficInfoService.save(trafficInfo);
     }
 
     @RequestMapping("/getTrafficInfoList")
     public String getTrafficInfoList(@RequestBody TrafficInfo trafficVO){
-
-        logger.info("request TrafficInfo");
 
         Page<TrafficInfo> resultPage = trafficInfoService.findPage(trafficVO);
 

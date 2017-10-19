@@ -22,8 +22,6 @@ import java.util.List;
 @RequestMapping("/app/infoDepart")
 public class InfoDepartController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private InfoDepartService infoDepartService;
 
@@ -33,14 +31,11 @@ public class InfoDepartController {
     @RequestMapping("/addOrUpdateInfoDepart")
     public void addOrUpdate(@RequestBody InfoDepartment infoDepart){
 
-        logger.info("request param InfoDepartment:" + infoDepart);
-
         infoDepartService.addInfoDepartment(infoDepart);
     }
 
     @RequestMapping("/getInfoDepartment")
     public String findInfoDepartment(@RequestBody InfoDepartment infoDepart){
-        logger.info("request param InfoDepartment:" + infoDepart);
 
         InfoDepartment infoDepartment = infoDepartService.findOne(infoDepart);
 
@@ -49,7 +44,6 @@ public class InfoDepartController {
 
     @RequestMapping("/getInfoDepartmentList")
     public String findInfoDepartmentList(@RequestBody InfoDepartment infoDepart){
-        logger.info("request param InfoDepartment:" + infoDepart);
 
         List<InfoDepartment> infoDepartmetList = infoDepartService.findAll(infoDepart);
 
@@ -59,22 +53,16 @@ public class InfoDepartController {
     @RequestMapping("/deleteInfoDepartment")
     public void deleteInfoDepartment(@RequestBody InfoDepartment infoDepart){
 
-        logger.info("request param InfoDepartment:" + infoDepart);
-
         infoDepartService.deleteById(infoDepart);
     }
 
     @RequestMapping("/addOrUpdateLogisticsInfo")
     public void addOrUpdateLogisticsInfo(@RequestBody LogisticsInfo logisticsInfo){
-        logger.info("request param LogisticsInfo: " + logisticsInfo);
-
        logisticsInfoService.saveOrUpdate(logisticsInfo);
     }
 
     @RequestMapping("/getLogisticsList")
     public String getLogisticsList(@RequestBody LogisticsInfo logisticsInfo){
-        logger.info("request param LogisticsInfo: " + logisticsInfo);
-
         List<LogisticsInfo> resultList = logisticsInfoService.findList(logisticsInfo);
 
         return ResponseUtils.toJSONString(resultList);
@@ -82,7 +70,6 @@ public class InfoDepartController {
 
     @RequestMapping("/getLogisticsDetail")
     public String getLogisticsDetail(@RequestBody LogisticsInfo logisticsInfo){
-        logger.info("request param LogisticsInfo: " + logisticsInfo);
         LogisticsInfo result = logisticsInfoService.findOne(logisticsInfo);
 
         return ResponseUtils.toJSONString(result);
@@ -90,7 +77,6 @@ public class InfoDepartController {
 
     @RequestMapping("/deleteLogistics")
     public void deleteLogistics(@RequestBody LogisticsInfo logisticsInfo){
-        logger.info("request param LogisticsInfo: " + logisticsInfo);
         logisticsInfoService.deleteById(logisticsInfo);
     }
 }

@@ -24,8 +24,6 @@ import java.util.List;
 @Service
 public class ProductPriceServiceImpl implements ProductPriceService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private ProductPriceRepository productPriceRepository;
 
@@ -45,8 +43,6 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             if(productPriceTmp != null){
                 BigDecimal priceDiff = productPrice.getPrice().subtract(productPriceTmp.getPrice());
                 productPrice.setPriceDiff(priceDiff);
-            }else{
-                logger.error("product :" + productPrice +" is requesting to update data, but cant be found in database.");
             }
 
         }else{
@@ -149,7 +145,6 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
     @CacheEvict(value="productPriceCache",allEntries=true)
     @Scheduled(fixedDelay = 2*60*1000)
-    public void clearCache(){
-        logger.info("it's time to clean product price cache");
+    public void clearCache() {
     }
 }

@@ -22,8 +22,6 @@ import java.util.List;
 @Service
 public class InforDeparServiceImpl implements InfoDepartService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private InfoDepartRepository infoDepartRepository;
 
@@ -86,6 +84,5 @@ public class InforDeparServiceImpl implements InfoDepartService {
     @CacheEvict(value="infoDepartmentList",allEntries=true)
     @Scheduled(fixedDelay = 5*60*1000)
     public void clearCache(){
-        logger.info("now clean info department cache");
     }
 }

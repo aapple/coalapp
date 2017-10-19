@@ -28,8 +28,6 @@ import java.util.List;
 @RequestMapping("/app/user")
 public class UserController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private UserService userService;
 
@@ -38,8 +36,6 @@ public class UserController {
 
     @RequestMapping("/update")
     public String update(@RequestBody User user, HttpServletResponse response){
-
-        logger.debug("update user info, request param user : " + user);
 
         User userInfo = RequestUtils.getUserInfo();
         user.setId(userInfo.getId());
@@ -58,8 +54,6 @@ public class UserController {
         cookie.setMaxAge(365 * 24 * 60 * 60);// 设置为30min
         cookie.setPath("/");
         response.addCookie(cookie);
-
-        logger.debug("user info update success, response user : " + userJsonString);
 
         return userJsonString;
     }

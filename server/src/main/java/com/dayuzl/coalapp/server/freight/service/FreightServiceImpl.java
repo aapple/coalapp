@@ -17,8 +17,6 @@ import java.util.List;
 @Service
 public class FreightServiceImpl implements FreightService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private FreightRepository freightRepository;
 
@@ -77,6 +75,5 @@ public class FreightServiceImpl implements FreightService {
     @CacheEvict(value="freightList",allEntries=true)
     @Scheduled(fixedDelay = 3*60*1000)
     public void clearCache(){
-        logger.info("now clean freight cache");
     }
 }

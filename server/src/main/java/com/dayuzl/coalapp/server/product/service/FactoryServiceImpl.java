@@ -22,8 +22,6 @@ import java.util.List;
 @Service
 public class FactoryServiceImpl implements FactoryService {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private FactoryRepository factoryRepository;
 
@@ -109,6 +107,5 @@ public class FactoryServiceImpl implements FactoryService {
     @CacheEvict(value="factoryList",allEntries=true)
     @Scheduled(fixedDelay = 5*60*1000)
     public void clearCache(){
-        logger.info("it's time to clean factories cache");
     }
 }
