@@ -73,15 +73,17 @@ public class TimelinesServiceImpl implements TimelinesService {
 
         // 添加是否喜欢，喜欢数，评论数字段的处理
         User userInfo = RequestUtils.getUserInfo();
-        for (Timelines timelines: result) {
-            for (Timeline_likes timelineLikes : timelines.getAuthor_like()) {
-                if(timelineLikes.getUser_id() == userInfo.getId()){
-                    timelines.setIs_like(true);
-                    break;
+        if(null != userInfo){
+            for (Timelines timelines: result) {
+                for (Timeline_likes timelineLikes : timelines.getAuthor_like()) {
+                    if(timelineLikes.getUser_id() == userInfo.getId()){
+                        timelines.setIs_like(true);
+                        break;
+                    }
                 }
+                timelines.setLike_num(timelines.getAuthor_like().size());
+                timelines.setComment_num(timelines.getComments().size());
             }
-            timelines.setLike_num(timelines.getAuthor_like().size());
-            timelines.setComment_num(timelines.getComments().size());
         }
 
         return result;
