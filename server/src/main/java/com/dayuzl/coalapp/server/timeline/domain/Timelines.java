@@ -42,6 +42,12 @@ public class Timelines {
     @Column(length = 10000)
     private String content;
 
+    @Column(length = 100)
+    private String contactPhone;
+
+    @Column(length = 100)
+    private String timelineType;
+
     @Transient
     private Integer like_num;
 
