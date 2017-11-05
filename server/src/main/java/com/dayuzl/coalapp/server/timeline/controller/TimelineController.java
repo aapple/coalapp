@@ -35,6 +35,12 @@ public class TimelineController {
         return ResponseUtils.toJSONString(timelinesService.findAllTimelines(type, id));
     }
 
+    @RequestMapping("/findTimelineById")
+    String findTimelineById(Integer id){
+
+        return ResponseUtils.toJSONString(timelinesService.findTimelineById(id));
+    }
+
     @RequestMapping("/timeline/setLike")
     String setLike(@RequestBody Timelines timelines){
 

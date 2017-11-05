@@ -18,6 +18,8 @@ public interface TimelinesService {
 
     List<Timelines> findAllTimelines(String type, Integer id);
 
+    Timelines findTimelineById(Integer id);
+
     void deleteById(Timelines timelines);
 
     Timelines saveComment(TimelineCommentVo timelineCommentVo);

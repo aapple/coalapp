@@ -88,6 +88,11 @@ public class TimelinesServiceImpl implements TimelinesService {
     }
 
     @Override
+    public Timelines findTimelineById(Integer id) {
+        return timelinesRepository.findById(id);
+    }
+
+    @Override
     public void deleteById(Timelines timelines) {
         timelinesRepository.delete(timelines);
     }
