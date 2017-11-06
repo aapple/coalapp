@@ -56,17 +56,17 @@ public class TimelinesServiceImpl implements TimelinesService {
     }
 
     @Override
-    public List<Timelines> findAllTimelines(String type, Integer id) {
+    public List<Timelines> findAllTimelines(String type, Integer id, String timelineType) {
 
         List<Timelines> result = null;
         Pageable pageable = new PageRequest(0, 10, Sort.Direction.DESC, "created_at");
         if(StringUtils.isEmpty(type)) {
-            result =  timelinesRepository.findAllTimelines(pageable);
+            result =  timelinesRepository.findAllTimelines(timelineType, pageable);
         } else if(StringUtils.equals("refresh", type)) {
             Pageable page = new PageRequest(0, 10000000, Sort.Direction.DESC, "created_at");
-            result =  timelinesRepository.findAllByRefresh(id, page);
+            result =  timelinesRepository.findAllByRefresh(id, timelineType, page);
         } else if(StringUtils.equals("infinite", type)) {
-            result =  timelinesRepository.findAllByInfinite(id, pageable);
+            result =  timelinesRepository.findAllByInfinite(id, timelineType, pageable);
         }
 
         // 添加是否喜欢，喜欢数，评论数字段的处理

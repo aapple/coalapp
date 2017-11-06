@@ -16,7 +16,7 @@ public interface TimelinesService {
 
     Timeline_imgs saveTTimelineImgs(Timeline_imgs timelineImgs);
 
-    List<Timelines> findAllTimelines(String type, Integer id);
+    List<Timelines> findAllTimelines(String type, Integer id, String timelineType);
 
     Timelines findTimelineById(Integer id);
 

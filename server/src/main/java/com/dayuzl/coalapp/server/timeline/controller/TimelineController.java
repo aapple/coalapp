@@ -30,9 +30,9 @@ public class TimelineController {
     private TimelinesService timelinesService;
 
     @RequestMapping("/timeline")
-    String timeline(String type, Integer id){
+    String timeline(String type, Integer id, String timelineType){
 
-        return ResponseUtils.toJSONString(timelinesService.findAllTimelines(type, id));
+        return ResponseUtils.toJSONString(timelinesService.findAllTimelines(type, id, timelineType));
     }
 
     @RequestMapping("/findTimelineById")
