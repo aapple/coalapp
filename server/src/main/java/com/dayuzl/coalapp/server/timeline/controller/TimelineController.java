@@ -2,14 +2,13 @@ package com.dayuzl.coalapp.server.timeline.controller;
 
 import com.dayuzl.coalapp.server.framework.util.RequestUtils;
 import com.dayuzl.coalapp.server.framework.util.ResponseUtils;
-import com.dayuzl.coalapp.server.timeline.domain.Timeline_likes;
-import com.dayuzl.coalapp.server.timeline.service.TimelinesService;
-import com.dayuzl.coalapp.server.user.domain.User;
 import com.dayuzl.coalapp.server.timeline.domain.Timeline_imgs;
+import com.dayuzl.coalapp.server.timeline.domain.Timeline_likes;
 import com.dayuzl.coalapp.server.timeline.domain.Timelines;
+import com.dayuzl.coalapp.server.timeline.service.TimelinesService;
 import com.dayuzl.coalapp.server.timeline.vo.TimelineCommentVo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dayuzl.coalapp.server.user.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +30,10 @@ public class TimelineController {
 
     @RequestMapping("/timeline")
     String timeline(String type, Integer id, String timelineType){
+
+        if(StringUtils.isEmpty(timelineType)){
+            timelineType = "1";
+        }
 
         return ResponseUtils.toJSONString(timelinesService.findAllTimelines(type, id, timelineType));
     }
@@ -92,6 +95,10 @@ public class TimelineController {
                 imgs.add(timelinesService.saveTTimelineImgs(timelineImgs));
             }
             timelines.setImgs(imgs);;
+        }
+
+        if(StringUtils.isEmpty(timelines.getTimelineType())){
+            timelines.setTimelineType("1");
         }
 
         timelines = timelinesService.saveTimelines(timelines);
