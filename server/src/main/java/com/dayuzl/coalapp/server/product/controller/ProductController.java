@@ -139,19 +139,16 @@ public class ProductController {
         ProductTypeFormat gongchengMei = new ProductTypeFormat(36, "工程煤");
 
         List<ProductTypeFormat> yuanMeiList = new ArrayList<ProductTypeFormat>();
-        yuanMeiList.add(new ProductTypeFormat(3, "原煤"));
         yuanMeiList.add(new ProductTypeFormat(31, "5-2"));
         yuanMeiList.add(new ProductTypeFormat(32, "4-2"));
         yuanMei.setSubList(yuanMeiList);
 
         List<ProductTypeFormat> hunMeiList = new ArrayList<ProductTypeFormat>();
-        hunMeiList.add(new ProductTypeFormat(30, "混煤"));
         hunMeiList.add(new ProductTypeFormat(33, "5-2"));
         hunMeiList.add(new ProductTypeFormat(34, "4-2"));
         hunMei.setSubList(hunMeiList);
 
         List<ProductTypeFormat> ziMeiList = new ArrayList<ProductTypeFormat>();
-        ziMeiList.add(new ProductTypeFormat(29, "籽煤"));
         ziMeiList.add(new ProductTypeFormat(28, "1-2籽"));
         ziMeiList.add(new ProductTypeFormat(4, "1-3籽"));
         ziMeiList.add(new ProductTypeFormat(5, "2-5籽"));
@@ -159,7 +156,6 @@ public class ProductController {
         ziMei.setSubList(ziMeiList);
 
         List<ProductTypeFormat> kuaiMeiList = new ArrayList<ProductTypeFormat>();
-        kuaiMeiList.add(new ProductTypeFormat(35, "块煤"));
         kuaiMeiList.add(new ProductTypeFormat(7, "3-8块"));
         kuaiMeiList.add(new ProductTypeFormat(8, "4-9块"));
         kuaiMeiList.add(new ProductTypeFormat(9, "6-9块"));
