@@ -1,6 +1,5 @@
 package com.dayuzl.coalapp.server.product.controller;
 
-import com.dayuzl.coalapp.server.framework.domain.PageParam;
 import com.dayuzl.coalapp.server.framework.util.RequestUtils;
 import com.dayuzl.coalapp.server.framework.util.ResponseUtils;
 import com.dayuzl.coalapp.server.product.domain.Factory;
@@ -12,10 +11,10 @@ import com.dayuzl.coalapp.server.product.service.ProductPriceService;
 import com.dayuzl.coalapp.server.user.domain.User;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,10 +165,10 @@ public class ProductController {
 
         List<ProductTypeFormat> productTypeList = new ArrayList<ProductTypeFormat>();
         productTypeList.add(mianMei);
+        productTypeList.add(kuaiMei);
+        productTypeList.add(ziMei);
         productTypeList.add(yuanMei);
         productTypeList.add(hunMei);
-        productTypeList.add(ziMei);
-        productTypeList.add(kuaiMei);
         productTypeList.add(gongchengMei);
         return productTypeList;
 
